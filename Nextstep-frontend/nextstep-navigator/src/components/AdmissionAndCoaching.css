@@ -1,0 +1,43 @@
+.admission-card {
+  border-radius: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff;
+}
+
+.admission-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+}
+
+.admission-icon {
+  font-size: 2.5rem;
+  color: #0d6efd;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  color: #212529;
+}
+
+.card-text {
+  color: #6c757d;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 992px) {
+  .admission-card {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-title {
+    font-size: 1.1rem;
+  }
+
+  .admission-icon {
+    font-size: 2rem;
+  }
+}

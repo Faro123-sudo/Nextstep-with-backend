@@ -1,0 +1,33 @@
+{
+  "student": [
+    { "label": "Home", "page": "home", "icon": "Home" },
+    { "label": "Careers", "page": "careerBank", "icon": "BriefcaseBusiness" },
+    { "label": "Quiz", "page": "quiz", "icon": "HelpCircle" },
+    { "label": "Multimedia", "page": "multimedia", "icon": "PlayCircle" },
+    { "label": "Resources", "page": "resources", "icon": "BookOpen" },
+    { "label": "Stories", "page": "successStories", "icon": "Star" },
+    { "label": "Coaching", "page": "admissionCoaching", "icon": "GraduationCap" },
+    { "label": "Contact", "page": "contact", "icon": "MessageCircle" }
+  ],
+  "graduate": [
+    { "label": "Home", "page": "home", "icon": "Home" },
+    { "label": "Careers", "page": "careerBank", "icon": "BriefcaseBusiness" },
+    { "label": "Quiz", "page": "quiz", "icon": "HelpCircle" },
+    { "label": "Resources", "page": "resources", "icon": "BookOpen" },
+    { "label": "Stories", "page": "successStories", "icon": "Star" },
+    { "label": "Contact", "page": "contact", "icon": "MessageCircle" }
+  ],
+  "professional": [
+    { "label": "Home", "page": "home", "icon": "Home" },
+    { "label": "Careers", "page": "careerBank", "icon": "BriefcaseBusiness" },
+    { "label": "Resources", "page": "resources", "icon": "BookOpen" },
+    { "label": "Stories", "page": "successStories", "icon": "Star" },
+    { "label": "Contact", "page": "contact", "icon": "MessageCircle" }
+  ],
+  "guest": [
+    { "label": "Home", "page": "home", "icon": "Home" },
+    { "label": "Careers", "page": "careerBank", "icon": "BriefcaseBusiness" },
+    { "label": "About Us", "page": "aboutUs", "icon": "Info" },
+    { "label": "Contact", "page": "contact", "icon": "MessageCircle" }
+  ]
+}

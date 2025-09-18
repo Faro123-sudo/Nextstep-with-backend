@@ -1,0 +1,85 @@
+.controls-container {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+}
+
+.career-card {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.career-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+}
+
+.career-card .card-header {
+  background-color: transparent;
+  border-bottom: 1px solid #e9ecef;
+  padding: 1.5rem;
+}
+
+.career-card .card-title {
+  font-weight: 700;
+  color: #343a40;
+}
+
+.career-card .card-body {
+  padding: 1.5rem;
+}
+
+.career-card .card-footer {
+  background-color: transparent;
+  border-top: 1px solid #e9ecef;
+  padding: 1rem 1.5rem;
+}
+
+.skills-container .badge {
+  background-color: #e9ecef;
+  color: #495057;
+  font-weight: 500;
+  padding: 0.5em 0.75em;
+}
+
+.empty-state-animation {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.modal-content {
+  border-radius: 1rem;
+}
+
+.modal-header {
+  border-bottom: none;
+  padding: 2rem;
+}
+
+.modal-title {
+  font-weight: 700;
+}
+
+.modal-body {
+  padding: 2rem;
+}
+
+.modal-footer {
+  border-top: none;
+  padding: 1.5rem 2rem;
+}
+
+.modal-backdrop.show {
+  opacity: 0.5;
+}
+
+.salary-chart-container {
+  position: relative;
+  height: 300px;
+}
