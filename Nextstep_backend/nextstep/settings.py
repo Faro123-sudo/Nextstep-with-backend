@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     "corsheaders",
+    'core',
+    'accounts',
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,6 +55,38 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+    )
+}
+
+from datetime import timedelta
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    # Cookie options example:
+    # "SET_REFRESH_COOKIE": True,
+    # "REFRESH_COOKIE_NAME": "refresh_token",
+    # "REFRESH_COOKIE_PATH": "/api/auth/",
+    # "REFRESH_COOKIE_SECURE": False,
+    # "REFRESH_COOKIE_SAMESITE": "Lax",
+    # "HIDE_REFRESH_IN_RESPONSE": True,
+}
+REST_FRAMEWORK["DEFAULT_FILTER_BACKENDS"] = [
+    "django_filters.rest_framework.DjangoFilterBackend",
+    "rest_framework.filters.SearchFilter",
+    "rest_framework.filters.OrderingFilter",
+]
+
 
 ROOT_URLCONF = 'nextstep.urls'
 
@@ -71,6 +106,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'nextstep.wsgi.application'
+
 
 
 # Database
@@ -101,6 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+AUTH_USER_MODEL = "accounts.User"
 
 
 # Internationalization
