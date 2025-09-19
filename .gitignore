@@ -1,0 +1,79 @@
+# =========================
+# General
+# =========================
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.sqlite3
+.env
+.env.local
+.DS_Store
+
+# =========================
+# Django
+# =========================
+# Migrations
+*/migrations/
+!*/migrations/__init__.py
+
+# Django media/static
+media/
+staticfiles/
+static/
+
+# Django settings (if you keep local settings)
+settings_local.py
+
+# =========================
+# Python
+# =========================
+.venv/
+venv/
+env/
+ENV/
+build/
+dist/
+*.egg-info/
+*.egg
+
+# =========================
+# React / Node
+# =========================
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# testing
+coverage/
+*.lcov
+
+# production build
+build/
+
+# misc
+.npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# dotenv environment variables
+.env.development.local
+.env.test.local
+.env.production.local
+
+# editor
+.vscode/
+.idea/
+*.swp
+
+# =========================
+# Cache
+# =========================
+.cache/
+.next/
+out/
