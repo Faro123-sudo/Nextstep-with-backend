@@ -11,14 +11,15 @@ export const login = async (username, password) => {
 };
 
 // Updated register function to include firstName and lastName
-export const register = async (firstName, lastName, username, email, password, password2) => {
+export const register = async (firstName, lastName, username, email, password, password2, role) => {
   return await axios.post(`${API_URL}/register/`, {
     first_name: firstName,
     last_name: lastName,
     username,
     email,
     password,
-    password2 
+    password2,
+    role 
   });
 };
 

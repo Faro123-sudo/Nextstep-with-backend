@@ -53,6 +53,8 @@ export default function Dashboard() {
         Welcome, <span className="text-primary">{user.username}</span> 🎉
       </h1>
       {user.email && <p className="text-secondary">Email: {user.email}</p>}
+      {user.role && <p className="text-secondary">Role: {user.role}</p>}
+
 
       <button
         onClick={handleLogout}

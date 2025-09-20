@@ -10,9 +10,9 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [role, setRole] = useState(""); // New state for the user's role
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  // New state for the "show password" checkbox
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !username || !email || !password || !confirmPassword) {
+    if (!firstName || !lastName || !username || !email || !password || !confirmPassword || !role) {
       setError("All fields are required");
       return;
     }
@@ -38,18 +38,15 @@ export default function Register() {
     try {
       setLoading(true);
       setError("");
-      await register(firstName, lastName, username, email, password, confirmPassword);
+      await register(firstName, lastName, username, email, password, confirmPassword, role);
       await login(username, password);
       navigate("/dashboard");
     } catch (err) {
       if (err.response?.data) {
         const errors = err.response.data;
-
-        // Convert errors object into a single readable string
         const message = Object.entries(errors)
           .map(([field, msgs]) => `${field}: ${Array.isArray(msgs) ? msgs.join(", ") : msgs}`)
           .join("\n");
-
         setError(message);
       } else {
         setError("Registration failed");
@@ -105,7 +102,22 @@ export default function Register() {
                 required
               />
             </div>
-            {/* Conditional input type for Password */}
+
+            {/* Role selection dropdown */}
+            <div className="form-group">
+              <select
+                className="form-control"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                required
+              >
+                <option value="" disabled>Select Role</option>
+                <option value="student">Student</option>
+                <option value="graduate">Graduate</option>
+                <option value="professional">Professional</option>
+              </select>
+            </div>
+            
             <div className="form-group">
               <input
                 type={showPassword ? "text" : "password"}
@@ -116,7 +128,6 @@ export default function Register() {
                 required
               />
             </div>
-            {/* Conditional input type for Confirm Password */}
             <div className="form-group">
               <input
                 type={showPassword ? "text" : "password"}
@@ -127,7 +138,6 @@ export default function Register() {
                 required
               />
             </div>
-            {/* Checkbox for "Show Password" */}
             <div className="form-check">
               <input
                 type="checkbox"

@@ -4,11 +4,12 @@ from django.contrib.auth.password_validation import validate_password
 
 User = get_user_model()
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        # include fields you want exposed to frontend
-        fields = ("id", "username", "email", "first_name", "last_name",)
+        # include all fields from the model
+        fields = ("id", "username", "email", "first_name", "last_name", "role", "bio")
         read_only_fields = ("id",)
 
 from rest_framework import serializers
@@ -16,6 +17,10 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
 
 User = get_user_model()
+
+from rest_framework import serializers
+from django.contrib.auth.password_validation import validate_password
+from .models import User  # Ensure you are importing your custom User model
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
@@ -30,14 +35,16 @@ class RegisterSerializer(serializers.ModelSerializer):
         label="Confirm password",
         style={'input_type': 'password'}
     )
-
+    
     class Meta:
         model = User
-        fields = ("username", "email", "password", "password2", "first_name", "last_name")
+        # Add "role" to the fields tuple
+        fields = ("username", "email", "password", "password2", "first_name", "last_name", "role")
         extra_kwargs = {
-            "email": {"required": True},  # Make email mandatory
+            "email": {"required": True},
             "first_name": {"required": False},
             "last_name": {"required": False},
+            "role": {"required": True},
         }
 
     def validate(self, data):
@@ -55,8 +62,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
-
-
 
 class ChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(write_only=True, required=True)
