@@ -174,3 +174,12 @@ JAZZMIN_UI_TWEAKS = {
     "theme": "darkly",
     "dark_mode_theme": "darkly",
 }
+
+JAZZMIN_SETTINGS ={
+    "site_title": "NextStep Admin",
+    "site_header": "NextStep ",
+    "site_brand": "NextStep",
+    "show_ui_builder" : True,
+    "copyright": "NextStep Ltd",
+    "site_logo_classes": "img-circle",
+}
