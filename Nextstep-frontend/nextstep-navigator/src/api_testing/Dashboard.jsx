@@ -31,16 +31,16 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <p className="text-lg font-semibold">Loading dashboard...</p>
+      <div className="d-flex align-items-center justify-content-center vh-100">
+        <p className="fs-5 fw-semibold">Loading dashboard...</p>
       </div>
     );
   }
 
   if (!user) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <p className="text-red-500 font-semibold">
+      <div className="d-flex align-items-center justify-content-center vh-100">
+        <p className="text-danger fw-semibold">
           Could not load profile. Please log in again.
         </p>
       </div>
@@ -48,15 +48,15 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-3xl font-bold mb-4">
-        Welcome, <span className="text-blue-500">{user.username}</span> 🎉
+    <div className="container d-flex flex-column align-items-center justify-content-center vh-100 text-center">
+      <h1 className="display-4 fw-bold mb-4">
+        Welcome, <span className="text-primary">{user.username}</span> 🎉
       </h1>
-      {user.email && <p className="text-gray-700">Email: {user.email}</p>}
+      {user.email && <p className="text-secondary">Email: {user.email}</p>}
 
       <button
         onClick={handleLogout}
-        className="bg-red-500 text-white px-4 py-2 mt-6 rounded"
+        className="btn btn-danger mt-4"
       >
         Logout
       </button>

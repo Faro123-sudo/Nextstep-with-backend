@@ -10,8 +10,16 @@ export const login = async (username, password) => {
   return res.data;
 };
 
-export const register = async (username, password, email) => {
-  return await axios.post(`${API_URL}/register/`, { username, password, email });
+// Updated register function to include firstName and lastName
+export const register = async (firstName, lastName, username, email, password, password2) => {
+  return await axios.post(`${API_URL}/register/`, {
+    first_name: firstName,
+    last_name: lastName,
+    username,
+    email,
+    password,
+    password2 
+  });
 };
 
 export const logout = () => {
@@ -22,7 +30,7 @@ export const logout = () => {
 export const getAccessToken = () => localStorage.getItem("access");
 export const getRefreshToken = () => localStorage.getItem("refresh");
 
-// NEW: Fetch user profile
+// Fetch user profile
 export const getProfile = async () => {
   const token = getAccessToken();
   if (!token) return null;
