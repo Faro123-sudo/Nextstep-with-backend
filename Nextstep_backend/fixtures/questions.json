@@ -1,0 +1,167 @@
+[
+    {
+        "question_text": "Which of these activities sounds most interesting to you?",
+        "options": [
+            {"id": "building-things", "text": "Building things"},
+            {"id": "helping-people", "text": "Helping people"},
+            {"id": "analyzing-data", "text": "Analyzing data"},
+            {"id": "creating-art", "text": "Creating art"}
+        ],
+        "correct_answer": null,
+        "weightage": 1.0
+    },
+    {
+        "question_text": "What kind of school projects excite you most?",
+        "options": [
+            {"id": "science-fair-builds", "text": "Science fair builds"},
+            {"id": "group-presentations", "text": "Group presentations"},
+            {"id": "art-exhibitions", "text": "Art exhibitions"},
+            {"id": "code-or-apps", "text": "Code or apps"}
+        ],
+        "correct_answer": null,
+        "weightage": 1.0
+    },
+    {
+        "question_text": "How soon do you want to start earning while learning?",
+        "options": [
+            {"id": "immediately-part-time", "text": "Immediately (part-time)"},
+            {"id": "after-school", "text": "After finishing school"},
+            {"id": "full-time-study", "text": "I prefer full-time study"},
+            {"id": "not-sure", "text": "I’m not sure"}
+        ],
+        "correct_answer": null,
+        "weightage": 1.0
+    },
+    {
+        "question_text": "Which subject at school do you enjoy most?",
+        "options": [
+            {"id": "maths", "text": "Maths"},
+            {"id": "biology", "text": "Biology / Science"},
+            {"id": "english", "text": "English / Languages"},
+            {"id": "art-design", "text": "Art / Design"}
+        ],
+        "correct_answer": null,
+        "weightage": 1.0
+    },
+    {
+        "question_text": "Do you prefer structured guidance or self-directed learning?",
+        "options": [
+            {"id": "structured", "text": "Structured (timetables, teachers)"},
+            {"id": "self-directed", "text": "Self-directed (online, projects)"},
+            {"id": "mix-of-both", "text": "Mix of both"},
+            {"id": "not-sure", "text": "Not sure"}
+        ],
+        "correct_answer": null,
+        "weightage": 1.0
+    },
+    {
+        "question_text": "What's your immediate goal after graduation?",
+        "options": [
+            {"id": "get-job", "text": "Get a full-time job"},
+            {"id": "further-studies", "text": "Pursue further studies"},
+            {"id": "intern-apprenticeship", "text": "Intern / apprenticeship"},
+            {"id": "start-business", "text": "Start a business"}
+        ],
+        "correct_answer": null,
+        "weightage": 1.0
+    },
+    {
+        "question_text": "Which skill would you most like to improve before job hunting?",
+        "options": [
+            {"id": "coding", "text": "Coding / Technical"},
+            {"id": "communication", "text": "Communication / Public speaking"},
+            {"id": "data-analysis", "text": "Data analysis"},
+            {"id": "project-management", "text": "Project management"}
+        ],
+        "correct_answer": null,
+        "weightage": 1.0
+    },
+    {
+        "question_text": "What kind of employer do you prefer?",
+        "options": [
+            {"id": "large-corporate", "text": "Large corporate"},
+            {"id": "fast-paced-startup", "text": "Fast-paced startup"},
+            {"id": "ngo-public-sector", "text": "NGO / Public sector"},
+            {"id": "small-business", "text": "Small-to-medium business"}
+        ],
+        "correct_answer": null,
+        "weightage": 1.0
+    },
+    {
+        "question_text": "How do you prefer to apply for opportunities?",
+        "options": [
+            {"id": "campus-placements", "text": "Campus placements"},
+            {"id": "direct-company-applications", "text": "Direct company applications"},
+            {"id": "referral-network", "text": "Referral / network"},
+            {"id": "freelance-platforms", "text": "Freelance platforms"}
+        ],
+        "correct_answer": null,
+        "weightage": 1.0
+    },
+    {
+        "question_text": "Which project work do you prefer for your portfolio?",
+        "options": [
+            {"id": "long-term-research", "text": "Long-term research"},
+            {"id": "team-product-builds", "text": "Team product builds"},
+            {"id": "commercial-projects", "text": "Commercial projects"},
+            {"id": "creative-showcases", "text": "Creative showcases"}
+        ],
+        "correct_answer": null,
+        "weightage": 1.0
+    },
+    {
+        "question_text": "Why are you considering a career change now?",
+        "options": [
+            {"id": "growth-promotion", "text": "Growth & promotion"},
+            {"id": "work-life-balance", "text": "Better work-life balance"},
+            {"id": "higher-pay", "text": "Higher pay"},
+            {"id": "follow-passion", "text": "To follow passion"}
+        ],
+        "correct_answer": null,
+        "weightage": 1.0
+    },
+    {
+        "question_text": "Which skill would add the most value to your CV right now?",
+        "options": [
+            {"id": "advanced-data-ml", "text": "Advanced data skills / ML"},
+            {"id": "product-management", "text": "Product management"},
+            {"id": "cloud-devops", "text": "Cloud / DevOps"},
+            {"id": "leadership-management", "text": "Leadership & people management"}
+        ],
+        "correct_answer": null,
+        "weightage": 1.0
+    },
+    {
+        "question_text": "What’s your preferred transition timeline?",
+        "options": [
+            {"id": "immediate", "text": "Immediate (1–3 months)"},
+            {"id": "short-term", "text": "Short-term (3–6 months)"},
+            {"id": "medium", "text": "Medium (6–12 months)"},
+            {"id": "long-term", "text": "Long-term (12+ months)"}
+        ],
+        "correct_answer": null,
+        "weightage": 1.0
+    },
+    {
+        "question_text": "Which outcome is most important when negotiating a new role?",
+        "options": [
+            {"id": "higher-base-salary", "text": "Higher base salary"},
+            {"id": "better-title-seniority", "text": "Better title / seniority"},
+            {"id": "flexible-hours", "text": "Flexible hours / remote"},
+            {"id": "clear-career-growth", "text": "Clear career growth path"}
+        ],
+        "correct_answer": null,
+        "weightage": 1.0
+    },
+    {
+        "question_text": "Which evidence best demonstrates your readiness for a higher role?",
+        "options": [
+            {"id": "quantified-impact", "text": "Quantified impact (metrics)"},
+            {"id": "led-cross-functional-project", "text": "Led a cross-functional project"},
+            {"id": "built-end-to-end", "text": "Built a product/feature end-to-end"},
+            {"id": "managed-grown-team", "text": "Managed & grown a team"}
+        ],
+        "correct_answer": null,
+        "weightage": 1.0
+    }
+]
