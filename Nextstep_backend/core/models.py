@@ -55,8 +55,8 @@ class Career(models.Model):
         parts = [
             self.title or "",
             self.description or "",
-            " ".join([t.name for t in self.tags.all()]) if hasattr(self, "tags") else "",
-            " ".join([s.name for s in self.required_skills.all()]) if hasattr(self, "required_skills") else "",
+            " ".join([t.name for t in self.tags.all()]),
+            " ".join([s.name for s in self.required_skills.all()]),
         ]
         self.content_text = " | ".join([p.strip() for p in parts if p])
         return self.content_text

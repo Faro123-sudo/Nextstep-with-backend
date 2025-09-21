@@ -37,17 +37,29 @@ import Register from "./api_testing/Register";
 import Dashboard from "./api_testing/Dashboard";
 import ProtectedRoute from "./api_testing/ProtectedRoute";
 import { getAccessToken } from "./utils/auth";
+import DisplayPages from "./components/DisplayPages";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+import { useAutoRefresh } from "./hooks/useAutoRefresh";
 
 export default function App() {
+  useAutoRefresh();
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
+  }, []);
+
+  const isAuthenticated = getAccessToken();
+
   return (
     <BrowserRouter>
       <Routes>
-        {/* Default Route: Redirect "/" based on login state */}
+        {/* Root Redirect */}
         <Route
           path="/"
           element={
-            getAccessToken() ? (
-              <Navigate to="/dashboard" replace />
+            isAuthenticated ? (
+              <DisplayPages replace />
             ) : (
               <Navigate to="/login" replace />
             )
@@ -55,21 +67,36 @@ export default function App() {
         />
 
         {/* Auth Routes */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-
-        {/* Protected Route */}
         <Route
-          path="/dashboard"
+          path="/login"
+          element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login />}
+        />
+        <Route
+          path="/register"
+          element={isAuthenticated ? <Navigate to="/" /> : <Register />}
+        />
+
+        {/* Protected Dashboard */}
+        <Route
+          path="/"
           element={
             <ProtectedRoute>
-              <Dashboard />
+              <DisplayPages />
             </ProtectedRoute>
           }
         />
 
-        {/* Fallback for unknown routes */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* Catch-All */}
+        <Route
+          path="*"
+          element={
+            isAuthenticated ? (
+              <DisplayPages/>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

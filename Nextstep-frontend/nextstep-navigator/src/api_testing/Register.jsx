@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { register, login } from "../utils/auth";
+import Lottie from "lottie-react";
+import Logo from "../assets/logo.webp";
+import animationData from "../assets/animation/looking.json";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../components/staticFiles/LandingPage.css";
 
-export default function Register() {
+const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [role, setRole] = useState(""); // New state for the user's role
+  const [role, setRole] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -57,116 +61,147 @@ export default function Register() {
   };
 
   return (
-    <div className="container d-flex flex-column align-items-center justify-content-center vh-100">
-      <h2 className="text-center mb-4">Create Account</h2>
-      <div className="card shadow p-4" style={{ width: "22rem" }}>
-        <div className="card-body">
-          <form onSubmit={handleRegister} className="d-grid gap-3">
-            <div className="form-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="First Name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                required
+    <>
+      <div className="min-vh-100 d-flex flex-column align-items-center justify-content-center landing-bg" style={{ paddingTop: '0px !important;' }}>
+        <div className="container">
+          <div className="row text-center mb-3">
+            <div className="col-12" data-aos="fade-up" data-aos-delay="300">
+              <img 
+                src={Logo} 
+                alt="NextStep Navigator Logo" 
+                className="mb-4 fade-in" 
+                style={{ height: '70px' }}
               />
+              <h1 className="display-3 fw-bold text-primary mb-3">
+                NextStep Navigator
+              </h1>
+              <h2 className="fw-semibold text-secondary mb-2">
+                Your Guide to the Future
+              </h2>
             </div>
-            <div className="form-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Last Name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                required
+          </div>
+          <div className="row justify-content-center align-items-center">
+            <div className="col-md-6 col-lg-5 text-center mb-5 mb-md-0" data-aos="fade-right" data-aos-delay="500">
+              <Lottie
+                animationData={animationData}
+                loop={true}
+                style={{ width: "100%", maxWidth: "400px", margin: "auto" }}
               />
+              <p className="lead mt-4 text-muted px-3">
+                Discover your perfect career path with personalized guidance and insights tailored just for you.
+              </p>
             </div>
-            <div className="form-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
+            <div className="col-md-6 col-lg-5 mb-2" data-aos="fade-left" data-aos-delay="500">
+              <div className="form-container p-4 p-md-5 shadow-lg rounded-3">
+                <form onSubmit={handleRegister} className="d-grid gap-3">
+                  <h4 className="fw-bold mb-2 text-center">Create Your Account</h4>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="First Name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Last Name"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="email"
+                      className="form-control"
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <select
+                      className="form-control"
+                      value={role}
+                      onChange={(e) => setRole(e.target.value)}
+                      required
+                    >
+                      <option value="" disabled>Select Role</option>
+                      <option value="student">Student</option>
+                      <option value="graduate">Graduate</option>
+                      <option value="professional">Professional</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="form-control"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="form-control"
+                      placeholder="Confirm Password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="showPasswordCheck"
+                      checked={showPassword}
+                      onChange={() => setShowPassword(!showPassword)}
+                    />
+                    <label className="form-check-label" htmlFor="showPasswordCheck">
+                      Show Password
+                    </label>
+                  </div>
+                  {error && <p className="text-danger text-sm">{error}</p>}
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-lg w-100 py-2 fw-bold rounded-pill"
+                    disabled={loading}
+                  >
+                    {loading ? "Registering..." : "Register"}
+                  </button>
+                </form>
+                <p className="text-center mt-3">
+                  Already have an account?{" "}
+                  <Link to="/login" className="link-primary">
+                    Login
+                  </Link>
+                </p>
+              </div>
             </div>
-            <div className="form-group">
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-
-            {/* Role selection dropdown */}
-            <div className="form-group">
-              <select
-                className="form-control"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                required
-              >
-                <option value="" disabled>Select Role</option>
-                <option value="student">Student</option>
-                <option value="graduate">Graduate</option>
-                <option value="professional">Professional</option>
-              </select>
-            </div>
-            
-            <div className="form-group">
-              <input
-                type={showPassword ? "text" : "password"}
-                className="form-control"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type={showPassword ? "text" : "password"}
-                className="form-control"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="showPasswordCheck"
-                checked={showPassword}
-                onChange={() => setShowPassword(!showPassword)}
-              />
-              <label className="form-check-label" htmlFor="showPasswordCheck">
-                Show Password
-              </label>
-            </div>
-            {error && <p className="text-danger text-sm">{error}</p>}
-            <button
-              type="submit"
-              className="btn btn-primary"
-              disabled={loading}
-            >
-              {loading ? "Registering..." : "Register"}
-            </button>
-          </form>
-          <p className="text-center mt-3">
-            Already have an account?{" "}
-            <Link to="/login" className="link-primary">
-              Login
-            </Link>
-          </p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
-}
+};
+
+export default Register;

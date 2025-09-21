@@ -7,18 +7,34 @@ import Logo from "../assets/logo.webp";
 import menuData from "../data/menuData.json";
 import "./Header.css";
 
-const Header = ({ userType = "guest" }) => {
+// ✅ Import getProfile from auth.jsx
+import { getProfile } from "../utils/auth";
+
+const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
   const [isOpen, setIsOpen] = useState(false);
   const [activePage, setActivePage] = useState("home");
   const [username, setUsername] = useState("");
+  const [role, setRole] = useState("guest");
 
+  // ✅ Get user profile when header mounts
   useEffect(() => {
-    const storedUsername = sessionStorage.getItem("username");
-    if (storedUsername) setUsername(storedUsername);
+    const fetchProfile = async () => {
+      try {
+        const profile = await getProfile(); // from auth.jsx
+        if (profile?.username) setUsername(profile.username);
+        if (profile?.role) setRole(profile.role);
+      } catch (err) {
+        console.warn("Failed to fetch profile, using guest mode.");
+        setRole("guest");
+      }
+    };
+    fetchProfile();
   }, []);
 
+  // ✅ Track active page
   useEffect(() => {
     const path = location.pathname.replace("/", "") || "home";
     setActivePage(path);
@@ -32,13 +48,20 @@ const Header = ({ userType = "guest" }) => {
     window.scrollTo(0, 0);
   };
 
-  const navLinks = menuData[userType?.toLowerCase()] || menuData["guest"];
+  // ✅ Choose menu based on role (fallback to guest)
+  const navLinks = menuData[role?.toLowerCase()] || menuData["guest"];
 
   const menuVariants = {
     open: {
       opacity: 1,
       y: 0,
-      transition: { type: "spring", stiffness: 300, damping: 40, staggerChildren: 0.05, delayChildren: 0.1 },
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 40,
+        staggerChildren: 0.05,
+        delayChildren: 0.1,
+      },
     },
     closed: { opacity: 0, y: -20, transition: { duration: 0.25 } },
   };
@@ -50,6 +73,7 @@ const Header = ({ userType = "guest" }) => {
       <div className="container floating-navbar-container">
         <nav className="navbar navbar-expand-lg navbar-light rounded-navbar">
           <div className="d-flex align-items-center w-100">
+            {/* Logo */}
             <div className="d-flex align-items-center me-auto">
               <img
                 src={Logo}
@@ -60,50 +84,57 @@ const Header = ({ userType = "guest" }) => {
               />
             </div>
 
-<div className="d-none d-lg-flex align-items-center flex-grow-1">
-  <ul className="navbar-nav mb-2 mb-lg-0 d-flex flex-row align-items-center mx-auto">
-    {navLinks.map((link) => {
-      const IconComponent = Icons[link.icon] || Icons.Circle;
-      return (
-        <li className="nav-item mx-lg-1 position-relative" key={link.page}>
-          <button
-            onClick={() => handleNavigation(link.page)}
-            className={`btn nav-link rounded-pill px-3 py-2 d-flex align-items-center gap-2 ${
-              activePage === link.page ? "fw-bold text-primary" : "text-dark"
-            }`}
-          >
-            <IconComponent size={18} />
-            {link.label}
-            {activePage === link.page && (
-              <motion.div
-                layoutId="underline"
-                className="position-absolute bottom-0 start-50 translate-middle-x bg-primary"
-                style={{ height: "3px", width: "60%", borderRadius: "2px" }}
-                initial={{ width: 0 }}
-                animate={{ width: "60%" }}
-                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-              />
-            )}
-          </button>
-        </li>
-      );
-    })}
-  </ul>
+            {/* Desktop Navigation */}
+            <div className="d-none d-lg-flex align-items-center flex-grow-1">
+              <ul className="navbar-nav mb-2 mb-lg-0 d-flex flex-row align-items-center mx-auto">
+                {navLinks.map((link) => {
+                  const IconComponent = Icons[link.icon] || Icons.Circle;
+                  return (
+                    <li className="nav-item mx-lg-1 position-relative" key={link.page}>
+                      <button
+                        onClick={() => handleNavigation(link.page)}
+                        className={`btn nav-link rounded-pill px-3 py-2 d-flex align-items-center gap-2 ${
+                          activePage === link.page ? "fw-bold text-primary" : "text-dark"
+                        }`}
+                      >
+                        <IconComponent size={18} />
+                        {link.label}
+                        {activePage === link.page && (
+                          <motion.div
+                            layoutId="underline"
+                            className="position-absolute bottom-0 start-50 translate-middle-x bg-primary"
+                            style={{ height: "3px", width: "60%", borderRadius: "2px" }}
+                            initial={{ width: 0 }}
+                            animate={{ width: "60%" }}
+                            transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                          />
+                        )}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
 
-  {username && (
-    <div className="d-flex align-items-center ps-3 border-start ms-2">
-      <User size={20} className="text-primary me-2" />
-      <span className="fw-semibold text-secondary">{username}</span>
-    </div>
-  )}
-</div>
+              {/* Username on Desktop */}
+              {username && (
+                <div className="d-flex align-items-center ps-3 border-start ms-2">
+                  <User size={20} className="text-primary me-2" />
+                  <span className="fw-semibold text-secondary">{username}</span>
+                </div>
+              )}
+            </div>
 
-
-            <button className="navbar-toggler border-0 p-0 ms-3 d-lg-none" type="button" onClick={toggleMenu}>
+            {/* Mobile Toggle Button */}
+            <button
+              className="navbar-toggler border-0 p-0 ms-3 d-lg-none"
+              type="button"
+              onClick={toggleMenu}
+            >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
 
+          {/* Mobile Menu */}
           <AnimatePresence>
             {isOpen && (
               <motion.div
