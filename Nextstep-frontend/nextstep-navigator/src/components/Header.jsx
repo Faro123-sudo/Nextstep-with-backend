@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as Icons from "lucide-react";
-import { Menu, X, User } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import Logo from "../assets/logo.webp";
@@ -9,8 +9,9 @@ import "./Header.css";
 
 // ✅ Import getProfile from auth.jsx
 import { getProfile } from "../utils/auth";
+import { logout } from "../utils/auth";
 
-const Header = () => {
+const Header = ({ onLogout }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -46,6 +47,11 @@ const Header = () => {
     navigate(`/${page === "home" ? "" : page}`);
     setIsOpen(false);
     window.scrollTo(0, 0);
+  };
+
+  const handleLogout = async () => {
+    await onLogout(); // Use the prop passed from App.jsx
+    navigate("/login"); // Redirect to login after state is updated
   };
 
   // ✅ Choose menu based on role (fallback to guest)
@@ -117,9 +123,15 @@ const Header = () => {
 
               {/* Username on Desktop */}
               {username && (
-                <div className="d-flex align-items-center ps-3 border-start ms-2">
+                <div className="d-flex align-items-center ps-3 border-start ms-3">
                   <User size={20} className="text-primary me-2" />
                   <span className="fw-semibold text-secondary">{username}</span>
+                  <button
+                    onClick={handleLogout}
+                    className="btn btn-icon text-danger ms-2 p-1"
+                    title="Logout">
+                    <LogOut size={20} />
+                  </button>
                 </div>
               )}
             </div>
@@ -168,6 +180,16 @@ const Header = () => {
                       </motion.button>
                     );
                   })}
+                  {username && (
+                    <motion.button
+                      onClick={handleLogout}
+                      className="btn w-100 text-center fw-medium py-3 d-flex justify-content-center gap-2 text-danger"
+                      variants={itemVariants}
+                    >
+                      <LogOut size={18} />
+                      Logout
+                    </motion.button>
+                  )}
                 </div>
               </motion.div>
             )}

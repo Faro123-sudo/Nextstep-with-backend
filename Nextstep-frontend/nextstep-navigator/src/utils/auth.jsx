@@ -25,10 +25,11 @@ export const clearTokens = () => {
 // ---------- AUTH FUNCTIONS ----------
 
 // Login and store tokens
-export const login = async (username, password) => {
+export const login = async (username, password, onLoginSuccess) => {
   const response = await axios.post(`${API_URL}/login/`, { username, password });
   saveTokens(response.data.access, response.data.refresh);
-  return response.data;
+  onLoginSuccess(); // Callback to update app state
+  return response.data; // Return data for local component use if needed
 };
 
 // Register new user
@@ -53,9 +54,27 @@ export const register = async (
 };
 
 // Logout user
-export const logout = () => {
+export const logout = async (onLogoutSuccess) => {
+  const refreshToken = getRefreshToken();
+
+  if (refreshToken) {
+    try {
+      // Call the backend to blacklist the refresh token
+      // This endpoint requires authentication, so we must pass the access token.
+      await axios.post(`${API_URL}/logout/`, {
+        refresh: refreshToken,
+      }, {
+        headers: { Authorization: `Bearer ${getAccessToken()}` }
+      }
+      );
+    } catch (error) {
+      // Log the error but proceed with local cleanup
+      console.error("Logout API call failed:", error);
+    }
+  }
+  // Always clear tokens from local storage
   clearTokens();
-  window.location.href = "/login"; // redirect to login page
+  onLogoutSuccess(); // Callback to update app state
 };
 
 // Fetch logged-in user's profile

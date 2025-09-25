@@ -43,7 +43,7 @@ const Register = () => {
       setLoading(true);
       setError("");
       await register(firstName, lastName, username, email, password, confirmPassword, role);
-      await login(username, password);
+      await login(username, password, () => {}); // Pass a no-op function to prevent TypeError
       navigate("/dashboard");
     } catch (err) {
       if (err.response?.data) {

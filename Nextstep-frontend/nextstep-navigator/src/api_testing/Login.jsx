@@ -27,14 +27,13 @@ const Login = ({ onLogin }) => {
     try {
       setLoading(true);
       setError("");
-      await login(username, password);
-      
-      // 🔑 Notify parent so `isAuthenticated` updates
-      onLogin?.();
-
+      // Pass the onLogin prop to the login utility.
+      // It will be called on success to update the app's state.
+      await login(username, password, onLogin);
       navigate("/");
     } catch (err) {
-      setError(err.response?.data?.detail || "Login failed");
+      const errorMessage = err.response?.data?.detail || "Login failed. Please check your credentials.";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
