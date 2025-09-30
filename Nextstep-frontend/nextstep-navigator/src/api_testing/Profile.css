@@ -1,0 +1,41 @@
+/* Custom CSS for Profile Component */
+
+/* --- Profile Card Styling --- */
+
+/* Ensures the card has a maximum width and a smooth border radius */
+.profile-card {
+    max-width: 400px; /* Limits the card size */
+    width: 90%; /* Responsive width on smaller screens */
+    animation: fadeIn 0.5s ease-out; /* Simple animation for a smooth entrance */
+}
+
+/* Avatar Placeholder Style */
+.avatar-placeholder {
+    width: 100px;
+    height: 100px;
+    color: white;
+    border-radius: 50%; /* Makes it a perfect circle */
+    font-size: 40px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 5px rgba(13, 110, 253, 0.3); /* Subtle outer ring/glow */
+}
+
+/* Enhancing the details section */
+.details-section {
+    border-color: #eee !important; /* Lighter border for separation */
+}
+
+/* Custom Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

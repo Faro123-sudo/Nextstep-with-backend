@@ -14,6 +14,7 @@ import ContactUs from "./Contact";
 import Footer from "./Footer";
 import Feedback from "./Feedback";
 import { getProfile, logout } from "../utils/auth";
+import Profile from "../api_testing/Profile";
 
 function DisplayPages() {
   const [user, setUser] = useState(null);
@@ -68,6 +69,7 @@ function DisplayPages() {
             <Route path="/admissionCoaching" element={<AdmissionCoaching userType={userType} />} />
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/profile" element={<Profile user={user} />} />
           </Routes>
         </div>
       </main>

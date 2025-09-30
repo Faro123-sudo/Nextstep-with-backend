@@ -124,8 +124,9 @@ const Header = ({ onLogout }) => {
               {/* Username on Desktop */}
               {username && (
                 <div className="d-flex align-items-center ps-3 border-start ms-3">
+                  <a href="/profile" className="d-flex align-items-center text-decoration-none"> 
                   <User size={20} className="text-primary me-2" />
-                  <span className="fw-semibold text-secondary">{username}</span>
+                  <span className="fw-semibold text-secondary">{username}</span></a>
                   <button
                     onClick={handleLogout}
                     className="btn btn-icon text-danger ms-2 p-1"
