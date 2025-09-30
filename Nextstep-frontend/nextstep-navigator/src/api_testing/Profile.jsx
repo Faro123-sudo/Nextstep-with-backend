@@ -1,7 +1,7 @@
 import React from "react";
 import "./Profile.css";
 import defaultProfilePic from "../assets/default-profile.webp"; // <-- Default profile picture
-const Profile = ({ user, defaultProfilePic }) => { // <-- Added defaultProfilePic prop
+const Profile = ({ user }) => {
 
     // Determine what to display in the avatar
     const avatarContent = defaultProfilePic ? (
