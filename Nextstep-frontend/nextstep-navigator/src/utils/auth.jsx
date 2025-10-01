@@ -131,3 +131,8 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+// Send password reset email
+export const sendPasswordResetEmail = async (email) => {
+  return await axios.post(`${API_URL}/password/change/`, { email });
+};

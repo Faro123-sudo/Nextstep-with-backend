@@ -85,17 +85,22 @@ const Login = ({ onLogin }) => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                <div className="form-check">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="showPasswordCheck"
-                    checked={showPassword}
-                    onChange={() => setShowPassword(!showPassword)}
-                  />
-                  <label className="form-check-label" htmlFor="showPasswordCheck">
-                    Show Password
-                  </label>
+                <div className="d-flex justify-content-between align-items-center">
+                  <div className="form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="showPasswordCheck"
+                      checked={showPassword}
+                      onChange={() => setShowPassword(!showPassword)}
+                    />
+                    <label className="form-check-label" htmlFor="showPasswordCheck">
+                      Show Password
+                    </label>
+                  </div>
+                  <Link to="/forgot-password" className="link-primary small">
+                    Forgot Password?
+                  </Link>
                 </div>
                 {error && <p className="text-danger text-sm">{error}</p>}
                 <button
