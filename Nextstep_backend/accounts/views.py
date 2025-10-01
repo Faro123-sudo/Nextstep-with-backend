@@ -8,7 +8,13 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .serializers import UserSerializer, RegisterSerializer, ChangePasswordSerializer
+from .serializers import (
+    UserSerializer, 
+    RegisterSerializer, 
+    ChangePasswordSerializer, 
+    PasswordResetRequestSerializer, 
+    PasswordResetConfirmSerializer
+)
 
 User = get_user_model()
 
@@ -47,6 +53,49 @@ class ChangePasswordView(generics.UpdateAPIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response({"detail": "Password updated successfully."}, status=status.HTTP_200_OK)
+
+
+# Password Reset
+from django.core.mail import send_mail
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+
+class PasswordResetRequestView(generics.GenericAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = PasswordResetRequestSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        email = serializer.validated_data['email']
+        user = User.objects.get(email__iexact=email)
+
+        # Generate token and uid
+        token = default_token_generator.make_token(user)
+        uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+
+        # In a real app, you'd build a full URL to your frontend app
+        # For now, we'll just send the token and uid
+        reset_link = f"Your frontend reset URL?uid={uidb64}&token={token}"
+
+        send_mail(
+            'Password Reset Request',
+            f'Here is your password reset info:\n\nUID: {uidb64}\nToken: {token}\n\nUse them in the app to reset your password. The link would be: {reset_link}',
+            settings.DEFAULT_FROM_EMAIL,
+            [user.email]
+        )
+        return Response({"detail": "Password reset email has been sent."}, status=status.HTTP_200_OK)
+
+class PasswordResetConfirmView(generics.GenericAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = PasswordResetConfirmSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"detail": "Password has been reset successfully."}, status=status.HTTP_200_OK)
 
 
 # Logout / blacklist refresh (requires token_blacklist app)
