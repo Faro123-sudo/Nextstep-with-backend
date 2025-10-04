@@ -82,10 +82,13 @@ class ChangePasswordSerializer(serializers.Serializer):
 class PasswordResetRequestSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
 
-    def validate_email(self, value):
-        if not User.objects.filter(email__iexact=value).exists():
+    def validate(self, data):
+        email = data.get('email')
+        user = User.objects.filter(email__iexact=email).first()
+        if not user:
             raise serializers.ValidationError("No user is associated with this email address.")
-        return value
+        data['user'] = user
+        return data
 
 class PasswordResetConfirmSerializer(serializers.Serializer):
     new_password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
@@ -94,9 +97,6 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
     token = serializers.CharField(required=True)
 
     def validate(self, data):
-        if data['new_password'] != data['confirm_new_password']:
-            raise serializers.ValidationError({"new_password": "Passwords must match."})
-
         from django.contrib.auth.tokens import default_token_generator
         from django.utils.http import urlsafe_base64_decode
         from django.utils.encoding import force_str
@@ -109,6 +109,9 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
 
         if self.user is None or not default_token_generator.check_token(self.user, data['token']):
             raise serializers.ValidationError("Invalid password reset link.")
+
+        if data['new_password'] != data['confirm_new_password']:
+            raise serializers.ValidationError({"new_password": "Passwords must match."})
 
         return data
 

@@ -56,10 +56,12 @@ class ChangePasswordView(generics.UpdateAPIView):
 
 
 # Password Reset
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 class PasswordResetRequestView(generics.GenericAPIView):
     permission_classes = [permissions.AllowAny]
@@ -68,23 +70,36 @@ class PasswordResetRequestView(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        email = serializer.validated_data['email']
-        user = User.objects.get(email__iexact=email)
+        user = serializer.validated_data['user']
 
         # Generate token and uid
         token = default_token_generator.make_token(user)
         uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
 
-        # In a real app, you'd build a full URL to your frontend app
-        # For now, we'll just send the token and uid
-        reset_link = f"Your frontend reset URL?uid={uidb64}&token={token}"
+        # Construct the full reset URL for your frontend application
+        # Replace 'http://localhost:5173' with your actual frontend URL,
+        # which should be defined in your settings.
+        frontend_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:5173')
+        reset_link = f"{frontend_url}/reset-password-confirm?uid={uidb64}&token={token}"
 
-        send_mail(
-            'Password Reset Request',
-            f'Here is your password reset info:\n\nUID: {uidb64}\nToken: {token}\n\nUse them in the app to reset your password. The link would be: {reset_link}',
-            settings.DEFAULT_FROM_EMAIL,
-            [user.email]
+        # Render email from template
+        email_context = {
+            'user': user,
+            'reset_link': reset_link,
+        }
+        html_content = render_to_string('password_reset_email.html', email_context)
+        text_content = strip_tags(html_content) # Create a plain-text version
+
+        # Create and send the email
+        email = EmailMultiAlternatives(
+            subject="Reset Your Password for NextStep Navigator",
+            body=text_content,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[user.email]
         )
+        email.attach_alternative(html_content, "text/html")
+        email.send()
+
         return Response({"detail": "Password reset email has been sent."}, status=status.HTTP_200_OK)
 
 class PasswordResetConfirmView(generics.GenericAPIView):

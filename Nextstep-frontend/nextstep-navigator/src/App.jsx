@@ -8,6 +8,7 @@ import "aos/dist/aos.css";
 import Login from "./api_testing/Login";
 import Register from "./api_testing/Register";
 import ForgotPassword from "./api_testing/ForgotPassword";
+import ResetPasswordConfirm from "./api_testing/ResetPasswordConfirm"; // Import the new component
 import ProtectedRoute from "./api_testing/ProtectedRoute";
 import DisplayPages from "./components/DisplayPages";
 import { getAccessToken, logout } from "./utils/auth";
@@ -57,6 +58,7 @@ export default function App() {
         />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password-confirm" element={<ResetPasswordConfirm />} />
 
         {/* --- Protected Route --- */}
         <Route

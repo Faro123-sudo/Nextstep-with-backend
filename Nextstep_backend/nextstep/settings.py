@@ -96,7 +96,7 @@ ROOT_URLCONF = 'nextstep.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -188,3 +188,17 @@ JAZZMIN_SETTINGS ={
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# Email Configuration for SendGrid
+# In production, use environment variables for sensitive data like EMAIL_HOST_PASSWORD.
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'apikey'  # This is the literal username for SendGrid API keys
+EMAIL_HOST_PASSWORD = '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'
+DEFAULT_FROM_EMAIL = 'NextStep Navigator <haleemcoco14@gmail.com>' # Change this to your sending email
+
+# For development, you can print emails to the console instead of sending them
+# by uncommenting the following line:
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -120,3 +120,13 @@ export const refreshAccessToken = async () => {
 export const sendPasswordResetEmail = async (email) => {
   return await axios.post(`${API_URL}/password/reset/`, { email });
 };
+
+// Confirm and set the new password
+export const resetPasswordConfirm = async (uid, token, password, confirmPassword) => {
+  return await axios.post(`${API_URL}/password/reset/confirm/`, {
+    uidb64: uid,
+    token: token,
+    new_password: password,
+    confirm_new_password: confirmPassword,
+  });
+};
