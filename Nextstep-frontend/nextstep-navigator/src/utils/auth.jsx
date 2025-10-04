@@ -115,22 +115,6 @@ export const refreshAccessToken = async () => {
   }
 };
 
-// Setup axios interceptor to auto-refresh token
-axios.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      const newAccess = await refreshAccessToken();
-      if (newAccess) {
-        originalRequest.headers["Authorization"] = `Bearer ${newAccess}`;
-        return axios(originalRequest);
-      }
-    }
-    return Promise.reject(error);
-  }
-);
 
 // Send password reset email
 export const sendPasswordResetEmail = async (email) => {

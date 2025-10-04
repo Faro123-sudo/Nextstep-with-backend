@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import * as Icons from "lucide-react";
-import { Menu, X, User, LogOut } from "lucide-react";
+import { Menu, X, User, LogOut, UserPlus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import Logo from "../assets/logo.webp";
 import menuData from "../data/menuData.json";
 import "./Header.css";
 
-// ✅ Import getProfile from auth.jsx
-import { getProfile } from "../utils/auth";
-import { logout } from "../utils/auth";
+// ✅ Import getProfile and logout from auth.jsx
+import { getProfile, logout } from "../utils/auth";
 
 const Header = ({ onLogout }) => {
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ const Header = ({ onLogout }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const profile = await getProfile(); // from auth.jsx
+        const profile = await getProfile();
         if (profile?.username) setUsername(profile.username);
         if (profile?.role) setRole(profile.role);
       } catch (err) {
@@ -50,8 +49,8 @@ const Header = ({ onLogout }) => {
   };
 
   const handleLogout = async () => {
-    await onLogout(); // Use the prop passed from App.jsx
-    navigate("/login"); // Redirect to login after state is updated
+    await onLogout();
+    navigate("/login"); // Redirect to login after logout
   };
 
   // ✅ Choose menu based on role (fallback to guest)
@@ -121,17 +120,34 @@ const Header = ({ onLogout }) => {
                 })}
               </ul>
 
-              {/* Username on Desktop */}
-              {username && (
+              {/* Auth Section (Desktop) */}
+              {username ? (
                 <div className="d-flex align-items-center ps-3 border-start ms-3">
                   <a href="/profile" className="d-flex align-items-center text-decoration-none"> 
-                  <User size={20} className="text-primary me-2" />
-                  <span className="fw-semibold text-secondary">{username}</span></a>
+                    <User size={20} className="text-primary me-2" />
+                    <span className="fw-semibold text-secondary">{username}</span>
+                  </a>
                   <button
                     onClick={handleLogout}
                     className="btn btn-icon text-danger ms-2 p-1"
-                    title="Logout">
+                    title="Logout"
+                  >
                     <LogOut size={20} />
+                  </button>
+                </div>
+              ) : (
+                <div className="d-flex align-items-center ps-3 border-start ms-3 gap-2">
+                  <button
+                    onClick={() => navigate("/login")}
+                    className="btn btn-outline-primary rounded-pill px-3 py-1"
+                  >
+                    Login
+                  </button>
+                  <button
+                    onClick={() => navigate("/register")}
+                    className="btn btn-primary rounded-pill px-3 py-1"
+                  >
+                    Register
                   </button>
                 </div>
               )}
@@ -161,10 +177,13 @@ const Header = ({ onLogout }) => {
                 <div className="d-flex flex-column align-items-center py-2">
                   {username && (
                     <div className="d-flex align-items-center py-3 text-primary fw-bold">
-                      <User size={20} className="me-2" />
-                      <span>{username}</span>
+                      <a href="/profile" className="d-flex align-items-center text-decoration-none"> 
+                    <User size={20} className="text-primary me-2" />
+                    <span className="fw-bold">{username}</span>
+                  </a>
                     </div>
                   )}
+
                   {navLinks.map((link) => {
                     const IconComponent = Icons[link.icon] || Icons.Circle;
                     return (
@@ -181,7 +200,9 @@ const Header = ({ onLogout }) => {
                       </motion.button>
                     );
                   })}
-                  {username && (
+
+                  {/* Auth Section (Mobile) */}
+                  {username ? (
                     <motion.button
                       onClick={handleLogout}
                       className="btn w-100 text-center fw-medium py-3 d-flex justify-content-center gap-2 text-danger"
@@ -190,6 +211,25 @@ const Header = ({ onLogout }) => {
                       <LogOut size={18} />
                       Logout
                     </motion.button>
+                  ) : (
+                    <>
+                      <motion.button
+                        onClick={() => handleNavigation("login")}
+                        className="btn w-100 text-center fw-medium py-3 d-flex justify-content-center gap-2 text-primary"
+                        variants={itemVariants}
+                      >
+                        <User size={18} />
+                        Login
+                      </motion.button>
+                      <motion.button
+                        onClick={() => handleNavigation("register")}
+                        className="btn w-100 text-center fw-medium py-3 d-flex justify-content-center gap-2 text-success"
+                        variants={itemVariants}
+                      >
+                        <UserPlus size={18} />
+                        Register
+                      </motion.button>
+                    </>
                   )}
                 </div>
               </motion.div>

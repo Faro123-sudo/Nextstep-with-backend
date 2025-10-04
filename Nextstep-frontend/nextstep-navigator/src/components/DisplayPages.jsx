@@ -1,5 +1,6 @@
+// src/components/DisplayPages.jsx
+
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
 import Header from "./Header";
 import Breadcrumbs from "./Breadcrumbs";
 import HomePage from "./HomePage";
@@ -13,31 +14,25 @@ import AboutUs from "./Aboutus";
 import ContactUs from "./Contact";
 import Footer from "./Footer";
 import Feedback from "./Feedback";
-import { getProfile, logout } from "../utils/auth";
 import Profile from "../api_testing/Profile";
 
-function DisplayPages() {
-  const [user, setUser] = useState(null);
+// Import the custom profile hook
+import { useProfile } from "../context/ProfileContext";
+
+// DisplayPages now receives the global onLogout handler from App.jsx as a prop
+function DisplayPages({ onLogout }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const profile = await getProfile();
-        setUser(profile);
-      } catch (error) {
-        console.error("No user profile found, user is not logged in.", error);
-        setUser(null);
-      }
-    };
-    fetchUser();
-  }, []);
+  // Get user profile from the centralized context
+  const { profile, loading } = useProfile();
+  const user = profile.username ? profile : null; // Determine user presence
 
-  const handleLogout = () => {
-    logout();
-    setUser(null);
-    navigate("/login");
+  // This handleLogout calls the prop function passed from App.jsx.
+  // That prop function handles: 1. API logout, 2. Local token clear, 3. Updating isAuthenticated state.
+  const handleGlobalLogout = async () => {
+    await onLogout(); // This runs the logout logic defined in App.jsx
+    navigate("/login"); // Redirect after the global state is updated
   };
 
   const handleNavigate = (page) => {
@@ -47,19 +42,25 @@ function DisplayPages() {
   const activeSection = location.pathname === "/" ? "home" : location.pathname.replace("/", "");
   const userType = user ? user.role : "guest";
 
+  // Optional: Show loading state while profile is fetched on initial mount
+  if (loading) {
+    return <div>Loading user data...</div>;
+  }
+
   return (
     <>
-      <Header 
-        onNavigate={handleNavigate} 
-        activePage={activeSection} 
-        user={user} 
-        onLogout={handleLogout} 
+      <Header
+        onNavigate={handleNavigate}
+        activePage={activeSection}
+        // Header now uses the profile from context (if you apply the Header fix)
+        onLogout={handleGlobalLogout}
       />
       <main className="container">
         <Breadcrumbs activeSection={activeSection} userType={userType} onNavigate={handleNavigate} />
 
         <div className="max-w-4xl mx-auto p-4">
           <Routes>
+            {/* Pass the user object derived from the context */}
             <Route path="*" element={<HomePage onNavigate={handleNavigate} user={user} />} />
             <Route path="/careerBank" element={<CareerBank userType={userType} />} />
             <Route path="/quiz" element={<Quiz userType={userType} />} />
