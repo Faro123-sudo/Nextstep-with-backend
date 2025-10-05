@@ -118,7 +118,15 @@ export const refreshAccessToken = async () => {
 
 // Send password reset email
 export const sendPasswordResetEmail = async (email) => {
-  return await axios.post(`${API_URL}/password/reset/`, { email });
+    try {
+        const response = await axios.post(`${API_URL}/password/reset/`, { email });
+        return response.data; // Return the success message/data
+    } catch (error) {
+        // Log the error for debugging
+        console.error("Password reset request failed:", error.response?.data || error.message);
+        // Throw the error so the component can catch and display it
+        throw error; 
+    }
 };
 
 // Confirm and set the new password

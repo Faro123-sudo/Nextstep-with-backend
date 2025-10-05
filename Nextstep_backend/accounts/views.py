@@ -63,6 +63,11 @@ from django.utils.encoding import force_bytes
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
+
+# views.py
+
+# ... (imports remain the same) ...
+
 class PasswordResetRequestView(generics.GenericAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = PasswordResetRequestSerializer
@@ -70,37 +75,46 @@ class PasswordResetRequestView(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
+        
+        # Get the user. It could be None if the email didn't exist, 
+        # but the serializer passed validation for security reasons.
+        user = serializer.validated_data.get('user') 
 
-        # Generate token and uid
-        token = default_token_generator.make_token(user)
-        uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+        # SECURITY: Always return a success message immediately 
+        # to prevent user enumeration.
+        response_detail = "If an account with that email exists, a password reset link has been sent."
+        
+        # Only proceed with email sending if a user was actually found.
+        if user:
+            # Generate token and uid
+            token = default_token_generator.make_token(user)
+            uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
 
-        # Construct the full reset URL for your frontend application
-        # Replace 'http://localhost:5173' with your actual frontend URL,
-        # which should be defined in your settings.
-        frontend_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:5173')
-        reset_link = f"{frontend_url}/reset-password-confirm?uid={uidb64}&token={token}"
+            # Construct the full reset URL
+            frontend_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:5173')
+            reset_link = f"{frontend_url}/reset-password-confirm?uid={uidb64}&token={token}"
 
-        # Render email from template
-        email_context = {
-            'user': user,
-            'reset_link': reset_link,
-        }
-        html_content = render_to_string('password_reset_email.html', email_context)
-        text_content = strip_tags(html_content) # Create a plain-text version
+            # Render email from template
+            email_context = {
+                'user': user,
+                'reset_link': reset_link,
+            }
+            html_content = render_to_string('password_reset_email.html', email_context)
+            text_content = strip_tags(html_content) 
 
-        # Create and send the email
-        email = EmailMultiAlternatives(
-            subject="Reset Your Password for NextStep Navigator",
-            body=text_content,
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            to=[user.email]
-        )
-        email.attach_alternative(html_content, "text/html")
-        email.send()
+            # Create and send the email
+            email = EmailMultiAlternatives(
+                subject="Reset Your Password for NextStep Navigator",
+                body=text_content,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[user.email]
+            )
+            email.attach_alternative(html_content, "text/html")
+            email.send()
 
-        return Response({"detail": "Password reset email has been sent."}, status=status.HTTP_200_OK)
+        # IMPORTANT: Return a success response regardless of whether 
+        # an email was sent or not.
+        return Response({"detail": response_detail}, status=status.HTTP_200_OK)
 
 class PasswordResetConfirmView(generics.GenericAPIView):
     permission_classes = [permissions.AllowAny]

@@ -79,16 +79,18 @@ class ChangePasswordSerializer(serializers.Serializer):
         user.save()
         return user
 
+# serializer.py
+
 class PasswordResetRequestSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
 
     def validate(self, data):
         email = data.get('email')
+        # Look up the user
         user = User.objects.filter(email__iexact=email).first()
-        if not user:
-            raise serializers.ValidationError("No user is associated with this email address.")
         data['user'] = user
         return data
+    
 
 class PasswordResetConfirmSerializer(serializers.Serializer):
     new_password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
