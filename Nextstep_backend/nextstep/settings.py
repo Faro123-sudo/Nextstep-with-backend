@@ -12,20 +12,24 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environment variables from .env file
+load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-tbgs8ttlggt%z9^c1hri12%ynp*pd4-un*xc+@v)dmmt582mky'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = []
 
@@ -196,9 +200,9 @@ EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'apikey'  # This is the literal username for SendGrid API keys
-DEFAULT_FROM_EMAIL = 'NextStep Navigator <haleemcoco14@gmail.com>' # Change this to your sending email
-EMAIL_HOST_PASSWORD = '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'
+EMAIL_HOST_USER = 'apikey'  # This is the literal username for SendGrid API keys.
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 # For development, you can print emails to the console instead of sending them
 # by uncommenting the following line:
