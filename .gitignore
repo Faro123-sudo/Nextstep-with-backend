@@ -38,6 +38,8 @@ build/
 dist/
 *.egg-info/
 *.egg
+# Environment variables
+.env
 
 # =========================
 # React / Node
