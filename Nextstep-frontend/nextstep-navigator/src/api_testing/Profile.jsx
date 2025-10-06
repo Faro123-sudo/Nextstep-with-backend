@@ -33,6 +33,12 @@ const Profile = ({ user }) => {
                         <span className="fw-semibold">Role:</span>{" "}
                         <span className="badge bg-info text-dark">{user.role}</span>
                     </p>
+                    <p className="text-muted mb-1 small">
+                        <span className="fw-semibold">First Name:</span> {user.firstName}
+                    </p>
+                    <p className="text-muted mb-0 small">
+                        <span className="fw-semibold">Lastname: </span>{user.lastName}
+                    </p>
                 </div>
             </div>
         </div>

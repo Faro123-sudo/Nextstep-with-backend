@@ -73,7 +73,7 @@ function HomePage({ user, onNavigate }) { // Renamed and changed props
     return (
       <div className="container d-flex flex-column align-items-center justify-content-center text-center">
         <h1 className="display-4 fw-bold mb-4">
-          Welcome back, <span className="text-primary">{user.username}</span>!
+          Welcome back, <span className="text-primary">{user.firstName}</span>!
         </h1>
         <p className="lead text-muted mb-4">You are logged in as a {user.role}.</p>
         

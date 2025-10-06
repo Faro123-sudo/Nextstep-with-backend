@@ -13,6 +13,8 @@ const ResetPasswordConfirm = () => {
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    // New state for show password checkbox
+    const [showPassword, setShowPassword] = useState(false); 
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
 
@@ -40,7 +42,9 @@ const ResetPasswordConfirm = () => {
             setLoading(true);
             setError("");
             setMessage("");
-            await resetPasswordConfirm(uid, token, password, confirmPassword);
+            // Assuming resetPasswordConfirm only needs the new password once if it's confirmed
+            // Based on your original code, it takes both, so I'll keep it.
+            await resetPasswordConfirm(uid, token, password, confirmPassword); 
             setMessage("Your password has been reset successfully! You can now log in.");
             setTimeout(() => navigate("/login"), 3000); // Redirect to login after 3 seconds
         } catch (err) {
@@ -50,10 +54,13 @@ const ResetPasswordConfirm = () => {
             setLoading(false);
         }
     };
+    
+    // Determine the input type based on the state
+    const passwordInputType = showPassword ? "text" : "password";
 
     return (
         <div className="min-vh-100 d-flex flex-column align-items-center justify-content-center landing-bg">
-            <h2 className="mb-4 text-center">Reset Your Password</h2>
+            <h1 className="mb-4 fw-bold text-primary text-center">Reset Your Password</h1>
             <div className="container">
                 <div className="row align-items-center">
                     <div className="col-md-6 col-lg-5 text-center mb-5 mb-md-0">
@@ -67,7 +74,7 @@ const ResetPasswordConfirm = () => {
                             </div>
                             <p className="text-muted text-center mb-3">Enter your new password below.</p>
                             <input
-                                type="password"
+                                type={passwordInputType}
                                 className="form-control mb-3"
                                 placeholder="New Password"
                                 value={password}
@@ -76,7 +83,7 @@ const ResetPasswordConfirm = () => {
                                 required
                             />
                             <input
-                                type="password"
+                                type={passwordInputType}
                                 className="form-control mb-3"
                                 placeholder="Confirm New Password"
                                 value={confirmPassword}
@@ -84,6 +91,22 @@ const ResetPasswordConfirm = () => {
                                 disabled={!!message}
                                 required
                             />
+                            
+                            {/* NEW CHECKBOX */}
+                            <div className="form-check mb-3">
+                                <input
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    id="showPasswordCheck"
+                                    checked={showPassword}
+                                    onChange={() => setShowPassword(!showPassword)}
+                                />
+                                <label className="form-check-label" htmlFor="showPasswordCheck">
+                                    Show Password
+                                </label>
+                            </div>
+                            {/* END NEW CHECKBOX */}
+
                             {error && <p className="text-danger text-sm">{error}</p>}
                             {message && <p className="text-success text-sm">{message}</p>}
                             <button type="submit" className="btn btn-primary btn-lg w-100 py-2 fw-bold rounded-pill" disabled={loading || !!message}>

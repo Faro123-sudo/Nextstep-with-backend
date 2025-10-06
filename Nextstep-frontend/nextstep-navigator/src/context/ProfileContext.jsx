@@ -20,6 +20,8 @@ export const ProfileProvider = ({ children }) => {
             const userProfile = await getProfile();
             if (userProfile) {
                 setProfile({
+                    firstName: userProfile.first_name || null,
+                    lastName: userProfile.last_name || null,
                     username: userProfile.username || null,
                     role: userProfile.role || 'guest',
                     email: userProfile.email || null
