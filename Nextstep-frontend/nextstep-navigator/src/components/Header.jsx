@@ -7,32 +7,19 @@ import Logo from "../assets/logo.webp";
 import menuData from "../data/menuData.json";
 import "./Header.css";
 
-// ✅ Import getProfile and logout from auth.jsx
-import { getProfile, logout } from "../utils/auth";
+// ✅ Import the profile hook
+import { useProfile } from "../context/ProfileContext";
 
 const Header = ({ onLogout }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // ✅ Get user profile from the centralized context
+  const { profile } = useProfile();
+  const user = profile?.user; // The nested user object
+
   const [isOpen, setIsOpen] = useState(false);
   const [activePage, setActivePage] = useState("home");
-  const [username, setUsername] = useState("");
-  const [role, setRole] = useState("guest");
-
-  // ✅ Get user profile when header mounts
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const profile = await getProfile();
-        if (profile?.username) setUsername(profile.username);
-        if (profile?.role) setRole(profile.role);
-      } catch (err) {
-        console.warn("Failed to fetch profile, using guest mode.");
-        setRole("guest");
-      }
-    };
-    fetchProfile();
-  }, []);
 
   // ✅ Track active page
   useEffect(() => {
@@ -54,7 +41,7 @@ const Header = ({ onLogout }) => {
   };
 
   // ✅ Choose menu based on role (fallback to guest)
-  const navLinks = menuData[role?.toLowerCase()] || menuData["guest"];
+  const navLinks = menuData[user?.role?.toLowerCase() || "guest"] || menuData["guest"];
 
   const menuVariants = {
     open: {
@@ -121,11 +108,11 @@ const Header = ({ onLogout }) => {
               </ul>
 
               {/* Auth Section (Desktop) */}
-              {username ? (
+              {user ? (
                 <div className="d-flex align-items-center ps-3 border-start ms-3">
                   <a href="/profile" className="d-flex align-items-center text-decoration-none"> 
                     <User size={20} className="text-primary me-2" />
-                    <span className="fw-semibold text-secondary">{username}</span>
+                    <span className="fw-semibold text-secondary">{user.username}</span>
                   </a>
                   <button
                     onClick={handleLogout}
@@ -175,11 +162,11 @@ const Header = ({ onLogout }) => {
                 style={{ top: "100%" }}
               >
                 <div className="d-flex flex-column align-items-center py-2">
-                  {username && (
+                  {user && (
                     <div className="d-flex align-items-center py-3 text-primary fw-bold">
                       <a href="/profile" className="d-flex align-items-center text-decoration-none"> 
                     <User size={20} className="text-primary me-2" />
-                    <span className="fw-bold">{username}</span>
+                    <span className="fw-bold">{user.username}</span>
                   </a>
                     </div>
                   )}
@@ -202,7 +189,7 @@ const Header = ({ onLogout }) => {
                   })}
 
                   {/* Auth Section (Mobile) */}
-                  {username ? (
+                  {user ? (
                     <motion.button
                       onClick={handleLogout}
                       className="btn w-100 text-center fw-medium py-3 d-flex justify-content-center gap-2 text-danger"

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
-import { resetPasswordConfirm } from "../utils/auth"; // We will create this function
+import { resetPasswordConfirm } from "../../utils/auth"; // We will create this function
 import Lottie from "lottie-react";
-import Logo from "../assets/logo.webp";
-import animationData from "../assets/animation/forgot-password.json"; // Reusing the animation
+import Logo from "../../assets/logo.webp";
+import animationData from "../../assets/animation/forgot-password.json"; // Reusing the animation
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../components/staticFiles/LandingPage.css";
+import "../../components/staticFiles/LandingPage.css";
 
 const ResetPasswordConfirm = () => {
     const [password, setPassword] = useState("");

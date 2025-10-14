@@ -1,6 +1,7 @@
 # core/views.py
 from rest_framework import viewsets, generics, permissions, status
 from rest_framework.decorators import action
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
@@ -137,12 +138,69 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
     Retrieve / update the current user's profile.
     URL: /api/core/profile/
     """
+    # Add parsers to handle file uploads (for profile_image)
+    parser_classes = [MultiPartParser, FormParser]
     serializer_class = UserProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self):
         profile, _ = UserProfile.objects.get_or_create(user=self.request.user)
         return profile
+    
+    def update(self, request, *args, **kwargs):
+        """
+        Override update to handle interests submitted via multipart/form-data.
+        Accepts:
+          - repeated form fields: interests=1 & interests=2
+          - JSON string: interests="[1,2,3]"
+        """
+        partial = kwargs.pop('partial', True)
+        instance = self.get_object()
+
+        # Extract interests from request.data flexibly
+        interests = None
+        if 'interests' in request.data:
+            raw = None
+            # QueryDict has getlist
+            try:
+                raw = request.data.getlist('interests')
+            except Exception:
+                raw = request.data.get('interests')
+
+            if isinstance(raw, (list, tuple)):
+                # list of strings/ints
+                try:
+                    interests = [int(x) for x in raw if x not in (None, '')]
+                except Exception:
+                    interests = [x for x in raw if x not in (None, '')]
+            else:
+                # single value: might be JSON string or comma-separated
+                try:
+                    parsed = __import__('json').loads(raw)
+                    if isinstance(parsed, (list, tuple)):
+                        interests = [int(x) for x in parsed]
+                    else:
+                        interests = [int(parsed)]
+                except Exception:
+                    # fallback: split by comma
+                    try:
+                        interests = [int(x) for x in str(raw).split(',') if x.strip()]
+                    except Exception:
+                        interests = None
+
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        # If we parsed interests, set the many-to-many relationship explicitly
+        if interests is not None:
+            try:
+                instance.interests.set(interests)
+            except Exception:
+                # swallow individual errors to avoid breaking update — serializer validation should have caught bad ids
+                pass
+
+        return Response(self.get_serializer(instance).data)
 
 class FeedbackViewSet(viewsets.ModelViewSet):
     queryset = Feedback.objects.all().select_related("user","handled_by")

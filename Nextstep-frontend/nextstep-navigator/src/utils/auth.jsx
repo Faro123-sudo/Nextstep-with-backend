@@ -1,35 +1,27 @@
-import axios from "axios";
+import api from "./axiosClient";
 
-const API_URL = "http://127.0.0.1:8000/api/auth"; // adjust if needed
+// ---------- TOKEN MANAGEMENT ----------
 
-// ---------- TOKEN STORAGE ----------
-const ACCESS_TOKEN_KEY = "access_token";
-const REFRESH_TOKEN_KEY = "refresh_token";
+export const getAccessToken = () => localStorage.getItem("access_token");
+export const getRefreshToken = () => localStorage.getItem("refresh_token");
 
-// Save tokens to localStorage
-export const saveTokens = (access, refresh) => {
-  localStorage.setItem(ACCESS_TOKEN_KEY, access);
-  localStorage.setItem(REFRESH_TOKEN_KEY, refresh);
+export const setTokens = (access, refresh) => {
+  localStorage.setItem("access_token", access);
+  localStorage.setItem("refresh_token", refresh);
 };
 
-// Get tokens
-export const getAccessToken = () => localStorage.getItem(ACCESS_TOKEN_KEY);
-export const getRefreshToken = () => localStorage.getItem(REFRESH_TOKEN_KEY);
-
-// Remove tokens
 export const clearTokens = () => {
-  localStorage.removeItem(ACCESS_TOKEN_KEY);
-  localStorage.removeItem(REFRESH_TOKEN_KEY);
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("refresh_token");
 };
 
 // ---------- AUTH FUNCTIONS ----------
 
 // Login and store tokens
-export const login = async (username, password, onLoginSuccess) => {
-  const response = await axios.post(`${API_URL}/login/`, { username, password });
-  saveTokens(response.data.access, response.data.refresh);
-  onLoginSuccess(); // Callback to update app state
-  return response.data; // Return data for local component use if needed
+export const login = async (username, password) => {
+  const response = await api.post("/auth/login/", { username, password });
+  setTokens(response.data.access, response.data.refresh);
+  return response.data;
 };
 
 // Register new user
@@ -42,7 +34,7 @@ export const register = async (
   confirmPassword,
   role
 ) => {
-  return await axios.post(`${API_URL}/register/`, {
+  return await api.post("/auth/register/", {
     first_name: firstName,
     last_name: lastName,
     username,
@@ -54,72 +46,22 @@ export const register = async (
 };
 
 // Logout user
-export const logout = async (onLogoutSuccess) => {
+export const logout = async () => {
   const refreshToken = getRefreshToken();
-
   if (refreshToken) {
     try {
-      // Call the backend to blacklist the refresh token
-      // This endpoint requires authentication, so we must pass the access token.
-      await axios.post(`${API_URL}/logout/`, {
-        refresh: refreshToken,
-      }, {
-        headers: { Authorization: `Bearer ${getAccessToken()}` }
-      }
-      );
+      await api.post("/auth/logout/", { refresh: refreshToken });
     } catch (error) {
-      // Log the error but proceed with local cleanup
       console.error("Logout API call failed:", error);
     }
   }
-  // Always clear tokens from local storage
   clearTokens();
-  onLogoutSuccess(); // Callback to update app state
 };
-
-// Fetch logged-in user's profile
-export const getProfile = async () => {
-  const token = getAccessToken();
-  if (!token) return null;
-
-  try {
-    const response = await axios.get(`${API_URL}/profile/`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Failed to fetch profile", error);
-    return null;
-  }
-};
-
-
-// Refresh token if access token is expired
-export const refreshAccessToken = async () => {
-  const refresh = getRefreshToken();
-  if (!refresh) {
-    logout();
-    return;
-  }
-  try {
-    const response = await axios.post(`${API_URL}/token/refresh/`, {
-      refresh,
-    });
-    saveTokens(response.data.access, refresh);
-    return response.data.access;
-  } catch (err) {
-    console.error("Failed to refresh token", err);
-    logout();
-  }
-};
-
 
 // Send password reset email
 export const sendPasswordResetEmail = async (email) => {
     try {
-        const response = await axios.post(`${API_URL}/password/reset/`, { email });
+        const response = await api.post("/auth/password/reset/", { email });
         return response.data; // Return the success message/data
     } catch (error) {
         // Log the error for debugging
@@ -131,7 +73,7 @@ export const sendPasswordResetEmail = async (email) => {
 
 // Confirm and set the new password
 export const resetPasswordConfirm = async (uid, token, password, confirmPassword) => {
-  return await axios.post(`${API_URL}/password/reset/confirm/`, {
+  return await api.post("/auth/password/reset/confirm/", {
     uidb64: uid,
     token: token,
     new_password: password,

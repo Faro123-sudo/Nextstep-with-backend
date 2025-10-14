@@ -1,0 +1,57 @@
+/* --- Profile Card Styling --- */
+
+/* Ensures the card has a maximum width and a smooth border radius */
+.profile-card {
+    max-width: 450px; /* Slightly increased max-width for more content space */
+    width: 90%; 
+    animation: fadeIn 0.5s ease-out; 
+    transition: transform 0.3s ease; /* Added transition for hover effect */
+}
+
+/* Optional: Add a subtle hover effect to the card */
+.profile-card:hover {
+    transform: translateY(-3px);
+}
+
+/* --- Avatar Styling --- */
+
+/* The actual image */
+.custom-avatar {
+    width: 140px; /* Slightly increased size */
+    height: 140px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    display: block; 
+    /* Added a solid white border for contrast against the card/page */
+    border: 5px solid white; 
+}
+
+/* Avatar Placeholder Style (The container for the image) */
+.avatar-placeholder {
+    width: 140px; /* Must match the image size */
+    height: 140px;
+    border-radius: 50%; 
+    /* Removed unnecessary flex properties, font-size, color since the image is styled now */
+    
+    /* Replaced the blue glow with a subtle primary color ring */
+    border: 3px solid var(--bs-primary); /* Use Bootstrap primary color variable */
+    /* Remove 'box-shadow' if you are using 'shadow-sm' on the image itself */
+}
+
+/* --- Details Section Styling --- */
+.details-section {
+    /* Made the top border thicker and more defined */
+    border-top: 2px solid #ddd !important;
+}
+
+/* Custom Fade-in Animation (Keep this as is) */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

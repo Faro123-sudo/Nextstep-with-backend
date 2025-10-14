@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { register, login } from "../utils/auth";
+import { register, login } from "../../utils/auth";
+import { useProfile } from "../../context/ProfileContext"; // Import the profile hook
 import Lottie from "lottie-react";
-import Logo from "../assets/logo.webp";
-import animationData from "../assets/animation/looking.json";
+import Logo from "../../assets/logo.webp";
+import animationData from "../../assets/animation/looking.json";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../components/staticFiles/LandingPage.css";
+import "../../components/staticFiles/LandingPage.css";
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -18,6 +19,7 @@ const Register = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const { setProfile } = useProfile(); // Get the setProfile function from context
 
   const navigate = useNavigate();
 
@@ -43,8 +45,8 @@ const Register = () => {
       setLoading(true);
       setError("");
       await register(firstName, lastName, username, email, password, confirmPassword, role);
-      await login(username, password, () => {}); // Pass a no-op function to prevent TypeError
-      navigate("/dashboard");
+      await login(username, password, setProfile); // Pass setProfile to login
+      navigate("/"); // Navigate to the home page
     } catch (err) {
       if (err.response?.data) {
         const errors = err.response.data;

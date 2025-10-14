@@ -6,21 +6,15 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
+    education_level = serializers.CharField(source='profile.education_level', read_only=True)
+    bio = serializers.CharField(source='profile.bio', read_only=True)
+    interests = serializers.PrimaryKeyRelatedField(many=True, read_only=True, source='profile.interests')
     class Meta:
         model = User
         # include all fields from the model
-        fields = ("id", "username", "email", "first_name", "last_name", "role", "bio")
+        fields = ("id", "username", "email", "first_name", "last_name", "role", "bio", "education_level", "interests")
         read_only_fields = ("id",)
 
-from rest_framework import serializers
-from django.contrib.auth import get_user_model
-from django.contrib.auth.password_validation import validate_password
-
-User = get_user_model()
-
-from rest_framework import serializers
-from django.contrib.auth.password_validation import validate_password
-from .models import User  # Ensure you are importing your custom User model
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
@@ -78,8 +72,6 @@ class ChangePasswordSerializer(serializers.Serializer):
         user.set_password(self.validated_data["new_password"])
         user.save()
         return user
-
-# serializer.py
 
 class PasswordResetRequestSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)

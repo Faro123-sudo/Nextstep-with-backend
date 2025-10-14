@@ -14,7 +14,9 @@ import AboutUs from "./Aboutus";
 import ContactUs from "./Contact";
 import Footer from "./Footer";
 import Feedback from "./Feedback";
-import Profile from "../api_testing/Profile";
+import Profile from "../pages/auth/Profile";
+import UploadStory from "./SuccessStory/UploadStory.jsx";
+import ProfileSetting from "../pages/auth/ProfileSetting.jsx";
 
 // Import the custom profile hook
 import { useProfile } from "../context/ProfileContext";
@@ -26,7 +28,7 @@ function DisplayPages({ onLogout }) {
 
   // Get user profile from the centralized context
   const { profile, loading } = useProfile();
-  const user = profile.username ? profile : null; // Determine user presence
+  const user = profile?.user; // The profile from context is the user object.
 
   // This handleLogout calls the prop function passed from App.jsx.
   // That prop function handles: 1. API logout, 2. Local token clear, 3. Updating isAuthenticated state.
@@ -70,7 +72,10 @@ function DisplayPages({ onLogout }) {
             <Route path="/admissionCoaching" element={<AdmissionCoaching userType={userType} />} />
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
-            <Route path="/profile" element={<Profile user={user} />} />
+            {/* Pass the full profile object to Profile so it can access top-level fields like profile_image */}
+            <Route path="/profile" element={<Profile user={profile} />} />
+            <Route path="/uploadStory" element={<UploadStory userType={userType} />} />
+            <Route path="/profileSetting" element={<ProfileSetting user={user} />} />            
           </Routes>
         </div>
       </main>

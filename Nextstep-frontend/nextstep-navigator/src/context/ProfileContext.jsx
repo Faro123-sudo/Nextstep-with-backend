@@ -1,37 +1,23 @@
 // src/context/ProfileContext.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { getProfile, getAccessToken } from '../utils/auth'; // Import your auth functions
+import { getProfile } from '../utils/core';
 
 const ProfileContext = createContext();
 
 export const useProfile = () => useContext(ProfileContext);
 
 export const ProfileProvider = ({ children }) => {
-    const [profile, setProfile] = useState({ username: null, role: 'guest' });
+    const [profile, setProfile] = useState(null); // Start with null
     const [loading, setLoading] = useState(true);
 
     const fetchProfile = async () => {
-        if (!getAccessToken()) {
-            setProfile({ username: null, role: 'guest' });
-            setLoading(false);
-            return;
-        }
         try {
             const userProfile = await getProfile();
-            if (userProfile) {
-                setProfile({
-                    firstName: userProfile.first_name || null,
-                    lastName: userProfile.last_name || null,
-                    username: userProfile.username || null,
-                    role: userProfile.role || 'guest',
-                    email: userProfile.email || null
-                });
-            } else {
-                setProfile({ username: null, role: 'guest' });
-            }
+            // Store the entire profile object (or null if fetch fails)
+            setProfile(userProfile);
         } catch (err) {
             console.error("Profile fetch failed:", err);
-            setProfile({ username: null, role: 'guest' });
+            setProfile(null);
         } finally {
             setLoading(false);
         }
@@ -39,8 +25,11 @@ export const ProfileProvider = ({ children }) => {
 
     // Run once on component mount
     useEffect(() => {
-        fetchProfile();
-    }, []);
+        // Only fetch profile if there isn't one already (e.g., from login)
+        if (!profile) {
+            fetchProfile();
+        }
+    }, []); // Dependency array is empty, so this runs only once on initial mount
 
     // Function to manually refresh profile after actions like username change
     const refreshProfile = () => {
@@ -49,7 +38,7 @@ export const ProfileProvider = ({ children }) => {
     };
 
     return (
-        <ProfileContext.Provider value={{ profile, loading, refreshProfile, setProfile }}>
+        <ProfileContext.Provider value={{ profile, loading, refreshProfile, setProfile, setLoading }}>
             {children}
         </ProfileContext.Provider>
     );

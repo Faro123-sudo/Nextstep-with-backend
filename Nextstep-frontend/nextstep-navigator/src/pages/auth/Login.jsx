@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { login } from "../utils/auth";
+import { login } from "../../utils/auth";
+import { useProfile } from "../../context/ProfileContext"; // Import the profile hook
 import Lottie from "lottie-react";
-import Logo from "../assets/logo.webp";
-import animationData from "../assets/animation/looking.json";
+import Logo from "../../assets/logo.webp";
+import animationData from "../../assets/animation/looking.json";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../components/staticFiles/LandingPage.css";
+import "../../components/staticFiles/LandingPage.css";
 
-const Login = ({ onLogin }) => {
+const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const { refreshProfile } = useProfile(); // Get the refreshProfile function from context
 
   const navigate = useNavigate();
 
@@ -27,9 +29,9 @@ const Login = ({ onLogin }) => {
     try {
       setLoading(true);
       setError("");
-      // Pass the onLogin prop to the login utility.
-      // It will be called on success to update the app's state.
-      await login(username, password, onLogin);
+      // Pass setProfile to the login function to update state immediately
+      await login(username, password);
+      await refreshProfile(); // Manually refresh the profile
       navigate("/");
     } catch (err) {
       const errorMessage = err.response?.data?.detail || "Login failed. Please check your credentials.";

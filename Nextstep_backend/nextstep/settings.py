@@ -21,7 +21,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Load environment variables from .env file
 load_dotenv(BASE_DIR / '.env')
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -31,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -51,23 +50,30 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",  # Should be placed high, before CommonMiddleware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.common.CommonMiddleware",
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS settings for credentialed requests (cookies)
+
+# --- HTTPS/Production Security Settings (Disabled for Local Development) ---
+# In production, you would uncomment these lines.
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = not DEBUG
+# SESSION_COOKIE_SECURE = not DEBUG
+# CSRF_COOKIE_SECURE = not DEBUG
+
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticatedOrReadOnly",
@@ -80,13 +86,7 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
-    # Cookie options example:
-    # "SET_REFRESH_COOKIE": True,
-    # "REFRESH_COOKIE_NAME": "refresh_token",
-    # "REFRESH_COOKIE_PATH": "/api/auth/",
-    # "REFRESH_COOKIE_SECURE": False,
-    # "REFRESH_COOKIE_SAMESITE": "Lax",
-    # "HIDE_REFRESH_IN_RESPONSE": True,
+    'AUTH_HEADER_TYPES': ('Bearer',),
 }
 REST_FRAMEWORK["DEFAULT_FILTER_BACKENDS"] = [
     "django_filters.rest_framework.DjangoFilterBackend",
@@ -169,11 +169,15 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://localhost:5174",
     "http://127.0.0.1:5174",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "http://localhost",
 ]
 
 JAZZMIN_UI_TWEAKS = {
@@ -185,6 +189,7 @@ JAZZMIN_SETTINGS ={
     "site_title": "NextStep Admin",
     "site_header": "NextStep ",
     "site_brand": "NextStep",
+    # show_ui_builder should be set to False in production
     "show_ui_builder" : True,
     "copyright": "NextStep Ltd",
     "site_logo_classes": "img-circle",

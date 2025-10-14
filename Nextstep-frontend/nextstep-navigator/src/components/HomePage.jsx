@@ -72,9 +72,9 @@ function HomePage({ user, onNavigate }) { // Renamed and changed props
   if (user) {
     return (
       <div className="container d-flex flex-column align-items-center justify-content-center text-center">
-        <h1 className="display-4 fw-bold mb-4">
-          Welcome back, <span className="text-primary">{user.firstName}</span>!
-        </h1>
+        <h3 className="display-6 fw-bold mb-4">
+          Welcome back, <span className="text-primary">{user.first_name} {user.last_name}</span>!
+        </h3>
         <p className="lead text-muted mb-4">You are logged in as a {user.role}.</p>
         
         <div className="d-flex flex-column align-items-center justify-content-center landing-bg position-relative overflow-hidden">

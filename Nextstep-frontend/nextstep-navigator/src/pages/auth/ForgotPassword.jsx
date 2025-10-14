@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { sendPasswordResetEmail } from "../utils/auth";
+import { sendPasswordResetEmail } from "../../utils/auth";
 import Lottie from "lottie-react";
-import Logo from "../assets/logo.webp";
-import animationData from "../assets/animation/forgot-password.json";
+import Logo from "../../assets/logo.webp";
+import animationData from "../../assets/animation/forgot-password.json";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../components/staticFiles/LandingPage.css";
+import "../../components/staticFiles/LandingPage.css";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -36,12 +36,12 @@ const ForgotPassword = () => {
 
     return (
         <div className="min-vh-100 d-flex flex-column align-items-center justify-content-center landing-bg">
-        <h2 className="mb-4 text-center">Forgot Password</h2>
+        <h2 className="fw-bold mb-4 text-center">Forgot Password</h2>
         <div className="container">
           <div className="row align-items-center">
             <div className="col-md-6 col-lg-5 text-center mb-5 mb-md-0" data-aos="fade-right" data-aos-delay="500">
               <Lottie animationData={animationData} loop style={{ width: "100%", maxWidth: "400px", margin: "auto" }} />
-              <p className="lead mt-4 text-muted px-3">
+              <p className="lead mt-4 px-3">
                 Enter your email address and we'll send you a link to reset your password.
               </p>
             </div>
