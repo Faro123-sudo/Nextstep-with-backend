@@ -116,9 +116,12 @@ const Profile = ({ user }) => {
         </div>
 
     </div>
-    <div className="upload-section mt-4 text-center">
+    <div className="upload-section mt-4 text-center gap-5 d-flex justify-content-center">
         <a href="/profileSetting" className="btn btn-primary btn-lg rounded-pill">
             Edit Profile ✏️
+        </a>
+        <a href="#" className="btn btn-primary btn-lg rounded-pill">
+            Upload CV 📝
         </a>
     </div>
 </div>
