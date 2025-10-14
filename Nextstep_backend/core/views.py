@@ -222,6 +222,48 @@ class QuizViewSet(viewsets.ModelViewSet):
     search_fields = ["title","description"]
     ordering_fields = ["created_at"]
 
+    @action(detail=False, methods=['get'])
+    def random(self, request):
+        """
+        Returns a single random active quiz.
+        """
+        active_quizzes = Quiz.objects.filter(is_active=True)
+        if not active_quizzes.exists():
+            return Response({"detail": "No active quizzes found."}, status=status.HTTP_404_NOT_FOUND)
+        
+        random_quiz = active_quizzes.order_by('?').first()
+        serializer = self.get_serializer(random_quiz)
+        return Response(serializer.data)
+    
+    @action(detail=False, methods=['get'])
+    def get_by_id(self, request):
+        """
+        Returns a single active quiz specified by a query parameter 'id'.
+        The URL would typically look like /quizzes/get_by_id/?id=5
+        """
+        quiz_id = request.query_params.get('id')
+        
+        if not quiz_id:
+            return Response(
+                {"detail": "Query parameter 'id' is required."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            # Filter by the ID from the query parameters and ensure it's active
+            quiz = Quiz.objects.get(pk=quiz_id, is_active=True)
+        except Quiz.DoesNotExist:
+            # If the quiz is not found by ID or is not active
+            return Response(
+                {"detail": f"No active quiz found with ID: {quiz_id}."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        serializer = self.get_serializer(quiz)
+        return Response(serializer.data)
+
+
+
 class QuizQuestionViewSet(viewsets.ModelViewSet):
     queryset = QuizQuestion.objects.all()
     serializer_class = QuizQuestionSerializer

@@ -5,7 +5,7 @@ import Header from "./Header";
 import Breadcrumbs from "./Breadcrumbs";
 import HomePage from "./HomePage";
 import CareerBank from "./CareerBank";
-import Quiz from "./Quiz";
+// import Quiz from "./Quiz";
 import Multimedia from "./MultimediaGuidance";
 import Resources from "./ResourceLibrary";
 import SuccessStories from "./SuccessStories";
@@ -17,6 +17,7 @@ import Feedback from "./Feedback";
 import Profile from "../pages/auth/Profile";
 import UploadStory from "./SuccessStory/UploadStory.jsx";
 import ProfileSetting from "../pages/auth/ProfileSetting.jsx";
+import Quiz from "../pages/auth/Quiz.jsx"; // Updated import path for Quiz
 
 // Import the custom profile hook
 import { useProfile } from "../context/ProfileContext";

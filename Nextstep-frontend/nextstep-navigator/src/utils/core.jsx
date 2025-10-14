@@ -43,3 +43,17 @@ export const updateProfile = async (profileData) => {
 
   return response.data;
 };
+
+/**
+ * Submits a quiz attempt for the currently authenticated user.
+ * @param {number} quizId - The ID of the quiz being attempted.
+ * @param {Object} answers - The user's answers, keyed by question ID.
+ * @returns {Promise<Object>} The created quiz attempt data.
+ */
+export const submitQuizAttempt = async (quizId, answers) => {
+  const response = await api.post("/core/quiz-attempts/", {
+    quiz: quizId,
+    answers: answers,
+  });
+  return response.data;
+};
