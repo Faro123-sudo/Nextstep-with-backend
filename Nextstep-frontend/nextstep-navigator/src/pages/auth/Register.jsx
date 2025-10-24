@@ -44,8 +44,8 @@ const Register = () => {
     try {
       setLoading(true);
       setError("");
-      await register(firstName, lastName, username, email, password, confirmPassword, role);
-      await login(username, password, setProfile); // Pass setProfile to login
+  await register(firstName, lastName, username, email, password, confirmPassword, role);
+  await login(email, password); // login expects email (or email/username) — use email here
       navigate("/"); // Navigate to the home page
     } catch (err) {
       if (err.response?.data) {

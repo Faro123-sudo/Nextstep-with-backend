@@ -6,23 +6,21 @@
     { "label": "Multimedia", "page": "multimedia", "icon": "PlayCircle" },
     { "label": "Resources", "page": "resources", "icon": "BookOpen" },
     { "label": "Stories", "page": "successStories", "icon": "Star" },
-    { "label": "Coaching", "page": "admissionCoaching", "icon": "GraduationCap" },
-    { "label": "Contact", "page": "contact", "icon": "MessageCircle" }
+    { "label": "Coaching", "page": "admissionCoaching", "icon": "GraduationCap" }
   ],
   "graduate": [
     { "label": "Home", "page": "home", "icon": "Home" },
     { "label": "Careers", "page": "careerBank", "icon": "BriefcaseBusiness" },
     { "label": "Quiz", "page": "quiz", "icon": "HelpCircle" },
     { "label": "Resources", "page": "resources", "icon": "BookOpen" },
-    { "label": "Stories", "page": "successStories", "icon": "Star" },
-    { "label": "Contact", "page": "contact", "icon": "MessageCircle" }
+    { "label": "Stories", "page": "successStories", "icon": "Star" }
   ],
   "professional": [
     { "label": "Home", "page": "home", "icon": "Home" },
     { "label": "Careers", "page": "careerBank", "icon": "BriefcaseBusiness" },
+    { "label": "Quiz", "page": "quiz", "icon": "HelpCircle" },
     { "label": "Resources", "page": "resources", "icon": "BookOpen" },
-    { "label": "Stories", "page": "successStories", "icon": "Star" },
-    { "label": "Contact", "page": "contact", "icon": "MessageCircle" }
+    { "label": "Stories", "page": "successStories", "icon": "Star" }
   ],
   "guest": [
     { "label": "Home", "page": "home", "icon": "Home" },

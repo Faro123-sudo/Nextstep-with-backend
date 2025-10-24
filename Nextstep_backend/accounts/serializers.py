@@ -36,7 +36,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         # Add "role" to the fields tuple
         fields = ("username", "email", "password", "password2", "first_name", "last_name", "role")
         extra_kwargs = {
-            "username": {"read_only": True},
+            # Allow username to be provided by the client. If omitted, we'll default to email.
             "email": {"required": True},
             "first_name": {"required": False},
             "last_name": {"required": False},
@@ -53,7 +53,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         # Remove password2 before creating user
         validated_data.pop("password2", None)
         password = validated_data.pop("password")
-        validated_data['username'] = validated_data['email']
+        # Use provided username if present, otherwise default username to the email
+        username = validated_data.get('username') or validated_data.get('email')
+        validated_data['username'] = username
         user = User(**validated_data)
         user.set_password(password)
         user.save()
