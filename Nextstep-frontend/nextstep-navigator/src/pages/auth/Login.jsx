@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../components/staticFiles/LandingPage.css";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,7 +21,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (!username || !password) {
+    if (!emailOrUsername || !password) {
       setError("Please fill in all fields");
       return;
     }
@@ -30,7 +30,7 @@ const Login = () => {
       setLoading(true);
       setError("");
       // Pass setProfile to the login function to update state immediately
-      await login(username, password);
+      await login(emailOrUsername, password);
       await refreshProfile(); // Manually refresh the profile
       navigate("/");
     } catch (err) {
@@ -74,9 +74,9 @@ const Login = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Email or Username"
+                  value={emailOrUsername}
+                  onChange={(e) => setEmailOrUsername(e.target.value)}
                   required
                 />
                 <input

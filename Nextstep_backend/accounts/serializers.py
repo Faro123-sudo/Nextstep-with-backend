@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth import authenticate
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 
@@ -35,6 +36,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         # Add "role" to the fields tuple
         fields = ("username", "email", "password", "password2", "first_name", "last_name", "role")
         extra_kwargs = {
+            "username": {"read_only": True},
             "email": {"required": True},
             "first_name": {"required": False},
             "last_name": {"required": False},
@@ -51,7 +53,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         # Remove password2 before creating user
         validated_data.pop("password2", None)
         password = validated_data.pop("password")
-        
+        validated_data['username'] = validated_data['email']
         user = User(**validated_data)
         user.set_password(password)
         user.save()
@@ -113,3 +115,23 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
         self.user.set_password(self.validated_data['new_password'])
         self.user.save()
         return self.user
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.CharField()
+    password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        email = data.get("email")
+        password = data.get("password")
+        # Some authentication backends expect the request to be passed in
+        request = self.context.get('request')
+        user = authenticate(request=request, username=email, password=password)
+
+        if not user:
+            raise serializers.ValidationError({"non_field_errors": ["Invalid credentials"]})
+
+        if not user.is_active:
+            raise serializers.ValidationError({"non_field_errors": ["This account is inactive"]})
+
+        data["user"] = user
+        return data

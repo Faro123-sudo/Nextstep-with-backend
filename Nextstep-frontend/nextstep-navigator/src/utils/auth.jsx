@@ -18,9 +18,12 @@ export const clearTokens = () => {
 // ---------- AUTH FUNCTIONS ----------
 
 // Login and store tokens
-export const login = async (username, password) => {
-  const response = await api.post("/auth/login/", { username, password });
-  setTokens(response.data.access, response.data.refresh);
+export const login = async (email, password) => {
+  const response = await api.post("/auth/login/", { email, password });
+  // Backend sets refresh token as HttpOnly cookie and returns the access token in the body
+  const access = response.data.access || response.data.access_token || response.data.accessToken;
+  const refresh = response.data.refresh || null;
+  setTokens(access, refresh);
   return response.data;
 };
 

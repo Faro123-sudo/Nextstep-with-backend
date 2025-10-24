@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User
+from .models import User, UserToken
 
 
 @admin.register(User)
@@ -26,3 +26,8 @@ class CustomUserAdmin(UserAdmin):
             "fields": ("username", "email", "password1", "password2", "role", "bio", "is_staff", "is_active"),
         }),
     )
+
+@admin.register(UserToken)
+class UserTokenAdmin(admin.ModelAdmin):
+    list_display = ('user', 'created_at', 'updated_at')
+    readonly_fields = ('access_token', 'refresh_token')
