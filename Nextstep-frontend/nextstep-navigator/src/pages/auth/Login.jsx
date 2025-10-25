@@ -4,6 +4,7 @@ import { login } from "../../utils/auth";
 import { useProfile } from "../../context/ProfileContext"; // Import the profile hook
 import Lottie from "lottie-react";
 import Logo from "../../assets/logo.webp";
+import { User, Lock, AlertCircle } from "lucide-react"; // Import icons
 import animationData from "../../assets/animation/looking.json";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../components/staticFiles/LandingPage.css";
@@ -23,7 +24,7 @@ const Login = () => {
 
     if (!username || !password) {
       setError("Please fill in all fields");
-      return;
+      return
     }
 
     try {
@@ -46,10 +47,10 @@ const Login = () => {
       <div className="container">
         <div className="row text-center mb-5">
           <div className="col-12" data-aos="fade-up" data-aos-delay="300">
-            <img 
-              src={Logo} 
-              alt="NextStep Navigator Logo" 
-              className="mb-4 fade-in" 
+            <img
+              src={Logo}
+              alt="NextStep Navigator Logo"
+              className="mb-4 fade-in"
               style={{ height: "70px" }}
             />
             <h1 className="display-3 fw-bold text-primary mb-3">
@@ -60,7 +61,7 @@ const Login = () => {
             </h2>
           </div>
         </div>
-        <div className="row justify-content-center align-items-center">
+        <div className="row justify-content-center align-items-center mb-5">
           <div className="col-md-6 col-lg-5 text-center mb-5 mb-md-0" data-aos="fade-right" data-aos-delay="500">
             <Lottie animationData={animationData} loop style={{ width: "100%", maxWidth: "400px", margin: "auto" }} />
             <p className="lead mt-4 text-muted px-3">
@@ -71,22 +72,28 @@ const Login = () => {
             <div className="form-container p-4 p-md-5 shadow-lg rounded-3">
               <form onSubmit={handleLogin} className="d-grid gap-3">
                 <h4 className="fw-bold mb-4 text-center">Login to Your Account</h4>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                />
-                <input
-                  type={showPassword ? "text" : "password"}
-                  className="form-control"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
+                <div className="form-group">
+                  <User className="form-icon" size={18} />
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <Lock className="form-icon" size={18} />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    className="form-control"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="form-check">
                     <input
@@ -104,7 +111,11 @@ const Login = () => {
                     Forgot Password?
                   </Link>
                 </div>
-                {error && <p className="text-danger text-sm">{error}</p>}
+                {error && (
+                  <div className="alert alert-danger p-2 form-error-alert" role="alert">
+                    <AlertCircle size={18} /> {error}
+                  </div>
+                )}
                 <button
                   type="submit"
                   className="btn btn-primary btn-lg w-100 py-2 fw-bold rounded-pill"

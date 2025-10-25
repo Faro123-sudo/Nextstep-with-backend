@@ -4,6 +4,7 @@ import { register, login } from "../../utils/auth";
 import { useProfile } from "../../context/ProfileContext"; // Import the profile hook
 import Lottie from "lottie-react";
 import Logo from "../../assets/logo.webp";
+import { User, Mail, Lock, Briefcase, AlertCircle } from "lucide-react"; // Import icons
 import animationData from "../../assets/animation/looking.json";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../components/staticFiles/LandingPage.css";
@@ -49,11 +50,9 @@ const Register = () => {
       navigate("/"); // Navigate to the home page
     } catch (err) {
       if (err.response?.data) {
-        const errors = err.response.data;
-        const message = Object.entries(errors)
-          .map(([field, msgs]) => `${field}: ${Array.isArray(msgs) ? msgs.join(", ") : msgs}`)
-          .join("\n");
-        setError(message);
+        const errorData = err.response.data;
+        const errorMessages = Object.values(errorData).flat(); // Get all error messages
+        setError(errorMessages[0] || "Registration failed."); // Display the first error
       } else {
         setError("Registration failed");
       }
@@ -98,6 +97,7 @@ const Register = () => {
                 <form onSubmit={handleRegister} className="d-grid gap-3">
                   <h4 className="fw-bold mb-2 text-center">Create Your Account</h4>
                   <div className="form-group">
+                    <User className="form-icon" size={18} />
                     <input
                       type="text"
                       className="form-control"
@@ -108,6 +108,7 @@ const Register = () => {
                     />
                   </div>
                   <div className="form-group">
+                    <User className="form-icon" size={18} />
                     <input
                       type="text"
                       className="form-control"
@@ -118,6 +119,7 @@ const Register = () => {
                     />
                   </div>
                   <div className="form-group">
+                    <User className="form-icon" size={18} />
                     <input
                       type="text"
                       className="form-control"
@@ -128,6 +130,7 @@ const Register = () => {
                     />
                   </div>
                   <div className="form-group">
+                    <Mail className="form-icon" size={18} />
                     <input
                       type="email"
                       className="form-control"
@@ -138,6 +141,7 @@ const Register = () => {
                     />
                   </div>
                   <div className="form-group">
+                    <Briefcase className="form-icon" size={18} />
                     <select
                       className="form-control"
                       value={role}
@@ -151,6 +155,7 @@ const Register = () => {
                     </select>
                   </div>
                   <div className="form-group">
+                    <Lock className="form-icon" size={18} />
                     <input
                       type={showPassword ? "text" : "password"}
                       className="form-control"
@@ -161,6 +166,7 @@ const Register = () => {
                     />
                   </div>
                   <div className="form-group">
+                    <Lock className="form-icon" size={18} />
                     <input
                       type={showPassword ? "text" : "password"}
                       className="form-control"
@@ -182,7 +188,11 @@ const Register = () => {
                       Show Password
                     </label>
                   </div>
-                  {error && <p className="text-danger text-sm">{error}</p>}
+                  {error && (
+                    <div className="alert alert-danger p-2 form-error-alert" role="alert">
+                      <AlertCircle size={18} /> {error}
+                    </div>
+                  )}
                   <button
                     type="submit"
                     className="btn btn-primary btn-lg w-100 py-2 fw-bold rounded-pill"
