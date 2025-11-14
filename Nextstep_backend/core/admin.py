@@ -1,3 +1,4 @@
+from django.utils.safestring import mark_safe
 from django.contrib import admin
 from .models import (
     Tag, Skill, Career, Resource, Multimedia,
@@ -109,9 +110,58 @@ class QuizAdmin(admin.ModelAdmin):
 
 @admin.register(QuizAttempt)
 class QuizAttemptAdmin(admin.ModelAdmin):
-    list_display = ("user", "quiz", "score", "started_at", "completed_at")
+    list_display = ("user", "quiz", "started_at", "completed_at")
     list_filter = ("quiz", "started_at", "completed_at")
     search_fields = ("user__username",)
+    readonly_fields = ('user', 'quiz', 'started_at', 'completed_at', 'formatted_answers')
+    fields = ('user', 'quiz', 'started_at', 'completed_at', 'formatted_answers')
+
+    def formatted_answers(self, obj):
+        if not obj.answers:
+            return "No answers submitted."
+
+        html = """
+        <style>
+            .answer-table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            .answer-table th, .answer-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+        </style>
+        <table class="answer-table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Answer</th>
+                </tr>
+            </thead>
+            <tbody>
+        """
+
+        for q_id, user_answer in obj.answers.items():
+            try:
+                question = QuizQuestion.objects.get(id=q_id)
+                html += f"""
+                <tr>
+                    <td>{question.question_text}</td>
+                    <td>{user_answer}</td>
+                </tr>
+                """
+            except QuizQuestion.DoesNotExist:
+                html += f"""
+                <tr>
+                    <td>Question ID {q_id} (not found)</td>
+                    <td>{user_answer}</td>
+                </tr>
+                """
+        
+        html += "</tbody></table>"
+        return mark_safe(html)
+    formatted_answers.short_description = "Questions and Answers"
 
 
 @admin.register(Interaction)
