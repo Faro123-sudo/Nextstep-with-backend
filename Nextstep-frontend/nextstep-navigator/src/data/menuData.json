@@ -20,6 +20,7 @@
   "professional": [
     { "label": "Home", "page": "home", "icon": "Home" },
     { "label": "Careers", "page": "careerBank", "icon": "BriefcaseBusiness" },
+    { "label": "Quiz", "page": "quiz", "icon": "HelpCircle" },
     { "label": "Resources", "page": "resources", "icon": "BookOpen" },
     { "label": "Stories", "page": "successStories", "icon": "Star" },
     { "label": "Contact", "page": "contact", "icon": "MessageCircle" }

@@ -15,22 +15,12 @@ const interests = [
   ...new Set(defaultData.careerBank.map((career) => career.industry)),
 ];
 
-function extractKeywords(message) {
-  if (typeof message !== "string") return [];
-  return message
-    .replace(
-      /careers? in |roles? in |may suit you|could be (a )?good fit|might be a good mix|such as |like |Consider |Explore |Look into |office-based roles |Many careers offer both, /gi,
-      ""
-    )
-    .split(/,| or | and /i)
-    .map((s) => s.trim().toLowerCase())
-    .filter(Boolean);
-}
-
 export default function Quiz({ userType = "student" }) {
   const [selectedInterest, setSelectedInterest] = useState("");
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  const [showRecommendations, setShowRecommendations] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [recommendations, setRecommendations] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const quizSets = defaultData.quizQuestions || {};
   const normalizedType = (userType || "student").toLowerCase();
@@ -54,7 +44,6 @@ export default function Quiz({ userType = "student" }) {
 
   useEffect(() => {
     setSelectedAnswers({});
-    setShowRecommendations(false);
   }, [selectedInterest, normalizedType]);
 
   const handleInterestChange = (e) => {
@@ -68,46 +57,26 @@ export default function Quiz({ userType = "student" }) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowRecommendations(true);
+    setIsLoading(true);
+    setShowModal(true);
+
+    const responses = filteredQuestions.map(q => ({
+      question: q.question,
+      answer: selectedAnswers[q.id],
+    }));
+
+    try {
+      const response = await axiosClient.post("/ai/recommend/", { responses });
+      setRecommendations(response.data);
+    } catch (error) {
+      console.error("Error fetching recommendations:", error);
+      // Optionally, set an error state to show in the modal
+    } finally {
+      setIsLoading(false);
+    }
   };
-
-  const recommendedCareers = useMemo(
-    () =>
-      defaultData.careerBank.filter(
-        (career) => career.industry === selectedInterest
-      ),
-    [selectedInterest]
-  );
-
-  const bestMatches = useMemo(() => {
-    if (!showRecommendations) return [];
-
-    const keywords = new Set();
-    filteredQuestions.forEach((q) => {
-      const answer = selectedAnswers[q.id];
-      if (answer && q.answersMapping[answer]) {
-        const extracted = extractKeywords(q.answersMapping[answer].message);
-        extracted.forEach((k) => keywords.add(k));
-      }
-    });
-
-    const keywordArray = Array.from(keywords);
-    if (keywordArray.length === 0) return [];
-
-    return recommendedCareers.filter(
-      (career) =>
-        keywordArray.some(
-          (keyword) =>
-            career.careerName.toLowerCase().includes(keyword) ||
-            career.industry.toLowerCase().includes(keyword) ||
-            (career.skillsRequired || []).some((skill) =>
-              skill.toLowerCase().includes(keyword)
-            )
-        )
-    );
-  }, [showRecommendations, filteredQuestions, selectedAnswers, recommendedCareers]);
 
   const answeredQuestions = Object.keys(selectedAnswers).length;
   const totalQuestions = filteredQuestions.length;
@@ -160,7 +129,7 @@ export default function Quiz({ userType = "student" }) {
           )}
 
           <AnimatePresence>
-            {selectedInterest && !showRecommendations && (
+            {selectedInterest && (
               <motion.form
                 onSubmit={handleSubmit}
                 initial={{ opacity: 0 }}
@@ -228,88 +197,11 @@ export default function Quiz({ userType = "student" }) {
               </motion.form>
             )}
           </AnimatePresence>
-
-          <AnimatePresence>
-            {showRecommendations && (
-              <motion.div
-                className="mt-5"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                data-aos="fade-in"
-              >
-                <h3 className="fw-bold text-success mb-4 text-center" data-aos="zoom-in">
-                  Your Recommended Careers
-                </h3>
-                {recommendedCareers.length > 0 ? (
-                  <div className="row g-4">
-                    {bestMatches.length > 0 && (
-                      <>
-                        <h5 className="text-primary fw-bold col-12" data-aos="fade-right">
-                          ⭐ Best Matches for You
-                        </h5>
-                        {bestMatches.map((career, idx) => (
-                          <div className="col-md-6" key={career.id} data-aos="fade-up" data-aos-delay={idx * 100}>
-                            <div className="recommendation-card best-match h-100">
-                              <h6 className="fw-bold">{career.careerName}</h6>
-                              <p className="text-muted small">
-                                {career.description}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                      </>
-                    )}
-                    <h5 className="text-dark fw-bold col-12 mt-4" data-aos="fade-right">
-                      Other Careers in {selectedInterest}
-                    </h5>
-                    {recommendedCareers
-                      .filter((c) => !bestMatches.some((bm) => bm.id === c.id))
-                      .map((career, idx) => (
-                        <div className="col-md-6" key={career.id} data-aos="fade-up" data-aos-delay={idx * 100}>
-                          <div className="recommendation-card h-100">
-                            <h6 className="fw-bold">{career.careerName}</h6>
-                            <p className="text-muted small">
-                              {career.description}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                ) : (
-                  <p className="text-center">
-                    No careers found for the selected interest.
-                  </p>
-                )}
-
-                <div className="text-center p-4 mt-5 bg-light rounded-3 whats-next-card" data-aos="zoom-in" data-aos-delay="300">
-                  <h4 className="fw-bold mb-3">What's Next?</h4>
-                  <p className="text-muted">
-                    Your journey doesn't stop here. Use these results to
-                    explore more.
-                  </p>
-                  <div className="d-flex flex-wrap justify-content-center gap-3 mt-4">
-                    <button className="btn btn-outline-primary">
-                      <Book className="me-2" />
-                      Explore the Career Bank
-                    </button>
-                    <button className="btn btn-outline-primary">
-                      <CameraVideo className="me-2" />
-                      Watch Expert Videos
-                    </button>
-                    <button className="btn btn-outline-primary">
-                      <Star className="me-2" />
-                      Read Success Stories
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
 
         <div className="col-lg-4 col-md-4 d-none d-md-block">
           <div className="quiz-sidebar" data-aos="fade-left" data-aos-delay="400">
-            {selectedInterest && !showRecommendations && (
+            {selectedInterest && (
               <div className="text-center mb-4">
                 <div style={{ width: 150, height: 150, margin: "auto" }}>
                   <CircularProgressbar

@@ -1,0 +1,17 @@
+.recommendation-item {
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+
+.recommendation-item:last-child {
+    border-bottom: none;
+}
+
+.recommendation-item:hover {
+    background-color: #f8f9fa;
+}
+
+.modal-title {
+    color: #0d6efd;
+}
