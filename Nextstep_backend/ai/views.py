@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-from .gemini import get_gemini_recommendations
+from .gemini import get_gemini_recommendations, get_career_recommendation
 import logging
 
 # Configure logging
@@ -43,5 +43,46 @@ class CareerRecommendationView(APIView):
             logger.exception(f"An unexpected error occurred in CareerRecommendationView: {e}")
             return Response(
                 {"error": "An internal server error occurred while generating recommendations."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+
+class CareerDetailRecommendationView(APIView):
+    """
+    API view to get a recommendation when viewing a specific career's details.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        """
+        Handles POST requests with career data to generate a recommendation.
+        Expects: { "career": {...career data...}, "userType": "student|professional|etc" }
+        """
+        career_data = request.data.get('career')
+        user_type = request.data.get('userType')
+        
+        if not career_data or 'careerName' not in career_data:
+            logger.warning("Career detail recommendation request with invalid career data.")
+            return Response(
+                {"error": "Invalid input. 'career' object with 'careerName' is required."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        try:
+            recommendation = get_career_recommendation(career_data, user_type)
+            
+            if not recommendation:
+                logger.error("Gemini service returned no recommendation.")
+                return Response(
+                    {"error": "Could not generate recommendation at this time. Please try again later."},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+                
+            return Response(recommendation, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            logger.exception(f"An unexpected error occurred in CareerDetailRecommendationView: {e}")
+            return Response(
+                {"error": "An internal server error occurred while generating recommendation."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )

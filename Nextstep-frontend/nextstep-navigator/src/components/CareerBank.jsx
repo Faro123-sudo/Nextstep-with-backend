@@ -15,7 +15,9 @@ import {
   FaChevronDown,
   FaInfoCircle,
   FaTimes,
+  FaPlay,
 } from "react-icons/fa";
+import api from "../utils/axiosClient";
 import "./CareerBank.css";
 import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
@@ -368,15 +370,112 @@ export default function CareerBank({ userType = "" }) {
                   {selectedCareer.careerVideo && (
                     <div className="mt-4">
                       <h5>Career Video</h5>
-                      <div className="ratio ratio-16x9">
-                        <iframe
-                          src={selectedCareer.careerVideo}
-                          title={selectedCareer.careerName}
-                          allowFullScreen
-                        ></iframe>
+                      <div
+                        className="ratio ratio-16x9 position-relative bg-black rounded overflow-hidden"
+                        style={{
+                          cursor: "pointer",
+                          backgroundImage: `url('https://img.youtube.com/vi/${
+                            selectedCareer.careerVideo.split("/watch?v=")[1] || 
+                            selectedCareer.careerVideo.split("v=")[1]
+                          }/maxresdefault.jpg')`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }}
+                        onClick={() => {
+                          const videoId = selectedCareer.careerVideo.split("/watch?v=")[1] || 
+                                         selectedCareer.careerVideo.split("v=")[1];
+                          if (videoId) {
+                            window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank");
+                          }
+                        }}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            const videoId = selectedCareer.careerVideo.split("/watch?v=")[1] || 
+                                           selectedCareer.careerVideo.split("v=")[1];
+                            if (videoId) {
+                              window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank");
+                            }
+                          }
+                        }}
+                      >
+                        <div
+                          className="position-absolute top-50 start-50 translate-middle"
+                          style={{
+                            cursor: "pointer",
+                            backgroundColor: "rgba(255, 0, 0, 0.8)",
+                            borderRadius: "50%",
+                            width: "80px",
+                            height: "80px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontSize: "40px",
+                            color: "white",
+                            zIndex: 10,
+                            transition: "all 0.3s ease",
+                            outline: "none",
+                            boxShadow: "none",
+                            border: "none",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = "rgba(255, 0, 0, 1)";
+                            e.currentTarget.style.transform = "scale(1.2)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = "rgba(255, 0, 0, 0.8)";
+                            e.currentTarget.style.transform = "scale(1)";
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const videoId = selectedCareer.careerVideo.split("/watch?v=")[1] || 
+                                           selectedCareer.careerVideo.split("v=")[1];
+                            if (videoId) {
+                              window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank");
+                            }
+                          }}
+                        >
+                          <FaPlay />
+                        </div>
                       </div>
                     </div>
                   )}
+
+                  {/* Career Insight from JSON */}
+                  <div className="mt-4 p-3 rounded-3 bg-light border-start border-5 border-primary">
+                    <h5 className="mb-3 text-primary">
+                      <FaInfoCircle className="me-2" />
+                      Career Insight
+                    </h5>
+                    {selectedCareer.careerInsight ? (
+                      <>
+                        <p className="mb-2">{selectedCareer.careerInsight}</p>
+                        {selectedCareer.relatedRoles && selectedCareer.relatedRoles.length > 0 && (
+                          <p className="mb-2 mt-2">
+                            <strong>Related Roles:</strong> {selectedCareer.relatedRoles.slice(0, 2).join(", ")}
+                          </p>
+                        )}
+                        {selectedCareer.careerVideoResourceUrl && (
+                          <p className="mb-0 mt-2">
+                            <strong>Learn More:</strong>{" "}
+                            <a
+                              href={selectedCareer.careerVideoResourceUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-primary text-decoration-none"
+                            >
+                              View Resources
+                            </a>
+                          </p>
+                        )}
+                      </>
+                    ) : (
+                      <p className="text-muted mb-0">
+                        No additional insights available for this career.
+                      </p>
+                    )}
+                  </div>
                 </Modal.Body>
                 <Modal.Footer>
                   <button className="btn btn-secondary" onClick={handleCloseModal}>

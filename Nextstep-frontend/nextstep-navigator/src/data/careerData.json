@@ -4,29 +4,17 @@
       "id": 1,
       "careerName": "Software Engineer",
       "description": "Develops, tests, and maintains software applications and systems to meet user needs.",
-      "skillsRequired": [
-        "JavaScript",
-        "React",
-        "Node.js",
-        "Python",
-        "SQL"
-      ],
+      "skillsRequired": ["JavaScript", "React", "Node.js", "Python", "SQL"],
       "averageSalary": "$95,000",
       "educationPath": "Bachelor's in Computer Science",
       "industry": "Technology",
       "jobOutlook": "22% (Much faster than average)",
-      "relatedRoles": [
-        "Data Scientist",
-        "DevOps Engineer",
-        "Product Manager"
-      ],
+      "relatedRoles": ["Data Scientist", "DevOps Engineer", "Product Manager"],
       "dayInTheLife": "A typical day involves writing code, collaborating with team members on features, debugging issues, and attending stand-up meetings to discuss progress.",
-      "careerVideo": "https://www.youtube.com/embed/watch?v=example1",
-      "audiences": [
-        "student",
-        "graduate",
-        "professional"
-      ],
+      "careerVideo": "https://www.youtube.com/watch?v=WWggmC8kYZc",
+      "careerInsight": "Software engineering is a dynamic field offering excellent career growth, competitive salaries, and remote work opportunities. Engineers are in high demand across industries, from healthcare to finance. The tech industry values continuous learning and offers diverse specializations like web, mobile, AI, and cloud computing.",
+      "careerVideoResourceUrl": "https://www.youtube.com/results?search_query=how+to+become+a+software+engineer",
+      "audiences": ["student", "graduate", "professional"],
       "audienceNotes": "Suitable for late students (taster projects), grads and pros (upskilling/advanced roles)."
     },
     {
@@ -49,12 +37,10 @@
         "Healthcare Administrator"
       ],
       "dayInTheLife": "A day can include assessing patients' conditions, administering medications, recording observations in medical records, and collaborating with doctors.",
-      "careerVideo": "https://www.youtube.com/embed/watch?v=example2",
-      "audiences": [
-        "student",
-        "graduate",
-        "professional"
-      ],
+      "careerVideo": "https://www.youtube.com/watch?v=TykAHBT5olg",
+      "careerInsight": "Nursing is a compassionate profession with deep personal satisfaction as you directly impact patients' lives. With an aging population increasing demand, jobs are secure with excellent growth prospects. Nurses enjoy flexible schedules, competitive benefits, and opportunities to specialize in areas like critical care, pediatrics, or emergency medicine.",
+      "careerVideoResourceUrl": "https://www.youtube.com/results?search_query=registered+nurse+career+path",
+      "audiences": ["student", "graduate", "professional"],
       "audienceNotes": "Good early-career clinical roles and longer-career progression."
     },
     {
@@ -78,11 +64,10 @@
         "Data Analyst"
       ],
       "dayInTheLife": "Work involves collecting and cleaning large datasets, building predictive models, and presenting findings to stakeholders through reports and visualizations.",
-      "careerVideo": "https://www.youtube.com/embed/watch?v=example3",
-      "audiences": [
-        "graduate",
-        "professional"
-      ],
+      "careerVideo": "https://www.youtube.com/watch?v=qXXNhLv986I",
+      "careerInsight": "Data Science is one of the fastest-growing fields with exceptional earning potential and remote work flexibility. You'll solve complex real-world problems using statistics, machine learning, and programming. The role intersects business strategy and technology, making it strategic and intellectually stimulating.",
+      "careerVideoResourceUrl": "https://www.youtube.com/results?search_query=data+scientist+career+guide",
+      "audiences": ["graduate", "professional"],
       "audienceNotes": "Mostly for grads and pros; students can view as long-term target."
     },
     {
@@ -99,18 +84,12 @@
       "educationPath": "Bachelor's in Graphic Design",
       "industry": "Creative Arts",
       "jobOutlook": "4% (As fast as average)",
-      "relatedRoles": [
-        "Art Director",
-        "Web Designer",
-        "Animator"
-      ],
+      "relatedRoles": ["Art Director", "Web Designer", "Animator"],
       "dayInTheLife": "A day includes brainstorming with clients, sketching out ideas, using design software to create visuals, and revising work based on feedback.",
-      "careerVideo": "https://www.youtube.com/embed/watch?v=example4",
-      "audiences": [
-        "student",
-        "graduate",
-        "professional"
-      ],
+      "careerVideo": "https://www.youtube.com/watch?v=RxUwE9pvrhs",
+      "careerInsight": "Graphic Design blends creativity with technical skills, allowing you to showcase your artistic abilities in commercial contexts. Designers work across all industries—tech, marketing, entertainment—collaborating with diverse teams. Portfolio-building begins in school, opening freelance and agency opportunities worldwide.",
+      "careerVideoResourceUrl": "https://www.youtube.com/results?search_query=graphic+design+career",
+      "audiences": ["student", "graduate", "professional"],
       "audienceNotes": "Portfolios matter; good for students (internships) and pros (freelance/lead roles)."
     },
     {
@@ -133,12 +112,10 @@
         "Manufacturing Engineer"
       ],
       "dayInTheLife": "Activities often include developing and testing prototypes, analyzing data, creating technical drawings, and managing projects.",
-      "careerVideo": "https://www.youtube.com/embed/watch?v=example5",
-      "audiences": [
-        "student",
-        "graduate",
-        "professional"
-      ],
+      "careerVideo": "https://youtu.be/UEEx5AxuyZ0?si=OZdu_hAoMYUjj8w-",
+      "careerInsight": "Mechanical Engineering offers the satisfaction of designing physical solutions to real-world problems, from engines to robotics to renewable energy systems. Engineers bridge theory and hands-on creation, influencing everything from transportation to medical devices. Career stability and numerous specialization paths ensure long-term growth.",
+      "careerVideoResourceUrl": "https://www.youtube.com/results?search_query=mechanical+engineer+career",
+      "audiences": ["student", "graduate", "professional"],
       "audienceNotes": "Strong fit for students who enjoy hands-on builds and grads entering engineering roles."
     },
     {
@@ -161,39 +138,27 @@
         "Instructional Coordinator"
       ],
       "dayInTheLife": "A day consists of delivering lessons, grading assignments, communicating with parents, and providing extra help to students.",
-      "careerVideo": "https://www.youtube.com/embed/watch?v=example6",
-      "audiences": [
-        "student",
-        "graduate",
-        "professional"
-      ],
-      "audienceNotes": "Students see teaching as a career path; grads/ pros for career-switch."
+      "careerVideo": "https://www.youtube.com/watch?v=1lfOvdRu_Qs",
+      "careerInsight": "Teaching is a profession with profound impact—you shape future leaders, instill knowledge, and inspire students daily. Summer breaks and structured schedules enhance work-life balance compared to other professions. Teachers experience genuine fulfillment when students succeed and lasting relationships with those they taught.",
+      "careerVideoResourceUrl": "https://www.youtube.com/results?search_query=high+school+teacher+career",
+      "audiences": ["student", "graduate", "professional"],
+      "audienceNotes": "Students see teaching as a career path; grads/pros for career-switch."
     },
     {
       "id": 7,
       "careerName": "Accountant",
       "description": "Examines, analyzes, and interprets accounting records to prepare financial statements, give advice, or audit and evaluate statements prepared by others.",
-      "skillsRequired": [
-        "GAAP",
-        "QuickBooks",
-        "Attention to Detail",
-        "Excel"
-      ],
+      "skillsRequired": ["GAAP", "QuickBooks", "Attention to Detail", "Excel"],
       "averageSalary": "$73,000",
       "educationPath": "Bachelor's in Accounting",
       "industry": "Finance",
       "jobOutlook": "7% (Faster than average)",
-      "relatedRoles": [
-        "Financial Analyst",
-        "Auditor",
-        "Forensic Accountant"
-      ],
+      "relatedRoles": ["Financial Analyst", "Auditor", "Forensic Accountant"],
       "dayInTheLife": "Daily tasks include reconciling bank statements, preparing tax returns, and ensuring compliance with financial regulations.",
-      "careerVideo": "https://www.youtube.com/embed/watch?v=example7",
-      "audiences": [
-        "graduate",
-        "professional"
-      ],
+      "careerVideo": "https://www.youtube.com/watch?v=l6gPXtsJIw0",
+      "careerInsight": "Accounting provides stable, recession-resistant employment with clear career progression to CPA or controller roles. Accountants are essential to every organization, working across sectors from healthcare to tech. The profession offers both technical satisfaction and client-facing advisory work, plus options for specialization.",
+      "careerVideoResourceUrl": "https://www.youtube.com/results?search_query=accountant+career+path",
+      "audiences": ["graduate", "professional"],
       "audienceNotes": "Primarily for grads & pros; students may explore entry-level internships."
     },
     {
@@ -216,11 +181,10 @@
         "Public Relations Manager"
       ],
       "dayInTheLife": "A typical day involves analyzing market trends, managing a marketing team, setting budgets, and collaborating with sales and product teams.",
-      "careerVideo": "https://www.youtube.com/embed/watch?v=example8",
-      "audiences": [
-        "graduate",
-        "professional"
-      ],
+      "careerVideo": "https://www.youtube.com/watch?v=8qkedm19ums",
+      "careerInsight": "Marketing Managers blend creativity with data analytics to influence business success. You'll develop strategies that connect products with customers across digital and traditional channels. The role offers dynamic variety, leadership growth, and directly measurable impact on company performance.",
+      "careerVideoResourceUrl": "https://www.youtube.com/results?search_query=marketing+manager+career",
+      "audiences": ["graduate", "professional"],
       "audienceNotes": "Good advanced career for graduates and professionals."
     },
     {
@@ -236,16 +200,12 @@
       "educationPath": "Apprenticeship/Trade School",
       "industry": "Trades",
       "jobOutlook": "8% (Faster than average)",
-      "relatedRoles": [
-        "Construction Manager",
-        "Electrical Inspector"
-      ],
+      "relatedRoles": ["Construction Manager", "Electrical Inspector"],
       "dayInTheLife": "A day can involve installing wiring in new buildings, troubleshooting electrical problems, or repairing outdated systems.",
-      "careerVideo": "https://www.youtube.com/embed/watch?v=example9",
-      "audiences": [
-        "student",
-        "professional"
-      ],
+      "careerVideo": "https://www.youtube.com/watch?v=DDDReMB9sss",
+      "careerInsight": "Electrical careers offer excellent earning potential without the debt of a four-year degree. Electricians are always in demand as infrastructure and technology expand. Work is hands-on and tangible—you can see immediate results. Many electricians eventually start their own businesses.",
+      "careerVideoResourceUrl": "https://www.youtube.com/results?search_query=electrician+apprenticeship+program",
+      "audiences": ["student", "professional"],
       "audienceNotes": "Vocational route — great for students looking for early earning."
     },
     {
@@ -262,17 +222,12 @@
       "educationPath": "Culinary School or Apprenticeship",
       "industry": "Hospitality",
       "jobOutlook": "25% (Much faster than average)",
-      "relatedRoles": [
-        "Restaurant Manager",
-        "Food Stylist",
-        "Caterer"
-      ],
+      "relatedRoles": ["Restaurant Manager", "Food Stylist", "Caterer"],
       "dayInTheLife": "A day in the life of a chef includes planning menus, managing kitchen staff, ordering supplies, and ensuring food quality and presentation.",
-      "careerVideo": "https://www.youtube.com/embed/watch?v=example10",
-      "audiences": [
-        "student",
-        "professional"
-      ],
+      "careerVideo": "https://www.youtube.com/watch?v=7HrMcd-ODj0",
+      "careerInsight": "Culinary arts combine passion for food with entrepreneurial opportunity. Chefs create memorable experiences and lead creative teams. Whether in fine dining, catering, or hospitality, the culinary field offers flexibility, travel opportunities, and the satisfaction of tangible, delicious results.",
+      "careerVideoResourceUrl": "https://www.youtube.com/results?search_query=culinary+school+chef+training",
+      "audiences": ["student", "professional"],
       "audienceNotes": "Strong vocational path with apprenticeship options."
     }
   ],
@@ -295,10 +250,7 @@
           "Education"
         ],
         "difficulty": "easy",
-        "tags": [
-          "interests",
-          "career-discovery"
-        ],
+        "tags": ["interests", "career-discovery"],
         "answersMapping": {
           "Building things": {
             "message": "Careers in Technology or Engineering may suit you.",
@@ -393,10 +345,7 @@
           "Engineering"
         ],
         "difficulty": "easy",
-        "tags": [
-          "project-type",
-          "skills"
-        ],
+        "tags": ["project-type", "skills"],
         "answersMapping": {
           "Science fair builds": {
             "message": "You might enjoy hands-on engineering or research tracks.",
@@ -448,11 +397,7 @@
           },
           "Code or apps": {
             "message": "Tech-oriented paths (software, game dev) could be fulfilling.",
-            "careers": [
-              "Junior Developer",
-              "QA Tester",
-              "App Design Intern"
-            ],
+            "careers": ["Junior Developer", "QA Tester", "App Design Intern"],
             "weight": 2,
             "followUpResources": [
               {
@@ -473,17 +418,9 @@
           "I prefer full-time study",
           "I’m not sure"
         ],
-        "industries": [
-          "Trades",
-          "Retail",
-          "Education",
-          "Technology"
-        ],
+        "industries": ["Trades", "Retail", "Education", "Technology"],
         "difficulty": "easy",
-        "tags": [
-          "practicality",
-          "time-horizon"
-        ],
+        "tags": ["practicality", "time-horizon"],
         "answersMapping": {
           "Immediately (part-time)": {
             "message": "Consider vocational/trade certificates or part-time roles.",
@@ -503,10 +440,7 @@
           },
           "After finishing school": {
             "message": "Explore internship and entry-level programs post-graduation.",
-            "careers": [
-              "Internships",
-              "Graduate Trainee Programs"
-            ],
+            "careers": ["Internships", "Graduate Trainee Programs"],
             "weight": 1,
             "followUpResources": [
               {
@@ -518,10 +452,7 @@
           },
           "I prefer full-time study": {
             "message": "Look at UG degree programs and scholarship opportunities.",
-            "careers": [
-              "Academic tracks",
-              "Research trainee roles"
-            ],
+            "careers": ["Academic tracks", "Research trainee roles"],
             "weight": 1,
             "followUpResources": [
               {
@@ -533,10 +464,7 @@
           },
           "I’m not sure": {
             "message": "Try exploratory quizzes and short taster courses to decide.",
-            "careers": [
-              "Short courses",
-              "Online micro-credentials"
-            ],
+            "careers": ["Short courses", "Online micro-credentials"],
             "weight": 0,
             "followUpResources": [
               {
@@ -564,18 +492,11 @@
           "Creative Arts"
         ],
         "difficulty": "easy",
-        "tags": [
-          "academic",
-          "strengths"
-        ],
+        "tags": ["academic", "strengths"],
         "answersMapping": {
           "Maths": {
             "message": "Math skills open doors to engineering, finance, and data.",
-            "careers": [
-              "Engineer",
-              "Actuarial Trainee",
-              "Data Analyst"
-            ],
+            "careers": ["Engineer", "Actuarial Trainee", "Data Analyst"],
             "weight": 2,
             "followUpResources": [
               {
@@ -644,22 +565,13 @@
           "Mix of both",
           "Not sure"
         ],
-        "industries": [
-          "Education",
-          "Technology",
-          "Creative Arts"
-        ],
+        "industries": ["Education", "Technology", "Creative Arts"],
         "difficulty": "easy",
-        "tags": [
-          "learning-style"
-        ],
+        "tags": ["learning-style"],
         "answersMapping": {
           "Structured (timetables, teachers)": {
             "message": "You may thrive in formal study programs and degree paths.",
-            "careers": [
-              "University paths",
-              "Vocational qualifications"
-            ],
+            "careers": ["University paths", "Vocational qualifications"],
             "weight": 2,
             "followUpResources": [
               {
@@ -687,10 +599,7 @@
           },
           "Mix of both": {
             "message": "Look for blended programmes, internships, and apprenticeships.",
-            "careers": [
-              "Apprenticeships",
-              "Industry-led internships"
-            ],
+            "careers": ["Apprenticeships", "Industry-led internships"],
             "weight": 1,
             "followUpResources": [
               {
@@ -702,10 +611,7 @@
           },
           "Not sure": {
             "message": "Start with short courses/club projects to discover what works.",
-            "careers": [
-              "Micro-credentials",
-              "Extracurricular clubs"
-            ],
+            "careers": ["Micro-credentials", "Extracurricular clubs"],
             "weight": 0,
             "followUpResources": [
               {
@@ -726,17 +632,9 @@
           "Mix of both",
           "It doesn't matter"
         ],
-        "industries": [
-          "Engineering",
-          "Trades",
-          "Science",
-          "Technology"
-        ],
+        "industries": ["Engineering", "Trades", "Science", "Technology"],
         "difficulty": "easy",
-        "tags": [
-          "environment",
-          "preference"
-        ],
+        "tags": ["environment", "preference"],
         "answersMapping": {
           "Indoors (office/lab)": {
             "message": "Good fit for controlled environments like labs, offices, and digital work.",
@@ -788,9 +686,7 @@
           },
           "It doesn't matter": {
             "message": "Focus on skill development first, environment second.",
-            "careers": [
-              "General Trainee Programs"
-            ],
+            "careers": ["General Trainee Programs"],
             "weight": 0,
             "followUpResources": [
               {
@@ -811,17 +707,9 @@
           "Trial and error until fixed",
           "Break it down into smaller steps"
         ],
-        "industries": [
-          "Technology",
-          "Engineering",
-          "Research",
-          "Education"
-        ],
+        "industries": ["Technology", "Engineering", "Research", "Education"],
         "difficulty": "easy",
-        "tags": [
-          "problem-solving",
-          "approach"
-        ],
+        "tags": ["problem-solving", "approach"],
         "answersMapping": {
           "Ask for help immediately": {
             "message": "Strong teamwork and communication are your assets; look for collaborative roles.",
@@ -873,11 +761,7 @@
           },
           "Break it down into smaller steps": {
             "message": "Methodical and analytical; excellent for coding, finance, and project planning.",
-            "careers": [
-              "QA Tester",
-              "Accounting Assistant",
-              "Junior Analyst"
-            ],
+            "careers": ["QA Tester", "Accounting Assistant", "Junior Analyst"],
             "weight": 2,
             "followUpResources": [
               {
@@ -898,17 +782,9 @@
           "Hiring help",
           "Marketing/promotion"
         ],
-        "industries": [
-          "Trades",
-          "Education",
-          "Business",
-          "Creative Arts"
-        ],
+        "industries": ["Trades", "Education", "Business", "Creative Arts"],
         "difficulty": "easy",
-        "tags": [
-          "values",
-          "resource-allocation"
-        ],
+        "tags": ["values", "resource-allocation"],
         "answersMapping": {
           "Tools/materials": {
             "message": "A practical, hands-on focus; consider vocational training and trades.",
@@ -928,10 +804,7 @@
           },
           "A course/book for skills": {
             "message": "You value personal growth; explore specialized learning paths.",
-            "careers": [
-              "Academic tracks",
-              "Specialist Micro-credentials"
-            ],
+            "careers": ["Academic tracks", "Specialist Micro-credentials"],
             "weight": 1,
             "followUpResources": [
               {
@@ -943,10 +816,7 @@
           },
           "Hiring help": {
             "message": "Shows leadership and delegation potential; suited for future management or team lead roles.",
-            "careers": [
-              "Team Lead (entry)",
-              "Junior Manager (trainee)"
-            ],
+            "careers": ["Team Lead (entry)", "Junior Manager (trainee)"],
             "weight": 1,
             "followUpResources": [
               {
@@ -983,17 +853,9 @@
           "A balance of both is ideal",
           "I get bored easily"
         ],
-        "industries": [
-          "Finance",
-          "Technology",
-          "Creative Arts",
-          "Healthcare"
-        ],
+        "industries": ["Finance", "Technology", "Creative Arts", "Healthcare"],
         "difficulty": "easy",
-        "tags": [
-          "work-pace",
-          "structure"
-        ],
+        "tags": ["work-pace", "structure"],
         "answersMapping": {
           "I like a predictable routine": {
             "message": "Suits roles requiring high accuracy and structure, like compliance or accounting.",
@@ -1070,17 +932,9 @@
           "Building something cool/new",
           "Earning money"
         ],
-        "industries": [
-          "Education",
-          "Healthcare",
-          "Technology",
-          "Finance"
-        ],
+        "industries": ["Education", "Healthcare", "Technology", "Finance"],
         "difficulty": "easy",
-        "tags": [
-          "motivation",
-          "values"
-        ],
+        "tags": ["motivation", "values"],
         "answersMapping": {
           "Achieving a high grade": {
             "message": "Value recognition and structure; pursue academic or formally accredited paths.",
@@ -1165,10 +1019,7 @@
           "Entrepreneurship"
         ],
         "difficulty": "medium",
-        "tags": [
-          "post-grad",
-          "goals"
-        ],
+        "tags": ["post-grad", "goals"],
         "answersMapping": {
           "Get a full-time job": {
             "message": "Focus on resume polish, placement drives and graduate roles.",
@@ -1188,10 +1039,7 @@
           },
           "Pursue further studies": {
             "message": "Look into PG programs, funding, and SOP/CV preparation.",
-            "careers": [
-              "Masters Programs",
-              "Research Assistantships"
-            ],
+            "careers": ["Masters Programs", "Research Assistantships"],
             "weight": 2,
             "followUpResources": [
               {
@@ -1219,10 +1067,7 @@
           },
           "Start a business": {
             "message": "Explore entrepreneurship programs and startup incubators.",
-            "careers": [
-              "Founder/Co-founder",
-              "Startup roles"
-            ],
+            "careers": ["Founder/Co-founder", "Startup roles"],
             "weight": 1,
             "followUpResources": [
               {
@@ -1243,24 +1088,13 @@
           "Data analysis",
           "Project management"
         ],
-        "industries": [
-          "Technology",
-          "Business",
-          "Finance",
-          "Research"
-        ],
+        "industries": ["Technology", "Business", "Finance", "Research"],
         "difficulty": "medium",
-        "tags": [
-          "skills-gap"
-        ],
+        "tags": ["skills-gap"],
         "answersMapping": {
           "Coding / Technical": {
             "message": "Consider coding bootcamps and project-based portfolios.",
-            "careers": [
-              "Software Developer",
-              "QA Engineer",
-              "DevOps (entry)"
-            ],
+            "careers": ["Software Developer", "QA Engineer", "DevOps (entry)"],
             "weight": 2,
             "followUpResources": [
               {
@@ -1272,11 +1106,7 @@
           },
           "Communication / Public speaking": {
             "message": "Join presentation clubs, internship interviews and workshops.",
-            "careers": [
-              "Client-Facing Roles",
-              "Sales Trainee",
-              "PR Assistant"
-            ],
+            "careers": ["Client-Facing Roles", "Sales Trainee", "PR Assistant"],
             "weight": 1,
             "followUpResources": [
               {
@@ -1288,10 +1118,7 @@
           },
           "Data analysis": {
             "message": "Short data courses and portfolio projects will help.",
-            "careers": [
-              "Data Analyst (junior)",
-              "Business Analyst (entry)"
-            ],
+            "careers": ["Data Analyst (junior)", "Business Analyst (entry)"],
             "weight": 2,
             "followUpResources": [
               {
@@ -1303,10 +1130,7 @@
           },
           "Project management": {
             "message": "Certifications and internships that expose you to workflows help.",
-            "careers": [
-              "Project Coordinator",
-              "Junior PM"
-            ],
+            "careers": ["Project Coordinator", "Junior PM"],
             "weight": 1,
             "followUpResources": [
               {
@@ -1327,23 +1151,13 @@
           "NGO / Public sector",
           "Small-to-medium business"
         ],
-        "industries": [
-          "Business",
-          "Technology",
-          "NGO",
-          "Government"
-        ],
+        "industries": ["Business", "Technology", "NGO", "Government"],
         "difficulty": "medium",
-        "tags": [
-          "workplace-culture"
-        ],
+        "tags": ["workplace-culture"],
         "answersMapping": {
           "Large corporate": {
             "message": "Structured graduate programs and stability are common here.",
-            "careers": [
-              "Graduate Trainee",
-              "Corporate Analyst"
-            ],
+            "careers": ["Graduate Trainee", "Corporate Analyst"],
             "weight": 1,
             "followUpResources": [
               {
@@ -1355,10 +1169,7 @@
           },
           "Fast-paced startup": {
             "message": "Expect diverse tasks and fast learning; portfolio & initiative matter.",
-            "careers": [
-              "Full-Stack Developer (junior)",
-              "Product Associate"
-            ],
+            "careers": ["Full-Stack Developer (junior)", "Product Associate"],
             "weight": 1,
             "followUpResources": [
               {
@@ -1370,10 +1181,7 @@
           },
           "NGO / Public sector": {
             "message": "Roles may value domain knowledge and mission alignment.",
-            "careers": [
-              "Program Officer (junior)",
-              "Research Assistant"
-            ],
+            "careers": ["Program Officer (junior)", "Research Assistant"],
             "weight": 0,
             "followUpResources": [
               {
@@ -1385,10 +1193,7 @@
           },
           "Small-to-medium business": {
             "message": "Multitasking roles and broader exposure—great for rapid skill building.",
-            "careers": [
-              "Operations Associate",
-              "Business Development (entry)"
-            ],
+            "careers": ["Operations Associate", "Business Development (entry)"],
             "weight": 1,
             "followUpResources": [
               {
@@ -1409,22 +1214,13 @@
           "Referral / network",
           "Freelance platforms"
         ],
-        "industries": [
-          "Business",
-          "Technology",
-          "Creative"
-        ],
+        "industries": ["Business", "Technology", "Creative"],
         "difficulty": "medium",
-        "tags": [
-          "job-search"
-        ],
+        "tags": ["job-search"],
         "answersMapping": {
           "Campus placements": {
             "message": "Prepare for aptitude tests, company-specific interviews and CV shortlisting.",
-            "careers": [
-              "Company-specific graduate roles",
-              "Trainee positions"
-            ],
+            "careers": ["Company-specific graduate roles", "Trainee positions"],
             "weight": 2,
             "followUpResources": [
               {
@@ -1436,9 +1232,7 @@
           },
           "Direct company applications": {
             "message": "Tailored CVs and cover letters work best for direct applications.",
-            "careers": [
-              "Role-specific junior positions"
-            ],
+            "careers": ["Role-specific junior positions"],
             "weight": 1,
             "followUpResources": [
               {
@@ -1450,9 +1244,7 @@
           },
           "Referral / network": {
             "message": "Networking can significantly increase interview chances.",
-            "careers": [
-              "Referrals to junior roles, internships"
-            ],
+            "careers": ["Referrals to junior roles, internships"],
             "weight": 1,
             "followUpResources": [
               {
@@ -1464,10 +1256,7 @@
           },
           "Freelance platforms": {
             "message": "Build a strong profile and portfolio for short-term gigs.",
-            "careers": [
-              "Freelance Designer",
-              "Contract Developer"
-            ],
+            "careers": ["Freelance Designer", "Contract Developer"],
             "weight": 0,
             "followUpResources": [
               {
@@ -1488,23 +1277,13 @@
           "Commercial projects",
           "Creative showcases"
         ],
-        "industries": [
-          "Research",
-          "Technology",
-          "Business",
-          "Creative Arts"
-        ],
+        "industries": ["Research", "Technology", "Business", "Creative Arts"],
         "difficulty": "medium",
-        "tags": [
-          "portfolio"
-        ],
+        "tags": ["portfolio"],
         "answersMapping": {
           "Long-term research": {
             "message": "Suitable if you aim for research or PG study.",
-            "careers": [
-              "Research Assistant",
-              "Academic roles"
-            ],
+            "careers": ["Research Assistant", "Academic roles"],
             "weight": 2,
             "followUpResources": [
               {
@@ -1516,10 +1295,7 @@
           },
           "Team product builds": {
             "message": "Great for product/engineering roles—shows collaboration and delivery.",
-            "careers": [
-              "Product Developer",
-              "Software Engineer (entry)"
-            ],
+            "careers": ["Product Developer", "Software Engineer (entry)"],
             "weight": 2,
             "followUpResources": [
               {
@@ -1531,10 +1307,7 @@
           },
           "Commercial projects": {
             "message": "Client-facing projects demonstrate business impact.",
-            "careers": [
-              "Consulting (entry)",
-              "Business Analyst"
-            ],
+            "careers": ["Consulting (entry)", "Business Analyst"],
             "weight": 1,
             "followUpResources": [
               {
@@ -1546,11 +1319,7 @@
           },
           "Creative showcases": {
             "message": "A portfolio of finished creative work helps land design/media roles.",
-            "careers": [
-              "Graphic Designer",
-              "Animator",
-              "Video Editor"
-            ],
+            "careers": ["Graphic Designer", "Animator", "Video Editor"],
             "weight": 1,
             "followUpResources": [
               {
@@ -1571,17 +1340,9 @@
           "Performance bonuses",
           "Comprehensive benefits"
         ],
-        "industries": [
-          "Finance",
-          "Technology",
-          "Business",
-          "Healthcare"
-        ],
+        "industries": ["Finance", "Technology", "Business", "Healthcare"],
         "difficulty": "medium",
-        "tags": [
-          "compensation",
-          "values"
-        ],
+        "tags": ["compensation", "values"],
         "answersMapping": {
           "High base salary": {
             "message": "You value certainty and immediate financial stability; focus on established industries/companies.",
@@ -1657,17 +1418,9 @@
           "Important but negotiable",
           "Not a top priority, only financial matters"
         ],
-        "industries": [
-          "NGO",
-          "Government",
-          "Technology",
-          "Finance"
-        ],
+        "industries": ["NGO", "Government", "Technology", "Finance"],
         "difficulty": "medium",
-        "tags": [
-          "values",
-          "mission-alignment"
-        ],
+        "tags": ["values", "mission-alignment"],
         "answersMapping": {
           "Crucial (must align with my values)": {
             "message": "Focus on non-profit, social enterprise, or B-Corp companies.",
@@ -1728,16 +1481,9 @@
           "No, I want to stay local",
           "Not sure yet"
         ],
-        "industries": [
-          "Global Business",
-          "Local Trades",
-          "Technology"
-        ],
+        "industries": ["Global Business", "Local Trades", "Technology"],
         "difficulty": "medium",
-        "tags": [
-          "geographic-flexibility",
-          "lifestyle"
-        ],
+        "tags": ["geographic-flexibility", "lifestyle"],
         "answersMapping": {
           "Yes, anywhere": {
             "message": "Open to global opportunities; look for multinational firms and remote contracts.",
@@ -1814,17 +1560,9 @@
           "Does the detailed execution (specialist)",
           "Solves conflicts (mediator)"
         ],
-        "industries": [
-          "Management",
-          "Project Management",
-          "Technical",
-          "HR"
-        ],
+        "industries": ["Management", "Project Management", "Technical", "HR"],
         "difficulty": "medium",
-        "tags": [
-          "team-role",
-          "leadership-style"
-        ],
+        "tags": ["team-role", "leadership-style"],
         "answersMapping": {
           "Sets the direction (vision)": {
             "message": "You are a natural leader; pursue management trainee or product roles.",
@@ -1901,17 +1639,9 @@
           "I do it when the project needs it",
           "I prefer a 9-5 structure"
         ],
-        "industries": [
-          "Public Sector",
-          "Finance",
-          "Startup",
-          "Corporate"
-        ],
+        "industries": ["Public Sector", "Finance", "Startup", "Corporate"],
         "difficulty": "medium",
-        "tags": [
-          "work-life-balance",
-          "commitment"
-        ],
+        "tags": ["work-life-balance", "commitment"],
         "answersMapping": {
           "I avoid it strictly": {
             "message": "Prioritize roles in public administration, non-profits, or highly regulated corporate environments.",
@@ -1990,17 +1720,9 @@
           "Higher pay",
           "To follow passion"
         ],
-        "industries": [
-          "Business",
-          "Technology",
-          "Healthcare",
-          "Creative Arts"
-        ],
+        "industries": ["Business", "Technology", "Healthcare", "Creative Arts"],
         "difficulty": "hard",
-        "tags": [
-          "career-change",
-          "motivation"
-        ],
+        "tags": ["career-change", "motivation"],
         "answersMapping": {
           "Growth & promotion": {
             "message": "Focus on upskilling, certification and internal mobility strategies.",
@@ -2036,11 +1758,7 @@
           },
           "Higher pay": {
             "message": "Map skills to market demand and negotiate with evidence of impact.",
-            "careers": [
-              "Senior Analyst",
-              "Senior Developer",
-              "Consultant"
-            ],
+            "careers": ["Senior Analyst", "Senior Developer", "Consultant"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2077,23 +1795,13 @@
           "Cloud / DevOps",
           "Leadership & people management"
         ],
-        "industries": [
-          "Technology",
-          "Business",
-          "Finance"
-        ],
+        "industries": ["Technology", "Business", "Finance"],
         "difficulty": "hard",
-        "tags": [
-          "upskill",
-          "senior-skills"
-        ],
+        "tags": ["upskill", "senior-skills"],
         "answersMapping": {
           "Advanced data skills / ML": {
             "message": "High ROI for data-heavy roles; consider certification + projects.",
-            "careers": [
-              "Data Scientist",
-              "ML Engineer"
-            ],
+            "careers": ["Data Scientist", "ML Engineer"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2105,10 +1813,7 @@
           },
           "Product management": {
             "message": "Great for moving toward cross-functional leadership roles.",
-            "careers": [
-              "Product Manager",
-              "Product Owner"
-            ],
+            "careers": ["Product Manager", "Product Owner"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2136,11 +1841,7 @@
           },
           "Leadership & people management": {
             "message": "Leadership training and documented impact enable manager-level moves.",
-            "careers": [
-              "Team Lead",
-              "Engineering Manager",
-              "Head of Ops"
-            ],
+            "careers": ["Team Lead", "Engineering Manager", "Head of Ops"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2161,21 +1862,13 @@
           "Medium (6–12 months)",
           "Long-term (12+ months)"
         ],
-        "industries": [
-          "Business",
-          "Technology"
-        ],
+        "industries": ["Business", "Technology"],
         "difficulty": "hard",
-        "tags": [
-          "planning"
-        ],
+        "tags": ["planning"],
         "answersMapping": {
           "Immediate (1–3 months)": {
             "message": "Target internal moves or roles that value transferrable skills; expect faster interviews.",
-            "careers": [
-              "Lateral moves",
-              "Short-term contract roles"
-            ],
+            "careers": ["Lateral moves", "Short-term contract roles"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2187,9 +1880,7 @@
           },
           "Short-term (3–6 months)": {
             "message": "Use focused certifications and networking to change roles.",
-            "careers": [
-              "Specialist roles after upskilling"
-            ],
+            "careers": ["Specialist roles after upskilling"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2201,10 +1892,7 @@
           },
           "Medium (6–12 months)": {
             "message": "Plan for certifications plus a portfolio of transition projects.",
-            "careers": [
-              "Mid-level role changes",
-              "Product/PM transitions"
-            ],
+            "careers": ["Mid-level role changes", "Product/PM transitions"],
             "weight": 1,
             "followUpResources": [
               {
@@ -2216,9 +1904,7 @@
           },
           "Long-term (12+ months)": {
             "message": "A full career pivot—consider formal education or deep reskilling.",
-            "careers": [
-              "Senior career pivot (e.g., to data/AI)"
-            ],
+            "careers": ["Senior career pivot (e.g., to data/AI)"],
             "weight": 1,
             "followUpResources": [
               {
@@ -2239,22 +1925,13 @@
           "Flexible hours / remote",
           "Clear career growth path"
         ],
-        "industries": [
-          "Business",
-          "Technology",
-          "Finance"
-        ],
+        "industries": ["Business", "Technology", "Finance"],
         "difficulty": "hard",
-        "tags": [
-          "negotiation"
-        ],
+        "tags": ["negotiation"],
         "answersMapping": {
           "Higher base salary": {
             "message": "Benchmark market salaries and prepare a negotiation script with evidence.",
-            "careers": [
-              "Senior Specialist",
-              "Lead roles"
-            ],
+            "careers": ["Senior Specialist", "Lead roles"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2266,10 +1943,7 @@
           },
           "Better title / seniority": {
             "message": "Titles matter for future mobility—align responsibilities with requested title.",
-            "careers": [
-              "Senior Manager",
-              "Director-track"
-            ],
+            "careers": ["Senior Manager", "Director-track"],
             "weight": 1,
             "followUpResources": [
               {
@@ -2281,10 +1955,7 @@
           },
           "Flexible hours / remote": {
             "message": "Negotiate clear policies and outputs/OKRs to secure flexibility.",
-            "careers": [
-              "Remote-friendly roles",
-              "Consultancy contracts"
-            ],
+            "careers": ["Remote-friendly roles", "Consultancy contracts"],
             "weight": 1,
             "followUpResources": [
               {
@@ -2296,9 +1967,7 @@
           },
           "Clear career growth path": {
             "message": "Ask for milestones and promotion timelines; capture them in writing if possible.",
-            "careers": [
-              "Leadership-track roles"
-            ],
+            "careers": ["Leadership-track roles"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2319,21 +1988,13 @@
           "Built a product/feature end-to-end",
           "Managed & grown a team"
         ],
-        "industries": [
-          "Business",
-          "Technology"
-        ],
+        "industries": ["Business", "Technology"],
         "difficulty": "hard",
-        "tags": [
-          "promotion"
-        ],
+        "tags": ["promotion"],
         "answersMapping": {
           "Quantified impact (metrics)": {
             "message": "Numbers are persuasive—collect KPIs and measurable outcomes.",
-            "careers": [
-              "Senior Analyst",
-              "Head of Growth"
-            ],
+            "careers": ["Senior Analyst", "Head of Growth"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2345,10 +2006,7 @@
           },
           "Led a cross-functional project": {
             "message": "Cross-functional leadership indicates readiness for product/ops leadership.",
-            "careers": [
-              "Product Lead",
-              "Program Manager"
-            ],
+            "careers": ["Product Lead", "Program Manager"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2360,10 +2018,7 @@
           },
           "Built a product/feature end-to-end": {
             "message": "Product delivery experience supports senior product and engineering roles.",
-            "careers": [
-              "Senior Product Manager",
-              "Engineering Lead"
-            ],
+            "careers": ["Senior Product Manager", "Engineering Lead"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2375,10 +2030,7 @@
           },
           "Managed & grown a team": {
             "message": "Direct people management experience is crucial for management positions.",
-            "careers": [
-              "Team Lead",
-              "Manager"
-            ],
+            "careers": ["Team Lead", "Manager"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2406,17 +2058,11 @@
           "Leadership"
         ],
         "difficulty": "hard",
-        "tags": [
-          "risk-appetite",
-          "career-pivot"
-        ],
+        "tags": ["risk-appetite", "career-pivot"],
         "answersMapping": {
           "Starting a self-funded venture": {
             "message": "You embrace high risk for high reward; focus on building a robust business plan.",
-            "careers": [
-              "Founder/CEO",
-              "Venture Partner"
-            ],
+            "careers": ["Founder/CEO", "Venture Partner"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2428,10 +2074,7 @@
           },
           "Moving to an entirely new industry": {
             "message": "You value change and new challenges; highlight transferrable skills and domain learning capacity.",
-            "careers": [
-              "Industry Transition Specialist",
-              "Consultant"
-            ],
+            "careers": ["Industry Transition Specialist", "Consultant"],
             "weight": 1,
             "followUpResources": [
               {
@@ -2443,10 +2086,7 @@
           },
           "Taking a pay cut for a Director-level title": {
             "message": "You prioritize long-term seniority and influence; focus on networking with executive recruiters.",
-            "careers": [
-              "Director of Operations (entry)",
-              "VP Associate"
-            ],
+            "careers": ["Director of Operations (entry)", "VP Associate"],
             "weight": 1,
             "followUpResources": [
               {
@@ -2458,10 +2098,7 @@
           },
           "Moving from specialist to general management": {
             "message": "You're aiming for broader impact; focus on communication and P&L skills.",
-            "careers": [
-              "General Manager",
-              "Head of Product"
-            ],
+            "careers": ["General Manager", "Head of Product"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2482,24 +2119,13 @@
           "Solving a complex technical/research problem",
           "Creating significant social impact"
         ],
-        "industries": [
-          "Business",
-          "Education",
-          "Technology",
-          "NGO"
-        ],
+        "industries": ["Business", "Education", "Technology", "NGO"],
         "difficulty": "hard",
-        "tags": [
-          "senior-motivation",
-          "legacy"
-        ],
+        "tags": ["senior-motivation", "legacy"],
         "answersMapping": {
           "Leading a multi-million dollar P&L": {
             "message": "You are financially driven; target executive roles with budgetary control and accountability.",
-            "careers": [
-              "CFO/COO",
-              "Divisional Head"
-            ],
+            "careers": ["CFO/COO", "Divisional Head"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2568,24 +2194,13 @@
           "Consensus-building meetings",
           "Designing a new policy/process"
         ],
-        "industries": [
-          "Management",
-          "Operations",
-          "Legal",
-          "Technology"
-        ],
+        "industries": ["Management", "Operations", "Legal", "Technology"],
         "difficulty": "hard",
-        "tags": [
-          "conflict-resolution",
-          "management-style"
-        ],
+        "tags": ["conflict-resolution", "management-style"],
         "answersMapping": {
           "Escalating to senior leadership": {
             "message": "You prefer clear authority; suited for roles with well-defined hierarchies like legal or compliance.",
-            "careers": [
-              "Chief Compliance Officer",
-              "Legal Counsel"
-            ],
+            "careers": ["Chief Compliance Officer", "Legal Counsel"],
             "weight": 1,
             "followUpResources": [
               {
@@ -2654,24 +2269,13 @@
           "Toxic work environment",
           "Limited opportunity for senior influence"
         ],
-        "industries": [
-          "Leadership",
-          "Finance",
-          "HR",
-          "Strategy"
-        ],
+        "industries": ["Leadership", "Finance", "HR", "Strategy"],
         "difficulty": "hard",
-        "tags": [
-          "retention",
-          "organizational-issues"
-        ],
+        "tags": ["retention", "organizational-issues"],
         "answersMapping": {
           "Lack of strategic vision": {
             "message": "You need to be part of the big picture; target high-growth companies or strategy roles.",
-            "careers": [
-              "Chief Strategy Officer (CSO)",
-              "Senior Consultant"
-            ],
+            "careers": ["Chief Strategy Officer (CSO)", "Senior Consultant"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2683,10 +2287,7 @@
           },
           "Stagnant compensation/benefits": {
             "message": "Your priority is economic value; leverage market data when seeking new roles.",
-            "careers": [
-              "High-Value Specialist Roles",
-              "Contract Consulting"
-            ],
+            "careers": ["High-Value Specialist Roles", "Contract Consulting"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2698,10 +2299,7 @@
           },
           "Toxic work environment": {
             "message": "You prioritize culture and well-being; seek certified 'best place to work' companies.",
-            "careers": [
-              "Roles at High-Culture Firms",
-              "HR Leadership"
-            ],
+            "careers": ["Roles at High-Culture Firms", "HR Leadership"],
             "weight": 1,
             "followUpResources": [
               {
@@ -2713,10 +2311,7 @@
           },
           "Limited opportunity for senior influence": {
             "message": "You seek impact and authority; focus on Director-level roles and above.",
-            "careers": [
-              "Vice President (VP)",
-              "Head of Department"
-            ],
+            "careers": ["Vice President (VP)", "Head of Department"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2737,23 +2332,13 @@
           "Finding the time to teach/train",
           "Fear of losing control of the outcome"
         ],
-        "industries": [
-          "Management",
-          "Leadership",
-          "HR"
-        ],
+        "industries": ["Management", "Leadership", "HR"],
         "difficulty": "hard",
-        "tags": [
-          "delegation",
-          "leadership-skills"
-        ],
+        "tags": ["delegation", "leadership-skills"],
         "answersMapping": {
           "Worrying it won't be done right": {
             "message": "You may be a perfectionist; focus on structured process documentation and QA protocols.",
-            "careers": [
-              "Director of Quality Assurance",
-              "Head of Operations"
-            ],
+            "careers": ["Director of Quality Assurance", "Head of Operations"],
             "weight": 1,
             "followUpResources": [
               {
@@ -2765,10 +2350,7 @@
           },
           "Lack of capable direct reports": {
             "message": "Prioritize talent acquisition and team development in your next role.",
-            "careers": [
-              "HR Director",
-              "Talent Management Lead"
-            ],
+            "careers": ["HR Director", "Talent Management Lead"],
             "weight": 1,
             "followUpResources": [
               {
@@ -2795,10 +2377,7 @@
           },
           "Fear of losing control of the outcome": {
             "message": "Work on empowering subordinates and defining clear boundaries. Trust is key for senior roles.",
-            "careers": [
-              "Executive Leadership",
-              "Board Member"
-            ],
+            "careers": ["Executive Leadership", "Board Member"],
             "weight": 2,
             "followUpResources": [
               {
@@ -2817,7 +2396,7 @@
       {
         "id": 1,
         "title": "A Day in the Life of a Software Engineer",
-        "url": "https://www.youtube.com/embed/watch?v=example1",
+        "url": "https://www.youtube.com/embed/dQw4w9WgXcQ1",
         "category": "Technology",
         "userType": "Graduate",
         "transcript": "This video shows a typical day for a software engineer, including stand-up meetings, coding sessions, and pair programming."
@@ -2825,7 +2404,7 @@
       {
         "id": 2,
         "title": "Choosing the Right University Major",
-        "url": "https://www.youtube.com/embed/watch?v=example2",
+        "url": "https://www.youtube.com/embed/dQw4w9WgXcQ2",
         "category": "Education",
         "userType": "Student",
         "transcript": "In this video, guidance counselors explain how to align your strengths and interests with university majors."
@@ -2833,7 +2412,7 @@
       {
         "id": 3,
         "title": "How to Transition to a New Career Path",
-        "url": "https://www.youtube.com/embed/watch?v=example3",
+        "url": "https://www.youtube.com/embed/dQw4w9WgXcQ3",
         "category": "Career Change",
         "userType": "Professional",
         "transcript": "Career coaches share strategies for professionals planning a shift into a new industry."
@@ -2841,7 +2420,7 @@
       {
         "id": 4,
         "title": "Creative Careers in Design",
-        "url": "https://www.youtube.com/embed/watch?v=example4",
+        "url": "https://www.youtube.com/embed/dQw4w9WgXcQ4",
         "category": "Creative Arts",
         "userType": "Student",
         "transcript": "Design experts discuss opportunities in graphic design, UI/UX, and animation."
@@ -2849,7 +2428,7 @@
       {
         "id": 5,
         "title": "Finance Careers Explained",
-        "url": "https://www.youtube.com/embed/watch?v=example5",
+        "url": "https://www.youtube.com/embed/dQw4w9WgXcQ5",
         "category": "Finance",
         "userType": "Graduate",
         "transcript": "This video explores different finance roles such as investment analyst, accountant, and financial advisor."
@@ -3011,10 +2590,7 @@
       "domain": "Business",
       "photo": "./images/images.webp",
       "story": "Jane started her own business after years of working in tech and now mentors young founders.",
-      "audiences": [
-        "graduate",
-        "professional"
-      ]
+      "audiences": ["graduate", "professional"]
     },
     {
       "id": 2,
@@ -3023,10 +2599,7 @@
       "domain": "Technology",
       "photo": "./images/carlos.webp",
       "story": "Carlos transitioned from teaching to software engineering after completing an online bootcamp and now works at a leading tech company.",
-      "audiences": [
-        "student",
-        "graduate"
-      ]
+      "audiences": ["student", "graduate"]
     },
     {
       "id": 3,
@@ -3035,10 +2608,7 @@
       "domain": "Technology",
       "photo": "./images/priya.webp",
       "story": "Priya leveraged her background in mathematics to become a data scientist and now leads analytics projects in healthcare.",
-      "audiences": [
-        "graduate",
-        "professional"
-      ]
+      "audiences": ["graduate", "professional"]
     },
     {
       "id": 4,
@@ -3047,11 +2617,7 @@
       "domain": "Creative Arts",
       "photo": "./images/michael.webp",
       "story": "Michael turned his passion for art into a successful freelance graphic design business, working with global brands.",
-      "audiences": [
-        "student",
-        "graduate",
-        "professional"
-      ]
+      "audiences": ["student", "graduate", "professional"]
     },
     {
       "id": 5,
@@ -3060,10 +2626,7 @@
       "domain": "Healthcare",
       "photo": "./images/aisha.webp",
       "story": "Aisha found her calling in nursing, helping patients recover and supporting families through difficult times. She now leads a team at a major hospital.",
-      "audiences": [
-        "student",
-        "graduate"
-      ]
+      "audiences": ["student", "graduate"]
     },
     {
       "id": 6,
@@ -3072,10 +2635,7 @@
       "domain": "Engineering",
       "photo": "./images/david.webp",
       "story": "David's curiosity for how things work led him to engineering. He now designs eco-friendly vehicles and mentors young engineers.",
-      "audiences": [
-        "student",
-        "graduate"
-      ]
+      "audiences": ["student", "graduate"]
     },
     {
       "id": 7,
@@ -3084,10 +2644,7 @@
       "domain": "Business",
       "photo": "./images/fatima.webp",
       "story": "Fatima started as a marketing intern and rose to lead global campaigns for a tech startup, inspiring others with her creativity and leadership.",
-      "audiences": [
-        "graduate",
-        "professional"
-      ]
+      "audiences": ["graduate", "professional"]
     },
     {
       "id": 8,
@@ -3096,10 +2653,7 @@
       "domain": "Education",
       "photo": "./images/liam.webp",
       "story": "Liam's passion for teaching has impacted hundreds of students. He now develops innovative curricula and trains new teachers.",
-      "audiences": [
-        "student",
-        "graduate"
-      ]
+      "audiences": ["student", "graduate"]
     },
     {
       "id": 9,
@@ -3108,10 +2662,7 @@
       "domain": "Finance",
       "photo": "./images/sophia.webp",
       "story": "Sophia turned her love for numbers into a successful accounting career, helping small businesses thrive and mentoring young professionals.",
-      "audiences": [
-        "graduate",
-        "professional"
-      ]
+      "audiences": ["graduate", "professional"]
     }
   ],
   "admissionAndCoaching": {
