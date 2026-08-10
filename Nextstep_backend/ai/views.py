@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.throttling import ScopedRateThrottle
 from .gemini import get_gemini_recommendations, get_career_recommendation
 import logging
 
@@ -13,6 +14,8 @@ class CareerRecommendationView(APIView):
     API view to get career recommendations based on user's quiz responses.
     """
     permission_classes = [IsAuthenticated]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'ai'
 
     def post(self, request, *args, **kwargs):
         """
@@ -52,6 +55,8 @@ class CareerDetailRecommendationView(APIView):
     API view to get a recommendation when viewing a specific career's details.
     """
     permission_classes = [IsAuthenticated]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'ai'
 
     def post(self, request, *args, **kwargs):
         """
@@ -86,3 +91,24 @@ class CareerDetailRecommendationView(APIView):
                 {"error": "An internal server error occurred while generating recommendation."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+
+# ---------------------------------------------------------------------------
+# AI API flow (ai.views)
+# ---------------------------------------------------------------------------
+# - `CareerRecommendationView`: Accepts a JSON payload `{'responses': [...]}`
+#   produced by frontend quiz flow, formats it and sends to `ai.gemini` for
+#   model-driven career suggestions. Uses scoped throttling ('ai') to limit
+#   rate and logs errors with context.
+# - `CareerDetailRecommendationView`: Accepts a `career` object and optional
+#   `userType` to produce a targeted recommendation (and an optional video
+#   embed URL). The view validates input and returns structured JSON or a
+#   500/400 with helpful messages on failure.
+#
+# Notes:
+# - Both endpoints expect authenticated users (IsAuthenticated). If you want
+#   recommendations for anonymous users, adjust permission classes.
+# - The views intentionally keep LLM calls behind try/except and do not
+#   expose raw LLM errors to clients; instead they log exceptions and return
+#   safe error messages.
+# ---------------------------------------------------------------------------

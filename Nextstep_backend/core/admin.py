@@ -8,6 +8,17 @@ from .models import (
 )
 
 
+# ---------------------------------------------------------------------------
+# Admin UI customizations (core.admin)
+# ---------------------------------------------------------------------------
+# This file registers core models with the Django admin and provides
+# convenience read-only fields and formatted displays (for example,
+# `formatted_answers` for quiz attempts). Admin hooks (save_model) rebuild
+# denormalized `content_text` fields to keep search/embedding-ready text in
+# sync with content edits.
+# ---------------------------------------------------------------------------
+
+
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ("name", "slug")

@@ -1,3 +1,12 @@
+"""
+Admin customization for `accounts` app.
+
+This file registers the custom `User` model in the Django admin and
+customizes list displays and editable fields. Admin code may call
+`UserAdmin` patterns but should avoid embedding business logic — prefer
+service-layer calls if complex behaviour is required.
+"""
+
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User

@@ -16,6 +16,31 @@ class Tag(models.Model):
         return self.name
 
 
+# ---------------------------------------------------------------------------
+# Core domain models (overview)
+# ---------------------------------------------------------------------------
+# This module defines the core domain objects used across the platform:
+# - `Career`: Represents a career entry in the Career Bank. Contains fields
+#    for domain, title, required skills (ManyToMany to `Skill`), tags, and
+#    denormalized `content_text` used to build embeddings or simple search.
+# - `Resource`, `Multimedia`, `SuccessStory`: Content models that can be
+#    uploaded or linked and are taggable. Each supplies `build_content_text`
+#    to create a combined text representation for indexing/embedding.
+# - `UserProfile`: One-to-one extension of the User model for education,
+#    interests, and profile images.
+# - `Quiz`, `QuizQuestion`, `QuizAttempt`: Simple quiz system to store
+#    questions, options, and attempts (answers stored as JSON).
+# - `Interaction`: Generic event model to record views/likes/saves across
+#    any content type using Django's GenericForeignKey.
+#
+# Design notes:
+# - Denormalized `content_text` fields make it easy to generate embeddings or
+#   basic substring searches without requiring an external search engine.
+# - Interaction uses generic relations to keep the event schema small and
+#   flexible for telemetry and recommendation signals.
+# ---------------------------------------------------------------------------
+
+
 class Skill(models.Model):
     name = models.CharField(max_length=120, unique=True)
 

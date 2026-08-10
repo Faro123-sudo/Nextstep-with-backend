@@ -1,4 +1,12 @@
-# core/urls.py
+"""
+Core URL router.
+
+This module registers viewsets with DRF's `DefaultRouter` so the frontend
+can discover RESTful endpoints for careers, resources, multimedia, quizzes,
+and interactions. Keep URL configuration lightweight — complex routing
+belongs in app views.
+"""
+
 from rest_framework.routers import DefaultRouter
 from django.urls import path, include
 from . import views

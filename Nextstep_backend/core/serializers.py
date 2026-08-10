@@ -1,4 +1,14 @@
-# core/serializers.py
+"""
+Core serializers: transform model instances to JSON and validate incoming
+payloads for the public API. Keep serializers thin — validation and
+transformation only; business logic belongs in views/services.
+
+Flow notes:
+- Read endpoints use these serializers for output formatting.
+- Create/update endpoints use these serializers for input validation and
+    nested updates (e.g., `UserProfileSerializer` updates related `User` fields).
+"""
+
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from .models import (

@@ -37,6 +37,33 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return request.user and request.user.is_staff
         return owner == request.user or request.user.is_staff
 
+
+    # ---------------------------------------------------------------------------
+    # API flow and design (core.views)
+    # ---------------------------------------------------------------------------
+    #
+    # - This module exposes CRUD endpoints for the main domain models using DRF
+    #   `ModelViewSet` classes registered via `DefaultRouter` in `core.urls`.
+    # - Common patterns used:
+    #   * `IsAuthenticatedOrReadOnly` to allow public reads but require auth for
+    #     writes.
+    #   * `IsOwnerOrReadOnly` to ensure only resource owners (or staff) can edit
+    #     or delete user-supplied content.
+    #   * `DjangoFilterBackend`, `SearchFilter`, and `OrderingFilter` are used to
+    #     provide basic multi-level filtering and search. These are intentionally
+    #     lightweight; SRS-level features like ElasticSearch or embeddings are not
+    #     implemented here yet.
+    # - Special endpoints:
+    #   * `build_content_text` admin actions rebuild denormalized text fields.
+    #   * `QuizViewSet.random` returns a random active quiz to drive the frontend
+    #     quiz experience.
+    #
+    # Notes:
+    # - `perform_create` hooks attach the `created_by` user to content where
+    #   applicable. Profile updates attempt to accept interests via multipart
+    #   forms in a robust way for file uploads.
+    # ---------------------------------------------------------------------------
+
 # Simple CRUD viewsets
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()

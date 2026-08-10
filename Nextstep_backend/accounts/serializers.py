@@ -5,6 +5,19 @@ from django.contrib.auth.password_validation import validate_password
 User = get_user_model()
 
 
+# ---------------------------------------------------------------------------
+# Serializers (accounts)
+# ---------------------------------------------------------------------------
+# This file contains serializer logic for user registration, profile output,
+# password change, and the password-reset flow. Key responsibilities:
+# - Input validation for registration and password changes (uses Django's
+#   password validators to ensure secure passwords).
+# - Protect sensitive fields (passwords are write-only).
+# - Lookup user by email in `PasswordResetRequestSerializer` without raising
+#   errors to avoid user enumeration.
+# ---------------------------------------------------------------------------
+
+
 class UserSerializer(serializers.ModelSerializer):
     education_level = serializers.CharField(source='profile.education_level', read_only=True)
     bio = serializers.CharField(source='profile.bio', read_only=True)

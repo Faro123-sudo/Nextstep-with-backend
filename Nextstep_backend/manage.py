@@ -1,5 +1,11 @@
 #!/usr/bin/env python
-"""Django's command-line utility for administrative tasks."""
+"""Django's command-line utility for administrative tasks.
+
+This wrapper is minimal — it sets `DJANGO_SETTINGS_MODULE` and delegates
+to Django's `execute_from_command_line`. For production deployment prefer
+to use WSGI/ASGI servers and environment-managed command execution.
+"""
+
 import os
 import sys
 

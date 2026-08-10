@@ -6,6 +6,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
+from rest_framework.throttling import ScopedRateThrottle
 
 from .serializers import (
     UserSerializer, 
@@ -17,11 +23,63 @@ from .serializers import (
 
 User = get_user_model()
 
+
+# SimpleJWT views with scoped throttling
+class ThrottledTokenObtainPairView(TokenObtainPairView):
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'auth'
+
+
+class ThrottledTokenRefreshView(TokenRefreshView):
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'auth'
+
+
+class ThrottledTokenVerifyView(TokenVerifyView):
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'auth'
+
+
+# ---------------------------------------------------------------------------
+# Overview / Flow (accounts app)
+# ---------------------------------------------------------------------------
+#
+# - Registration: `RegisterView` accepts user details and creates a new user
+#   using `RegisterSerializer`. Password validation is enforced at serializer
+#   level. After registration the client can call `login/` to obtain JWT tokens.
+#
+# - Authentication: JWT tokens are issued by SimpleJWT views. We subclass
+#   those views (ThrottledToken*) to attach scoped throttling (scope 'auth')
+#   to protect login/token endpoints from abuse.
+#
+# - Profile: `ProfileView` returns the current authenticated user's serialized
+#   profile. `UpdateProfileView` allows partial updates to the user's profile.
+#
+# - Password Flow:
+#   * `PasswordResetRequestView` accepts an email and (if present) sends a
+#     password-reset link to the user's email. For security it always returns
+#     the same success message to avoid user enumeration.
+#   * `PasswordResetConfirmView` validates the uid/token combo and sets the
+#     new password.
+#   * `ChangePasswordView` requires the user's old password and enforces
+#     password validators for the new password.
+#
+# - Logout: `LogoutView` blacklists refresh tokens (requires the
+#   `rest_framework_simplejwt.token_blacklist` app and migrations).
+#
+# Notes:
+# - Throttling is applied to sensitive endpoints to limit brute-force and
+#   automated abuse. Email sending uses `DEFAULT_FROM_EMAIL` and in DEBUG
+#   mode falls back to console backend to avoid accidental sends.
+# ---------------------------------------------------------------------------
+
 # Registration
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = RegisterSerializer
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'auth'
 
 # Profile (get current user)
 class ProfileView(APIView):
@@ -43,6 +101,8 @@ class UpdateProfileView(generics.UpdateAPIView):
 class ChangePasswordView(generics.UpdateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ChangePasswordSerializer
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'auth'
 
     def get_object(self):
         return self.request.user
@@ -70,6 +130,8 @@ from django.utils.html import strip_tags
 class PasswordResetRequestView(generics.GenericAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = PasswordResetRequestSerializer
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'auth'
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -118,6 +180,8 @@ class PasswordResetRequestView(generics.GenericAPIView):
 class PasswordResetConfirmView(generics.GenericAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = PasswordResetConfirmSerializer
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'auth'
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -129,6 +193,8 @@ class PasswordResetConfirmView(generics.GenericAPIView):
 # Logout / blacklist refresh (requires token_blacklist app)
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'auth'
 
     def post(self, request):
         try:

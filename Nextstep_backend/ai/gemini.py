@@ -227,3 +227,21 @@ def get_career_recommendation(career_data: Dict[str, Any], user_type: str = None
         return {"recommendation": msg, "relatedCareer": "", "resourceUrl": ""}
 
     return recommendation
+
+
+# ---------------------------------------------------------------------------
+# AI integration notes (ai.gemini)
+# ---------------------------------------------------------------------------
+# - Loads `GEMINI_API_KEY` from `.env` and attempts to initialize the Google
+#   GenAI client. If the client fails to initialize the functions raise a clear
+#   exception so the API layer can return a 5xx with an explanatory message.
+# - `format_user_responses_for_llm` converts quiz response objects into a
+#   single-line summary that is safer for prompt engineering and reduces
+#   chances of malformed LLM outputs.
+# - `get_gemini_recommendations` and `get_career_recommendation` build a
+#   schema-backed prompt so the model returns predictable JSON structures.
+# - Important production considerations (not fully implemented):
+#   * Implement caching for identical requests to reduce cost and latency.
+#   * Add quota handling and graceful fallbacks when the LLM is unavailable.
+#   * Validate and sanitize LLM outputs before returning them to clients.
+# ---------------------------------------------------------------------------
