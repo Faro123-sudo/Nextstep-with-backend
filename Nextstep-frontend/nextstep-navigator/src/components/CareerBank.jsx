@@ -595,12 +595,12 @@ export default function CareerBank({ userType = "" }) {
               </Modal>
             )}
 
-            <div className="mt-5">
+            {/* <div className="mt-5">
               <h2 className="text-center mb-4">Salary Comparison</h2>
               <div className="salary-chart-container" style={{ minHeight: 240 }}>
                 <Bar data={salaryChartData} options={{ maintainAspectRatio: false }} />
               </div>
-            </div>
+            </div> */}
           </>
         )}
       </div>
