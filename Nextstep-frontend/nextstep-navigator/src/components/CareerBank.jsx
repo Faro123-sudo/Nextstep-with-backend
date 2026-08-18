@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import defaultData from "../data/careerData.json";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal } from "react-bootstrap";
@@ -22,6 +22,49 @@ import "./CareerBank.css";
 import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
 
+// ---------------------------------------------------------------------------
+// Client-side fuzzy matching (typo-tolerant search over loaded career data)
+// ---------------------------------------------------------------------------
+
+function levenshtein(a, b) {
+  if (a === b) return 0;
+  const m = a.length;
+  const n = b.length;
+  if (!m) return n;
+  if (!n) return m;
+  let prev = Array.from({ length: n + 1 }, (_, i) => i);
+  for (let i = 1; i <= m; i++) {
+    const curr = [i];
+    for (let j = 1; j <= n; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      curr[j] = Math.min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost);
+    }
+    prev = curr;
+  }
+  return prev[n];
+}
+
+function similarity(a, b) {
+  const maxLen = Math.max(a.length, b.length);
+  if (maxLen === 0) return 1;
+  return 1 - levenshtein(a, b) / maxLen;
+}
+
+const FUZZY_THRESHOLD = 0.75;
+
+function fuzzyIncludes(query, text) {
+  const q = query.trim().toLowerCase();
+  const t = (text || "").toLowerCase();
+  if (!q) return true;
+  if (t.includes(q)) return true;
+  // Skip fuzzy comparison for very short queries — too many false positives
+  if (q.length < 3) return false;
+  if (similarity(q, t) >= FUZZY_THRESHOLD) return true;
+  return t
+    .split(/\s+/)
+    .some((word) => word.length >= 3 && similarity(q, word) >= FUZZY_THRESHOLD);
+}
+
 export default function CareerBank({ userType = "" }) {
   const [search, setSearch] = useState("");
   const [selectedIndustry, setSelectedIndustry] = useState("All");
@@ -31,6 +74,8 @@ export default function CareerBank({ userType = "" }) {
   const [data, setData] = useState(defaultData); // data used for rendering
   const [loadingData, setLoadingData] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const [aiSearching, setAiSearching] = useState(false);
+  const [aiResults, setAiResults] = useState([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -80,12 +125,13 @@ export default function CareerBank({ userType = "" }) {
 
     let filtered = list;
 
-    // Apply search + industry filter first
+    // Apply search + industry filter first (with fuzzy matching)
     filtered = filtered.filter((career) => {
       const matchesSearch =
-        career.careerName.toLowerCase().includes(search.toLowerCase()) ||
+        !search.trim() ||
+        fuzzyIncludes(search, career.careerName) ||
         (career.skillsRequired || []).some((skill) =>
-          skill.toLowerCase().includes(search.toLowerCase())
+          fuzzyIncludes(search, skill)
         );
 
       const matchesIndustry = selectedIndustry === "All" || career.industry === selectedIndustry;
@@ -139,6 +185,35 @@ export default function CareerBank({ userType = "" }) {
     setSelectedIndustry("All");
     setSortOption("none");
     setShowAll(false);
+    setAiResults([]);
+  };
+
+  // AI-powered career search fallback
+  const performAiSearch = async () => {
+    if (!search.trim()) return;
+    setAiSearching(true);
+    setAiResults([]);
+    try {
+      const res = await api.post("/ai/search/", {
+        query: search.trim(),
+        userType: userType || undefined,
+      });
+      if (res.data?.career) {
+        const newCareer = res.data.career;
+        setAiResults([newCareer]);
+        // Append to local data so it appears in the main grid
+        setData((prev) => {
+          const bank = prev.careerBank || [];
+          // Avoid duplicates
+          if (bank.some((c) => c.careerName === newCareer.careerName)) return prev;
+          return { ...prev, careerBank: [...bank, newCareer] };
+        });
+      }
+    } catch (err) {
+      console.error("AI career search failed:", err);
+    } finally {
+      setAiSearching(false);
+    }
   };
 
   const salaryChartData = {
@@ -262,12 +337,47 @@ export default function CareerBank({ userType = "" }) {
           </div>
         ) : filteredCareers.length === 0 ? (
           <div className="text-center py-5">
-            <Lottie animationData={lookingAnimation} className="empty-state-animation" />
-            <h3 className="mb-3">No careers found</h3>
-            <p className="text-muted mb-4">Try adjusting your search or filter criteria</p>
-            <button className="btn btn-primary" onClick={clearFilters}>
-              Reset Filters
-            </button>
+            {aiSearching ? (
+              <>
+                <Lottie animationData={lookingAnimation} className="empty-state-animation" />
+                <h3 className="mb-3">Searching with AI...</h3>
+                <p className="text-muted">
+                  We couldn't find "{search}" in our database. Our AI is generating career
+                  information for you.
+                </p>
+              </>
+            ) : aiResults.length > 0 ? (
+              <>
+                <h3 className="mb-3 text-success">AI-Generated Result</h3>
+                <p className="text-muted mb-4">
+                  "{search}" was added to the career bank!
+                </p>
+                <button className="btn btn-primary me-2" onClick={clearFilters}>
+                  View All Careers
+                </button>
+              </>
+            ) : (
+              <>
+                <Lottie animationData={lookingAnimation} className="empty-state-animation" />
+                <h3 className="mb-3">No careers found</h3>
+                <p className="text-muted mb-3">
+                  We couldn't find "{search}" in our career bank.
+                </p>
+                <div className="d-flex gap-2 justify-content-center">
+                  <button className="btn btn-primary" onClick={performAiSearch}>
+                    <FaSearch className="me-1" />
+                    Search with AI
+                  </button>
+                  <button className="btn btn-outline-secondary" onClick={clearFilters}>
+                    Reset Filters
+                  </button>
+                </div>
+                <p className="text-muted mt-3" style={{ fontSize: "0.85rem" }}>
+                  <FaInfoCircle className="me-1" />
+                  AI search will generate career information and add it to the bank for future use.
+                </p>
+              </>
+            )}
           </div>
         ) : (
           <>

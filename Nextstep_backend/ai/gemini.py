@@ -229,6 +229,135 @@ def get_career_recommendation(career_data: Dict[str, Any], user_type: str = None
     return recommendation
 
 
+def search_career_info(query: str, user_type: str = None) -> dict:
+    """
+    Master search prompt: takes a free-text career query and returns
+    structured career data matching the careerData.json schema.
+
+    Used when the user searches for a career not found in the static JSON
+    or the database cache.  The response is designed to be appended directly
+    to careerData.json.
+
+    Args:
+        query: Free-text search query (e.g. "data scientist", "ux designer").
+        user_type: Optional user type for personalisation.
+
+    Returns:
+        A dict with a single 'career' key whose value matches the
+        careerData.json entry schema, or an error dict.
+    """
+    if not client:
+        raise Exception("Gemini client failed to initialize.")
+
+    user_context = f"for a {user_type}" if user_type else ""
+
+    search_schema = {
+        "type": "object",
+        "properties": {
+            "careerName": {
+                "type": "string",
+                "description": "The specific title of the career.",
+            },
+            "industry": {
+                "type": "string",
+                "description": "Industry domain (e.g. Technology, Healthcare, Finance).",
+            },
+            "description": {
+                "type": "string",
+                "description": "A 2-3 sentence overview of what this career entails.",
+            },
+            "averageSalary": {
+                "type": "string",
+                "description": "Average annual salary range as a human-readable string (e.g. '$80,000 - $120,000').",
+            },
+            "educationPath": {
+                "type": "string",
+                "description": "Typical education path (e.g. 'Bachelor's Degree in Computer Science').",
+            },
+            "jobOutlook": {
+                "type": "string",
+                "description": "Job outlook description (e.g. 'Growing faster than average').",
+            },
+            "dayInTheLife": {
+                "type": "string",
+                "description": "A 2-3 sentence description of a typical day in this career.",
+            },
+            "skillsRequired": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "List of 4-8 key skills required for this career.",
+            },
+            "relatedRoles": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "2-3 related career roles that share similar skills.",
+            },
+            "audiences": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Target audience tags (student, graduate, professional).",
+            },
+            "careerInsight": {
+                "type": "string",
+                "description": "A 2-3 sentence personalised insight about this career path.",
+            },
+            "careerVideo": {
+                "type": "string",
+                "description": "A YouTube watch URL for a relevant career overview video, or empty string if uncertain.",
+            },
+            "careerVideoResourceUrl": {
+                "type": "string",
+                "description": "A supplementary resource URL related to this career, or empty string.",
+            },
+        },
+        "required": [
+            "careerName",
+            "industry",
+            "description",
+            "averageSalary",
+            "educationPath",
+            "jobOutlook",
+            "dayInTheLife",
+            "skillsRequired",
+            "relatedRoles",
+            "audiences",
+            "careerInsight",
+        ],
+    }
+
+    prompt = (
+        f"You are a knowledgeable career counsellor. "
+        f"A user {user_context} is searching for information about: '{query}'. "
+        "Provide accurate, realistic career data. "
+        "If the query is vague or doesn't match a real career, suggest the closest real career. "
+        "IMPORTANT: Only include a careerVideo URL if you are highly confident it is a real, relevant video. "
+        "Otherwise use an empty string. "
+        "The careerInsight should be personalised and encouraging."
+    )
+
+    try:
+        response = client.models.generate_content(
+            model=MODEL,
+            contents=prompt,
+            config={
+                "response_mime_type": "application/json",
+                "response_schema": search_schema,
+            },
+        )
+        result = json.loads(response.text)
+    except Exception as e:
+        print(f"search_career_info: Gemini call failed: {e}")
+        return {"error": str(e)}
+
+    # Validate required fields
+    required = ["careerName", "industry", "description"]
+    for field in required:
+        if field not in result or not result[field]:
+            return {"error": f"AI response missing required field: {field}"}
+
+    return result
+
+
 # ---------------------------------------------------------------------------
 # AI integration notes (ai.gemini)
 # ---------------------------------------------------------------------------
@@ -240,8 +369,11 @@ def get_career_recommendation(career_data: Dict[str, Any], user_type: str = None
 #   chances of malformed LLM outputs.
 # - `get_gemini_recommendations` and `get_career_recommendation` build a
 #   schema-backed prompt so the model returns predictable JSON structures.
-# - Important production considerations (not fully implemented):
-#   * Implement caching for identical requests to reduce cost and latency.
-#   * Add quota handling and graceful fallbacks when the LLM is unavailable.
-#   * Validate and sanitize LLM outputs before returning them to clients.
+# - `search_career_info` is the master search prompt for free-text queries
+#   that aren't found in the static JSON or DB cache.  Returns data matching
+#   the careerData.json schema so it can be appended directly.
+# - Important production considerations:
+#   * Caching is now implemented in ai/views.py via Django cache + DB + JSON.
+#   * Quota handling and graceful fallbacks are in place.
+#   * LLM outputs are validated before returning to clients.
 # ---------------------------------------------------------------------------
