@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaCommentDots } from "react-icons/fa";
 import "./ContactUs.css";
-import animationData from "../assets/animation/contact.json";
+import { animations } from "../utils/lottiePreload";
 import Lottie from "lottie-react";
 
 
@@ -23,7 +23,7 @@ export default function ContactUs() {
 
           <div className="col-md-6 col-lg-5  text-center mb-5 mb-md-0" data-aos="fade-right" data-aos-delay="500">
             <Lottie
-              animationData={animationData}
+              animationData={animations.contact}
               loop={true}
               style={{ width: "100%", maxWidth: "400px", margin: "auto" }}
             />

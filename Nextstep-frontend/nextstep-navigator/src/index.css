@@ -8,6 +8,10 @@
   -moz-osx-font-smoothing: grayscale;
  }
 
+body {
+  background-color: #fff !important;
+}
+
 /*
 a {
   font-weight: 500;

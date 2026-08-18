@@ -4,6 +4,9 @@ import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-route
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+// Eagerly load all Lottie animations into the main bundle
+import "./utils/lottiePreload";
+
 // Your custom components and utilities
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";

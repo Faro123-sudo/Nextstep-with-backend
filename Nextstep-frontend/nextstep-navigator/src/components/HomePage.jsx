@@ -1,10 +1,9 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./staticFiles/HomePage.css";
 import Logo from "../assets/logo.webp";
-import animationData from "../assets/animation/manWalking.json";
+import { animations } from "../utils/lottiePreload";
 import { FaQuestionCircle, FaBriefcase, FaBook, FaStar } from "react-icons/fa";
 import useSimulatedVisitors from "../hooks/useSimulatedVisitors";
 
@@ -21,7 +20,6 @@ function formatNumber(n) {
 }
 
 function HomePage({ user, onNavigate }) { // Renamed and changed props
-  const navigate = useNavigate();
   const backgroundParticles = useMemo(() => {
     return Array.from({ length: 30 }).map((_, i) => ({
       id: i,
@@ -124,7 +122,7 @@ function HomePage({ user, onNavigate }) { // Renamed and changed props
 
             <div className="col-lg-6 order-lg-2 order-1 text-center d-none d-lg-block" data-aos="fade-left" data-aos-delay="500">
               <div className="hero-animation-container">
-                <Lottie animationData={animationData} loop className="hero-animation" />
+                <Lottie animationData={animations.manWalking} loop className="hero-animation" />
               </div>
             </div>
           </div>
@@ -132,7 +130,7 @@ function HomePage({ user, onNavigate }) { // Renamed and changed props
       </div>
 
       <div className="text-center d-block d-lg-none my-4">
-        <Lottie animationData={animationData} loop className="hero-animation" />
+        <Lottie animationData={animations.manWalking} loop className="hero-animation" />
       </div>
 
       <section className="features-section py-5" data-aos="fade-up" data-aos-delay="200">
@@ -228,7 +226,7 @@ function HomePage({ user, onNavigate }) { // Renamed and changed props
 
             <div className="col-lg-6 order-lg-2 order-1 text-center d-none d-lg-block" data-aos="fade-left" data-aos-delay="500">
               <div className="hero-animation-container">
-                <Lottie animationData={animationData} loop className="hero-animation" />
+                <Lottie animationData={animations.manWalking} loop className="hero-animation" />
               </div>
             </div>
           </div>
@@ -236,7 +234,7 @@ function HomePage({ user, onNavigate }) { // Renamed and changed props
       </div>
 
       <div className="text-center d-block d-lg-none my-4">
-        <Lottie animationData={animationData} loop className="hero-animation" />
+        <Lottie animationData={animations.manWalking} loop className="hero-animation" />
       </div>
 
       <section className="features-section py-5" data-aos="fade-up" data-aos-delay="200">

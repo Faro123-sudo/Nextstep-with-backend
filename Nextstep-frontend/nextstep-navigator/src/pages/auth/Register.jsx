@@ -5,7 +5,7 @@ import { useProfile } from "../../context/ProfileContext"; // Import the profile
 import Lottie from "lottie-react";
 import Logo from "../../assets/logo.webp";
 import { User, Mail, Lock, Briefcase, AlertCircle } from "lucide-react"; // Import icons
-import animationData from "../../assets/animation/looking.json";
+import { animations } from "../../utils/lottiePreload";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../components/staticFiles/LandingPage.css";
 
@@ -84,7 +84,7 @@ const Register = () => {
           <div className="row justify-content-center align-items-center">
             <div className="col-md-6 col-lg-5 text-center mb-5 mb-md-0" data-aos="fade-right" data-aos-delay="500">
               <Lottie
-                animationData={animationData}
+                animationData={animations.looking}
                 loop={true}
                 style={{ width: "100%", maxWidth: "400px", margin: "auto" }}
               />

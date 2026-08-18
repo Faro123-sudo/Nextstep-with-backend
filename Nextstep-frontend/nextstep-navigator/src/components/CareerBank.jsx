@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import defaultData from "../data/careerData.json";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal } from "react-bootstrap";
 import { Bar } from "react-chartjs-2";
 import Lottie from "lottie-react";
-import lookingAnimation from "../assets/animation/looking.json";
+import { animations } from "../utils/lottiePreload";
 import {
   FaGraduationCap,
   FaDollarSign,
@@ -339,7 +339,7 @@ export default function CareerBank({ userType = "" }) {
           <div className="text-center py-5">
             {aiSearching ? (
               <>
-                <Lottie animationData={lookingAnimation} className="empty-state-animation" />
+                <Lottie animationData={animations.looking} className="empty-state-animation" />
                 <h3 className="mb-3">Searching with AI...</h3>
                 <p className="text-muted">
                   We couldn't find "{search}" in our database. Our AI is generating career
@@ -358,7 +358,7 @@ export default function CareerBank({ userType = "" }) {
               </>
             ) : (
               <>
-                <Lottie animationData={lookingAnimation} className="empty-state-animation" />
+                <Lottie animationData={animations.looking} className="empty-state-animation" />
                 <h3 className="mb-3">No careers found</h3>
                 <p className="text-muted mb-3">
                   We couldn't find "{search}" in our career bank.

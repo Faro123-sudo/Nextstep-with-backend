@@ -3,7 +3,7 @@ import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { resetPasswordConfirm } from "../../utils/auth"; // We will create this function
 import Lottie from "lottie-react";
 import Logo from "../../assets/logo.webp";
-import animationData from "../../assets/animation/forgot-password.json"; // Reusing the animation
+import { animations } from "../../utils/lottiePreload";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../components/staticFiles/LandingPage.css";
 
@@ -64,7 +64,7 @@ const ResetPasswordConfirm = () => {
             <div className="container">
                 <div className="row align-items-center">
                     <div className="col-md-6 col-lg-5 text-center mb-5 mb-md-0">
-                        <Lottie animationData={animationData} loop style={{ width: "100%", maxWidth: "400px", margin: "auto" }} />
+                        <Lottie animationData={animations.forgotPassword} loop style={{ width: "100%", maxWidth: "400px", margin: "auto" }} />
                     </div>
                     <div className="col-md-6 col-lg-5 offset-lg-1">
                         <form onSubmit={handleSubmit} className="p-4 p-md-5 bg-white rounded shadow-sm">

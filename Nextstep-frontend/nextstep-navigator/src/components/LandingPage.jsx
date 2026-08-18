@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Lottie from "lottie-react";
 import Logo from "../assets/logo.webp";
-import animationData from "../assets/animation/looking.json";
+import { animations } from "../utils/lottiePreload";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./staticFiles/LandingPage.css";
 
@@ -44,7 +44,7 @@ const LandingPage = ({ onNavigate }) => {
           <div className="row justify-content-center align-items-center">
             <div className="col-md-6 col-lg-5 text-center mb-5 mb-md-0" data-aos="fade-right" data-aos-delay="500">
               <Lottie
-                animationData={animationData}
+                animationData={animations.looking}
                 loop={true}
                 style={{ width: "100%", maxWidth: "400px", margin: "auto" }}
               />

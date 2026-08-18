@@ -349,6 +349,70 @@
       "careerVideo": "https://www.youtube.com/watch?v=FjI3p25h09U",
       "careerVideoResourceUrl": "https://www.nngroup.com/articles/usability-101-introduction-to-usability/",
       "id": 12
+    },
+    {
+      "careerName": "Visual Artist",
+      "industry": "Arts and Culture",
+      "description": "Visual artists create original works of art using various mediums such as painting, sculpture, photography, or digital art. They may work independently, exhibit their art in galleries, or undertake commissions for individuals or organizations. Their work often involves expressing ideas, emotions, or telling stories through visual forms.",
+      "averageSalary": "$30,000 - $70,000 (highly variable based on reputation and sales)",
+      "educationPath": "Bachelor's Degree in Fine Arts, art school diploma, or self-taught with extensive portfolio development.",
+      "jobOutlook": "Slower than average growth, with strong competition for paid positions. Success often depends on talent, networking, and business acumen to market one's work effectively.",
+      "dayInTheLife": "A visual artist's day often involves dedicating several hours to creating art in their studio, experimenting with new techniques, and developing their artistic style. They also spend time on administrative tasks like managing their website, marketing their work, networking with galleries or clients, and preparing for exhibitions.",
+      "skillsRequired": [
+        "Creativity and Imagination",
+        "Technical Proficiency (in chosen medium)",
+        "Attention to Detail",
+        "Self-Discipline",
+        "Marketing and Self-Promotion",
+        "Networking",
+        "Business Acumen",
+        "Adaptability"
+      ],
+      "relatedRoles": [
+        "Illustrator",
+        "Graphic Designer",
+        "Art Director"
+      ],
+      "audiences": [
+        "student",
+        "graduate",
+        "professional"
+      ],
+      "careerInsight": "As a professional exploring the path of a Visual Artist, remember that this career is a journey of continuous learning, resilience, and self-expression. While the financial aspects can be challenging, the profound satisfaction of creating meaningful work and connecting with an audience is unparalleled. Focus on refining your unique voice, building a strong portfolio, and actively engaging with the art community; your dedication and passion will pave the way for a fulfilling artistic career.",
+      "careerVideo": "",
+      "careerVideoResourceUrl": "",
+      "id": 13
+    },
+    {
+      "careerName": "Data Science Lead",
+      "industry": "Technology",
+      "description": "A Data Science Lead spearheads a team of data scientists, guiding them in the development and deployment of machine learning models and data-driven solutions. This role combines technical expertise with strong leadership and project management skills to drive business impact.",
+      "averageSalary": "$150,000 - $250,000+",
+      "educationPath": "Master's or Ph.D. in Computer Science, Statistics, Mathematics, or a related quantitative field, often combined with 5-10+ years of relevant experience.",
+      "jobOutlook": "Excellent, with demand for data science professionals, especially those with leadership capabilities, projected to grow much faster than average.",
+      "dayInTheLife": "A typical day involves overseeing data science projects, mentoring team members, reviewing model designs, and communicating insights to stakeholders. It also includes strategic planning, resource allocation, and ensuring alignment of data initiatives with business objectives.",
+      "skillsRequired": [
+        "Machine Learning",
+        "Statistical Modeling",
+        "Python/R Programming",
+        "SQL and Database Management",
+        "Big Data Technologies (e.g., Spark)",
+        "Cloud Platforms (e.g., AWS, Azure, GCP)",
+        "Team Leadership and Mentorship",
+        "Project Management"
+      ],
+      "relatedRoles": [
+        "Principal Data Scientist",
+        "Head of Data Science",
+        "Analytics Manager"
+      ],
+      "audiences": [
+        "professional"
+      ],
+      "careerInsight": "As a Data Science Lead, you're not just solving complex problems; you're empowering others to do so and shaping the strategic direction of data-driven innovation. Your blend of technical depth and leadership will allow you to make a significant impact, fostering a culture of discovery and driving transformative change within your organization. This path offers immense growth for those passionate about both data and people.",
+      "careerVideo": "",
+      "careerVideoResourceUrl": "",
+      "id": 14
     }
   ],
   "quizQuestions": {

@@ -5,7 +5,7 @@ import { useProfile } from "../../context/ProfileContext"; // Import the profile
 import Lottie from "lottie-react";
 import Logo from "../../assets/logo.webp";
 import { User, Lock, AlertCircle } from "lucide-react"; // Import icons
-import animationData from "../../assets/animation/looking.json";
+import { animations } from "../../utils/lottiePreload";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../components/staticFiles/LandingPage.css";
 
@@ -63,7 +63,7 @@ const Login = () => {
         </div>
         <div className="row justify-content-center align-items-center mb-5">
           <div className="col-md-6 col-lg-5 text-center mb-5 mb-md-0" data-aos="fade-right" data-aos-delay="500">
-            <Lottie animationData={animationData} loop style={{ width: "100%", maxWidth: "400px", margin: "auto" }} />
+            <Lottie animationData={animations.looking} loop style={{ width: "100%", maxWidth: "400px", margin: "auto" }} />
             <p className="lead mt-4 text-muted px-3">
               Discover your perfect career path with personalized guidance and insights tailored just for you.
             </p>
