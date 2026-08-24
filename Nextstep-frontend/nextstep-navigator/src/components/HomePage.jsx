@@ -1,37 +1,16 @@
-import React, { useMemo, useState, useEffect } from "react";
-import Lottie from "lottie-react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./staticFiles/HomePage.css";
 import Logo from "../assets/logo.webp";
-import { animations } from "../utils/lottiePreload";
+import { LottieAnimation } from "../utils/lottiePreload";
 import { FaQuestionCircle, FaBriefcase, FaBook, FaStar } from "react-icons/fa";
 import useSimulatedVisitors from "../hooks/useSimulatedVisitors";
-
-const codeElements = [
-  "NextStep", "Navigator", "Career", "Success", "Growth", "Future",
-  "Dreams", "Opportunities", "Innovation", "Skills", "Goals", "Journey",
-  "Mentorship", "Learning", "Resilience", "Focus", "Inspiration", "Teamwork",
-  "Leadership", "Impact", "Networking", "Strategy", "Empower", "Vision",
-  "Adaptability", "Excellence", "Motivation", "Progress", "Achievement", "Pathway"
-];
 
 function formatNumber(n) {
   return n.toLocaleString();
 }
 
 function HomePage({ user, onNavigate }) { // Renamed and changed props
-  const backgroundParticles = useMemo(() => {
-    return Array.from({ length: 30 }).map((_, i) => ({
-      id: i,
-      text: codeElements[Math.floor(Math.random() * codeElements.length)],
-      style: {
-        left: `${Math.random() * 100}%`,
-        animationDelay: `${Math.random() * 10}s`,
-        animationDuration: `${Math.random() * 5 + 8}s`,
-      },
-    }));
-  }, []);
-
   const handleNavClick = (e, page) => {
     e.preventDefault();
     onNavigate(page);
@@ -122,7 +101,7 @@ function HomePage({ user, onNavigate }) { // Renamed and changed props
 
             <div className="col-lg-6 order-lg-2 order-1 text-center d-none d-lg-block" data-aos="fade-left" data-aos-delay="500">
               <div className="hero-animation-container">
-                <Lottie animationData={animations.manWalking} loop className="hero-animation" />
+                <LottieAnimation name="manWalking" loop className="hero-animation" />
               </div>
             </div>
           </div>
@@ -130,7 +109,7 @@ function HomePage({ user, onNavigate }) { // Renamed and changed props
       </div>
 
       <div className="text-center d-block d-lg-none my-4">
-        <Lottie animationData={animations.manWalking} loop className="hero-animation" />
+        <LottieAnimation name="manWalking" loop className="hero-animation" />
       </div>
 
       <section className="features-section py-5" data-aos="fade-up" data-aos-delay="200">
@@ -171,14 +150,6 @@ function HomePage({ user, onNavigate }) { // Renamed and changed props
 
   return (
     <>
-      <div id="code-container">
-        {backgroundParticles.map((p) => (
-          <span key={p.id} className="code-particle" style={p.style}>
-            {p.text}
-          </span>
-        ))}
-      </div>
-
       <div className="d-flex flex-column align-items-center justify-content-center landing-bg position-relative overflow-hidden">
         <div className="container position-relative z-2">
           <div className="row align-items-center hero-section">
@@ -226,7 +197,7 @@ function HomePage({ user, onNavigate }) { // Renamed and changed props
 
             <div className="col-lg-6 order-lg-2 order-1 text-center d-none d-lg-block" data-aos="fade-left" data-aos-delay="500">
               <div className="hero-animation-container">
-                <Lottie animationData={animations.manWalking} loop className="hero-animation" />
+                <LottieAnimation name="manWalking" loop className="hero-animation" />
               </div>
             </div>
           </div>
@@ -234,7 +205,7 @@ function HomePage({ user, onNavigate }) { // Renamed and changed props
       </div>
 
       <div className="text-center d-block d-lg-none my-4">
-        <Lottie animationData={animations.manWalking} loop className="hero-animation" />
+        <LottieAnimation name="manWalking" loop className="hero-animation" />
       </div>
 
       <section className="features-section py-5" data-aos="fade-up" data-aos-delay="200">

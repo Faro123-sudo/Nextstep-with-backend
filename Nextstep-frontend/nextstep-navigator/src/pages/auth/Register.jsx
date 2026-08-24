@@ -2,10 +2,9 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { register, login } from "../../utils/auth";
 import { useProfile } from "../../context/ProfileContext"; // Import the profile hook
-import Lottie from "lottie-react";
 import Logo from "../../assets/logo.webp";
 import { User, Mail, Lock, Briefcase, AlertCircle } from "lucide-react"; // Import icons
-import { animations } from "../../utils/lottiePreload";
+import { LottieAnimation } from "../../utils/lottiePreload";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../components/staticFiles/LandingPage.css";
 
@@ -83,8 +82,8 @@ const Register = () => {
           </div>
           <div className="row justify-content-center align-items-center">
             <div className="col-md-6 col-lg-5 text-center mb-5 mb-md-0" data-aos="fade-right" data-aos-delay="500">
-              <Lottie
-                animationData={animations.looking}
+              <LottieAnimation
+                name="looking"
                 loop={true}
                 style={{ width: "100%", maxWidth: "400px", margin: "auto" }}
               />

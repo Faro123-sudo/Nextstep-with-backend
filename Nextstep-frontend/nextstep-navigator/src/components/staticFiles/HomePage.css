@@ -54,10 +54,6 @@
 
 .landing-logo {
   height: 70px;
-  transition: transform 0.3s ease-in-out;
-}
-.landing-logo:hover {
-  transform: scale(1.05);
 }
 
 .landing-title {
@@ -70,14 +66,6 @@
 
 .landing-description {
   max-width: 550px;
-}
-
-.btn.hover-lift {
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-.btn.hover-lift:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
 
 .hero-animation-container {
@@ -93,24 +81,6 @@
   max-height: 420px;
 }
 
-.fade-in {
-  opacity: 0;
-  transform: translateY(8px);
-  animation: fadeInUp 0.8s ease forwards;
-}
-@keyframes fadeInUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.slide-in-left {
-  opacity: 0;
-  transform: translateX(-18px);
-  animation: slideInLeft 0.6s cubic-bezier(.2,.9,.2,1) forwards;
-}
-@keyframes slideInLeft {
-  to { opacity: 1; transform: translateX(0); }
-}
-
 .features-section {
   background-color: #ffffff;
 }
@@ -119,15 +89,9 @@
   background-color: #f8f9fa;
   border-radius: 1rem;
   border: 1px solid #e9ecef;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-
-.feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.08);
 }
 
 .feature-icon {

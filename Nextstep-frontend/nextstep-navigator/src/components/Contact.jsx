@@ -2,8 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaCommentDots } from "react-icons/fa";
 import "./ContactUs.css";
-import { animations } from "../utils/lottiePreload";
-import Lottie from "lottie-react";
+import { LottieAnimation } from "../utils/lottiePreload";
 
 
 export default function ContactUs() {
@@ -22,8 +21,8 @@ export default function ContactUs() {
         <div className="row g-4 mt-4 align-items-center">
 
           <div className="col-md-6 col-lg-5  text-center mb-5 mb-md-0" data-aos="fade-right" data-aos-delay="500">
-            <Lottie
-              animationData={animations.contact}
+            <LottieAnimation
+              name="contact"
               loop={true}
               style={{ width: "100%", maxWidth: "400px", margin: "auto" }}
             />

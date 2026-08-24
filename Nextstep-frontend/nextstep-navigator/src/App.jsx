@@ -1,11 +1,8 @@
 
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
-// Eagerly load all Lottie animations into the main bundle
-import "./utils/lottiePreload";
+import { LottieProvider } from "./utils/lottiePreload";
 
 // Your custom components and utilities
 import Login from "./pages/auth/Login";
@@ -61,16 +58,13 @@ function AppContent() {
 }
 
 export default function App() {
-  useEffect(() => {
-    // Initialize AOS for animations
-    AOS.init({ duration: 1000, once: true });
-  }, []);
-
   return (
     <BrowserRouter>
-      <ProfileProvider>
-        <AppContent />
-      </ProfileProvider>
+      <LottieProvider>
+        <ProfileProvider>
+          <AppContent />
+        </ProfileProvider>
+      </LottieProvider>
     </BrowserRouter>
   );
 }

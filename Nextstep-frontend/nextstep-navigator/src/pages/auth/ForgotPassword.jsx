@@ -2,10 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { sendPasswordResetEmail } from "../../utils/auth";
-import Lottie from "lottie-react";
 import { Mail, AlertCircle, CheckCircle } from "lucide-react";
 import Logo from "../../assets/logo.webp";
-import { animations } from "../../utils/lottiePreload";
+import { LottieAnimation } from "../../utils/lottiePreload";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../components/staticFiles/LandingPage.css";
 
@@ -47,7 +46,7 @@ const ForgotPassword = () => {
         </div>
         <div className="row justify-content-center align-items-center mb-5">
           <div className="col-md-6 col-lg-5 text-center mb-5 mb-md-0" data-aos="fade-right" data-aos-delay="500">
-            <Lottie animationData={animations.forgotPassword} loop style={{ width: "100%", maxWidth: "400px", margin: "auto" }} />
+            <LottieAnimation name="forgotPassword" loop style={{ width: "100%", maxWidth: "400px", margin: "auto" }} />
             <p className="lead mt-4 text-muted px-3">
               Enter your email address and we'll send you a link to reset your password.
             </p>
