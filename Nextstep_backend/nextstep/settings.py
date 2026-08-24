@@ -267,4 +267,6 @@ AI_CACHE_TTL = {
     "quiz_recommendation": 86400,    # 24h
     "career_detail": 86400,          # 24h
     "career_search": 3600,           # 1h — search results may change
+    "resource_library": 21600,       # 6h — curated lists stay useful longer
+    "resource_search": 3600,         # 1h — search is query-specific
 }

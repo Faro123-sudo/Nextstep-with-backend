@@ -358,6 +358,185 @@ def search_career_info(query: str, user_type: str = None) -> dict:
     return result
 
 
+def generate_resource_library(topic: str = "career development", user_type: str = None, limit: int = 12) -> list[dict]:
+    """
+    Generate a realistic, diverse resource library list.
+
+    Returns a list of resource objects with keys:
+    type, title, description, url, tags.
+    """
+    if not client:
+        raise Exception("Gemini client failed to initialize.")
+
+    safe_limit = max(4, min(limit, 24))
+    user_context = f"targeted for a {user_type}" if user_type else "for a general audience"
+
+    resource_schema = {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "One of: Article, E-book, Webinar, Template",
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Specific and practical resource title.",
+                },
+                "description": {
+                    "type": "string",
+                    "description": "1-2 sentence realistic summary of what the resource teaches.",
+                },
+                "url": {
+                    "type": "string",
+                    "description": "Direct, plausible public URL. Use # only if no safe URL can be provided.",
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "2-5 concise topical tags.",
+                },
+            },
+            "required": ["type", "title", "description", "url"],
+        },
+    }
+
+    prompt = (
+        "You are curating a professional career resource library. "
+        f"Generate exactly {safe_limit} realistic resources about '{topic}', {user_context}. "
+        "Balance types across Article, E-book, Webinar, and Template. "
+        "Use practical titles and grounded descriptions. "
+        "Prefer trustworthy domains (e.g. coursera.org, edx.org, harvard.edu, linkedin.com, indeed.com, "
+        "forbes.com, government labor websites). "
+        "Do not invent fake-looking domains. If unsure about a URL, use '#'."
+    )
+
+    try:
+        response = client.models.generate_content(
+            model=MODEL,
+            contents=prompt,
+            config={
+                "response_mime_type": "application/json",
+                "response_schema": resource_schema,
+            },
+        )
+        result = json.loads(response.text)
+    except Exception as e:
+        raise Exception(f"Resource generation failed: {e}")
+
+    if not isinstance(result, list):
+        raise Exception("AI response was not a resource list.")
+
+    cleaned: list[dict] = []
+    allowed_types = {"Article", "E-book", "Webinar", "Template"}
+    for item in result:
+        if not isinstance(item, dict):
+            continue
+        title = (item.get("title") or "").strip()
+        description = (item.get("description") or "").strip()
+        if not title or not description:
+            continue
+
+        resource_type = (item.get("type") or "Article").strip()
+        if resource_type not in allowed_types:
+            resource_type = "Article"
+
+        url = (item.get("url") or "#").strip() or "#"
+        tags = item.get("tags") if isinstance(item.get("tags"), list) else []
+        cleaned.append(
+            {
+                "type": resource_type,
+                "title": title,
+                "description": description,
+                "url": url,
+                "tags": [str(tag).strip() for tag in tags if str(tag).strip()],
+            }
+        )
+
+    return cleaned[:safe_limit]
+
+
+def search_resource_info(query: str, user_type: str = None, limit: int = 8) -> list[dict]:
+    """
+    Generate AI-backed resource search results for a free-text query.
+    """
+    if not client:
+        raise Exception("Gemini client failed to initialize.")
+
+    safe_limit = max(1, min(limit, 12))
+    user_context = f"for a {user_type}" if user_type else ""
+
+    resource_search_schema = {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "type": {"type": "string"},
+                "title": {"type": "string"},
+                "description": {"type": "string"},
+                "url": {"type": "string"},
+                "tags": {"type": "array", "items": {"type": "string"}},
+            },
+            "required": ["type", "title", "description", "url"],
+        },
+    }
+
+    prompt = (
+        "You are a career learning librarian. "
+        f"A user {user_context} searched for '{query}'. "
+        f"Return exactly {safe_limit} highly relevant resources. "
+        "Use realistic resources and practical descriptions. "
+        "Choose from types: Article, E-book, Webinar, Template. "
+        "Prefer trustworthy domains and use '#' if URL confidence is low."
+    )
+
+    try:
+        response = client.models.generate_content(
+            model=MODEL,
+            contents=prompt,
+            config={
+                "response_mime_type": "application/json",
+                "response_schema": resource_search_schema,
+            },
+        )
+        result = json.loads(response.text)
+    except Exception as e:
+        raise Exception(f"Resource search generation failed: {e}")
+
+    if not isinstance(result, list):
+        raise Exception("AI response was not a resource list.")
+
+    cleaned: list[dict] = []
+    allowed_types = {"Article", "E-book", "Webinar", "Template"}
+    for item in result:
+        if not isinstance(item, dict):
+            continue
+
+        title = (item.get("title") or "").strip()
+        description = (item.get("description") or "").strip()
+        if not title or not description:
+            continue
+
+        resource_type = (item.get("type") or "Article").strip()
+        if resource_type not in allowed_types:
+            resource_type = "Article"
+
+        url = (item.get("url") or "#").strip() or "#"
+        tags = item.get("tags") if isinstance(item.get("tags"), list) else []
+        cleaned.append(
+            {
+                "type": resource_type,
+                "title": title,
+                "description": description,
+                "url": url,
+                "tags": [str(tag).strip() for tag in tags if str(tag).strip()],
+            }
+        )
+
+    return cleaned[:safe_limit]
+
+
 # ---------------------------------------------------------------------------
 # AI integration notes (ai.gemini)
 # ---------------------------------------------------------------------------

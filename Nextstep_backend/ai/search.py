@@ -163,3 +163,103 @@ def load_static_careers(json_path: str) -> list[dict]:
     if isinstance(data, list):
         return data
     return []
+
+
+def _resource_text(resource: dict) -> str:
+    """Build a single searchable string for a resource item."""
+    parts = [
+        resource.get("title", ""),
+        resource.get("description", ""),
+        resource.get("type", ""),
+        " ".join(resource.get("tags", []) or []),
+    ]
+    return _normalize(" ".join(parts))
+
+
+def fuzzy_search_resources(
+    query: str,
+    resources: list[dict],
+    *,
+    cutoff: float = 0.55,
+    max_results: int = 10,
+) -> list[dict]:
+    """
+    Search resources using title/description/type text with typo tolerance.
+    """
+    if not query or not resources:
+        return []
+
+    norm_query = _normalize(query)
+    scored: list[tuple[float, dict]] = []
+    seen: set[str] = set()
+
+    for resource in resources:
+        text = _resource_text(resource)
+        if not text:
+            continue
+
+        title = _normalize(resource.get("title", ""))
+        # Strong boost for exact title and direct substring matches.
+        if title and title == norm_query:
+            score = 1.0
+        elif norm_query in title or norm_query in text:
+            score = 0.9
+        else:
+            score = _similarity(norm_query, text)
+
+        if score >= cutoff:
+            key = title or text
+            if key not in seen:
+                seen.add(key)
+                scored.append((score, resource))
+
+    scored.sort(key=lambda x: x[0], reverse=True)
+    return [resource for _, resource in scored[:max_results]]
+
+
+def find_best_resource_matches(
+    query: str,
+    sources: list[list[dict]],
+    *,
+    cutoff: float = 0.55,
+    max_results: int = 10,
+) -> list[dict]:
+    """
+    Find top resource matches across multiple sources (JSON, DB cache, AI cache).
+    """
+    if not query:
+        return []
+
+    merged: list[dict] = []
+    for source in sources:
+        merged.extend(source)
+
+    return fuzzy_search_resources(query, merged, cutoff=cutoff, max_results=max_results)
+
+
+def load_static_resources(json_path: str) -> list[dict]:
+    """Load flattened resource list from careerData.json resourceLibrary section."""
+    path = Path(json_path)
+    if not path.exists():
+        return []
+
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except (json.JSONDecodeError, OSError):
+        return []
+
+    if not isinstance(data, dict):
+        return []
+
+    library = data.get("resourceLibrary", {})
+    if not isinstance(library, dict):
+        return []
+
+    all_resources: list[dict] = []
+    for key in ("articles", "ebooks", "webinars", "templates"):
+        items = library.get(key, [])
+        if isinstance(items, list):
+            all_resources.extend([item for item in items if isinstance(item, dict)])
+
+    return all_resources

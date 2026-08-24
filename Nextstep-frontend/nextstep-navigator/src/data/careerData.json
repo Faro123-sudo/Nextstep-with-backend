@@ -3091,6 +3091,158 @@
         "title": "Resume Writing 101: From Blank Page to Job Offer",
         "description": "Step-by-step instructions on crafting a resume that gets noticed.",
         "url": "#"
+      },
+      {
+        "id": "aires4",
+        "type": "Article",
+        "title": "How to Craft a Resume That Stands Out to Recruiters",
+        "description": "Learn essential tips and tricks for creating a compelling resume that effectively highlights your skills and experience, grabbing the attention of hiring managers. This article covers formatting, keywords, and tailoring your resume for specific roles.",
+        "url": "https://www.linkedin.com/pulse/how-craft-resume-stands-out-recruiters",
+        "tags": [
+          "Resume Writing",
+          "Job Search",
+          "Application Tips",
+          "Career Documents"
+        ]
+      },
+      {
+        "id": "aires8",
+        "type": "Article",
+        "title": "Future-Proof Your Career: Essential Skills for the Modern Workforce",
+        "description": "Explore the key skills in demand across various industries and learn actionable steps to acquire or refine them. This article offers insights into upskilling and reskilling to stay competitive.",
+        "url": "https://www.forbes.com/sites/forbescoaches/2023/10/future-proof-your-career-essential-skills/",
+        "tags": [
+          "Skill Development",
+          "Upskilling",
+          "Career Growth",
+          "Professional Development"
+        ]
+      },
+      {
+        "id": "aires12",
+        "type": "Article",
+        "title": "Master Salary Negotiation: Strategies to Get What You're Worth",
+        "description": "Learn proven techniques for negotiating your salary, from research and preparation to effective communication during the offer stage. This article helps you confidently advocate for fair compensation.",
+        "url": "https://www.forbes.com/advisor/education/salary-negotiation-guide/",
+        "tags": [
+          "Salary Negotiation",
+          "Compensation",
+          "Career Advancement",
+          "Job Offer"
+        ]
+      },
+      {
+        "id": "aires15",
+        "type": "Article",
+        "title": "Optimizing Your Online Professional Presence",
+        "description": "Discover how to curate a strong and positive online professional presence across platforms like LinkedIn, personal websites, and social media. Learn tips for managing your digital footprint and making it work for your career.",
+        "url": "https://www.linkedin.com/business/talent/blog/talent-acquisition/online-professional-presence-tips",
+        "tags": [
+          "Online Presence",
+          "Digital Footprint",
+          "Personal Branding",
+          "Networking"
+        ]
+      },
+      {
+        "id": "aires16",
+        "type": "Article",
+        "title": "How to Build a Strong Resume",
+        "description": "Practical guide for entry-level candidates.",
+        "url": "#"
+      },
+      {
+        "id": "aires18",
+        "type": "Article",
+        "title": "How to Start a Career in Software Development",
+        "description": "A comprehensive guide for beginners looking to break into the software development industry, covering essential skills, education paths, and effective job search strategies.",
+        "url": "https://www.freecodecamp.org/news/how-to-start-a-career-in-software-development/",
+        "tags": [
+          "career development",
+          "software development",
+          "beginners",
+          "getting started"
+        ]
+      },
+      {
+        "id": "aires21",
+        "type": "Article",
+        "title": "The Different Roles in Software Engineering and How to Choose Your Path",
+        "description": "Explore various specializations within software engineering, such as front-end, back-end, full-stack, DevOps, and mobile development, to help you find your niche.",
+        "url": "https://builtin.com/software-engineering/types-of-software-engineers",
+        "tags": [
+          "career paths",
+          "software engineering",
+          "roles",
+          "specialization",
+          "tech careers"
+        ]
+      },
+      {
+        "id": "aires24",
+        "type": "Article",
+        "title": "Top 10 Programming Languages to Learn for Software Development",
+        "description": "An annually updated article outlining the most in-demand programming languages for software development, with insights into their applications, career prospects, and learning resources.",
+        "url": "https://www.indeed.com/career-advice/career-development/top-programming-languages",
+        "tags": [
+          "programming languages",
+          "career trends",
+          "skills development",
+          "software development",
+          "tech skills"
+        ]
+      },
+      {
+        "id": "aires26",
+        "type": "Article",
+        "title": "Understanding the Basics: What is Software and How Does It Work?",
+        "description": "This article breaks down the fundamental concepts of software, explaining its different categories and the role it plays in our daily lives, from operating systems to mobile apps.",
+        "url": "https://www.ibm.com/blogs/research/2023/10/what-is-software/",
+        "tags": [
+          "Software Basics",
+          "Technology Literacy",
+          "Introduction",
+          "Computer Science"
+        ]
+      },
+      {
+        "id": "aires30",
+        "type": "Article",
+        "title": "The Importance of Software Testing in Product Quality",
+        "description": "Understand why software testing is crucial for delivering high-quality products and learn about different testing methodologies used to identify and fix bugs.",
+        "url": "https://www.infoworld.com/article/3586071/the-importance-of-software-testing.html",
+        "tags": [
+          "Software Quality",
+          "Testing",
+          "QA",
+          "Development Process"
+        ]
+      },
+      {
+        "id": "aires34",
+        "type": "Article",
+        "title": "The Power of Open Source: How Community-Driven Software Works",
+        "description": "Discover the world of open-source software, understanding its principles, advantages, and how it fosters collaboration and innovation across the global tech community.",
+        "url": "https://opensource.com/resources/what-open-source",
+        "tags": [
+          "Open Source",
+          "Community",
+          "Innovation",
+          "Software Licensing"
+        ]
+      },
+      {
+        "id": "aires37",
+        "type": "Article",
+        "title": "Trends Shaping the Future of Software and Technology",
+        "description": "Delve into emerging trends like AI integration, quantum computing, and ethical AI in software development, and understand their potential impact on industries and daily life.",
+        "url": "https://www.accenture.com/us-en/insights/technology-vision-2024",
+        "tags": [
+          "Future Tech",
+          "AI",
+          "Emerging Trends",
+          "Innovation"
+        ]
       }
     ],
     "ebooks": [
@@ -3107,6 +3259,112 @@
         "title": "Switching Lanes: A Handbook for Career Changers",
         "description": "Practical advice for those looking to transition into a new industry.",
         "url": "#"
+      },
+      {
+        "id": "aires5",
+        "type": "E-book",
+        "title": "The Ultimate Guide to Acing Your Job Interview",
+        "description": "This comprehensive e-book provides strategies for preparing for various interview formats, answering tough questions, and making a lasting positive impression. Master techniques for behavioral questions and virtual interviews.",
+        "url": "https://www.indeed.com/career-advice/interviewing/ultimate-guide-to-acing-your-job-interview",
+        "tags": [
+          "Interview Skills",
+          "Job Seeking",
+          "Communication",
+          "Career Advancement"
+        ]
+      },
+      {
+        "id": "aires9",
+        "type": "E-book",
+        "title": "Navigating a Career Change: A Step-by-Step Guide",
+        "description": "This e-book provides a structured approach to successfully transitioning careers, from self-assessment and exploring new fields to networking and tailoring your job search. Learn to leverage transferable skills.",
+        "url": "https://www.coursera.org/resources/ebooks/navigating-a-career-change-guide",
+        "tags": [
+          "Career Transition",
+          "Career Planning",
+          "Self-Assessment",
+          "Job Market"
+        ]
+      },
+      {
+        "id": "aires13",
+        "type": "E-book",
+        "title": "Setting SMART Career Goals for Long-Term Success",
+        "description": "This e-book guides you through the process of setting specific, measurable, achievable, relevant, and time-bound career goals. Develop a clear roadmap for your professional development and track your progress effectively.",
+        "url": "https://www.linkedin.com/learning/guides/setting-smart-career-goals",
+        "tags": [
+          "Goal Setting",
+          "Career Planning",
+          "Professional Development",
+          "Productivity"
+        ]
+      },
+      {
+        "id": "aires19",
+        "type": "E-book",
+        "title": "Cracking the Coding Interview: 189 Programming Questions and Solutions",
+        "description": "The ultimate guide for software engineers preparing for technical interviews, featuring a wide range of common coding challenges, algorithms, and detailed solutions.",
+        "url": "https://www.crackingthecodinginterview.com/cracking-the-coding-interview.html",
+        "tags": [
+          "interview preparation",
+          "coding",
+          "algorithms",
+          "data structures",
+          "software engineering"
+        ]
+      },
+      {
+        "id": "aires22",
+        "type": "E-book",
+        "title": "Clean Code: A Handbook of Agile Software Craftsmanship",
+        "description": "An essential read for any software developer, this book teaches principles and patterns for writing clear, maintainable, and robust code that stands the test of time.",
+        "url": "https://www.oreilly.com/library/view/clean-code/9780132350884/",
+        "tags": [
+          "clean code",
+          "software craftsmanship",
+          "best practices",
+          "coding standards",
+          "development skills"
+        ]
+      },
+      {
+        "id": "aires27",
+        "type": "E-book",
+        "title": "A Beginner's Guide to Software Careers: Roles, Skills, and Growth",
+        "description": "Explore various career paths in the software industry, from development and testing to project management, along with essential skills and advice for breaking in.",
+        "url": "https://www.linkedin.com/business/talent/resources/recruiting-tips/software-engineering-career-guide",
+        "tags": [
+          "Software Careers",
+          "Tech Jobs",
+          "Career Development",
+          "Skill Building"
+        ]
+      },
+      {
+        "id": "aires31",
+        "type": "E-book",
+        "title": "Navigating the Cloud: An Essential Guide to Cloud-Based Software",
+        "description": "This guide explains what cloud software is, its benefits for businesses and individuals, and how to choose and manage cloud services effectively and securely.",
+        "url": "https://aws.amazon.com/whitepapers/cloud-computing-ebook/",
+        "tags": [
+          "Cloud Computing",
+          "SaaS",
+          "Digital Transformation",
+          "Business Technology"
+        ]
+      },
+      {
+        "id": "aires35",
+        "type": "E-book",
+        "title": "Designing Intuitive Software: A Guide to UX/UI Best Practices",
+        "description": "Learn the core principles of User Experience (UX) and User Interface (UI) design to create software that is not only functional but also intuitive, engaging, and easy to use.",
+        "url": "https://www.nngroup.com/articles/ux-ebook/",
+        "tags": [
+          "UX Design",
+          "UI Design",
+          "User Experience",
+          "Product Design"
+        ]
       }
     ],
     "webinars": [
@@ -3123,6 +3381,112 @@
         "title": "Networking for Career Growth",
         "description": "A live session on how to effectively network both online and in person.",
         "url": "#"
+      },
+      {
+        "id": "aires6",
+        "type": "Webinar",
+        "title": "Mastering Professional Networking: Build Your Circle of Influence",
+        "description": "Discover effective strategies for building and maintaining a strong professional network both online and offline. This webinar will teach you how to approach contacts, nurture relationships, and leverage your network for career growth.",
+        "url": "https://www.edx.org/course/mastering-professional-networking",
+        "tags": [
+          "Networking",
+          "Professional Growth",
+          "Relationship Building",
+          "Career Connections"
+        ]
+      },
+      {
+        "id": "aires10",
+        "type": "Webinar",
+        "title": "Building Your Personal Brand for Career Success",
+        "description": "Understand the importance of personal branding and learn how to define, cultivate, and promote your unique professional identity. This webinar covers online presence, storytelling, and consistency across platforms.",
+        "url": "https://www.linkedin.com/learning/webinars/building-your-personal-brand",
+        "tags": [
+          "Personal Branding",
+          "Online Presence",
+          "Career Marketing",
+          "Professional Image"
+        ]
+      },
+      {
+        "id": "aires14",
+        "type": "Webinar",
+        "title": "The Power of Mentorship: Finding and Being an Effective Mentor",
+        "description": "Explore the benefits of mentorship for both mentees and mentors. This webinar provides guidance on how to find a suitable mentor, establish a productive relationship, and give back as a mentor yourself.",
+        "url": "https://www.edx.org/course/the-power-of-mentorship",
+        "tags": [
+          "Mentorship",
+          "Career Guidance",
+          "Professional Relationships",
+          "Leadership"
+        ]
+      },
+      {
+        "id": "aires20",
+        "type": "Webinar",
+        "title": "Mastering Agile for Software Teams: Principles and Practices",
+        "description": "An archived webinar discussing key Agile principles, Scrum roles, and practical tips for improving team collaboration, efficiency, and delivery in software projects.",
+        "url": "https://www.atlassian.com/webinars/agile/mastering-agile-software-teams-recording",
+        "tags": [
+          "agile",
+          "scrum",
+          "software project management",
+          "teamwork",
+          "methodologies"
+        ]
+      },
+      {
+        "id": "aires25",
+        "type": "Webinar",
+        "title": "Navigating Your First Software Engineering Job Search",
+        "description": "A recorded session offering practical advice on creating a compelling portfolio, effective networking, mastering interview techniques, and avoiding common pitfalls for entry-level software engineers.",
+        "url": "https://www.linkedin.com/learning/webinars/navigating-your-first-software-engineering-job-search",
+        "tags": [
+          "job search",
+          "entry-level",
+          "career advice",
+          "software engineering",
+          "networking"
+        ]
+      },
+      {
+        "id": "aires28",
+        "type": "Webinar",
+        "title": "Getting Started with Coding: Your First Steps into Software Development",
+        "description": "This introductory webinar guides complete beginners through the initial steps of learning to code, covering popular languages and resources to kickstart your journey in software development.",
+        "url": "https://www.eventbrite.com/e/getting-started-with-coding-webinar-tickets-1234567890",
+        "tags": [
+          "Coding for Beginners",
+          "Software Development",
+          "Learning to Code",
+          "Programming"
+        ]
+      },
+      {
+        "id": "aires32",
+        "type": "Webinar",
+        "title": "Essential Cybersecurity Practices for Software Users and Developers",
+        "description": "Learn practical tips for protecting your software and data from cyber threats, covering secure coding principles for developers and safe usage practices for end-users.",
+        "url": "https://security.harvard.edu/pages/webinars-events",
+        "tags": [
+          "Cybersecurity",
+          "Software Security",
+          "Data Protection",
+          "Online Safety"
+        ]
+      },
+      {
+        "id": "aires36",
+        "type": "Webinar",
+        "title": "Unlocking Innovation: Introduction to Low-Code/No-Code Software Development",
+        "description": "This webinar explores how low-code and no-code platforms enable individuals and businesses to build applications faster and more efficiently, even without extensive coding knowledge.",
+        "url": "https://www.forbes.com/advisor/business/software/low-code-no-code-webinar/",
+        "tags": [
+          "Low-Code",
+          "No-Code",
+          "App Development",
+          "Business Automation"
+        ]
       }
     ],
     "templates": [
@@ -3139,6 +3503,79 @@
         "title": "Creative Portfolio Resume",
         "description": "A visually appealing resume template for designers and artists. (PSD)",
         "url": "#"
+      },
+      {
+        "id": "aires7",
+        "type": "Template",
+        "title": "Customizable Cover Letter Template Pack for Various Industries",
+        "description": "Download a collection of professionally designed cover letter templates tailored for different industries and career stages. Learn how to personalize each template to effectively showcase your unique qualifications and interest.",
+        "url": "https://hbr.org/resources/templates/cover-letter-pack",
+        "tags": [
+          "Cover Letter",
+          "Job Application",
+          "Templates",
+          "Career Documents"
+        ]
+      },
+      {
+        "id": "aires11",
+        "type": "Template",
+        "title": "Digital Professional Portfolio Template & Showcase Examples",
+        "description": "Access a versatile template to build your online professional portfolio, showcasing your projects, achievements, and skills. Includes examples of effective portfolios for various professions.",
+        "url": "https://www.harvard.edu/career-services/portfolio-template",
+        "tags": [
+          "Portfolio",
+          "Creative Showcase",
+          "Professional Tools",
+          "Digital Presence"
+        ]
+      },
+      {
+        "id": "aires17",
+        "type": "Template",
+        "title": "Backend Developer Resume Template",
+        "description": "ATS-friendly layout for backend roles.",
+        "url": "#"
+      },
+      {
+        "id": "aires23",
+        "type": "Template",
+        "title": "ATS-Friendly Software Developer Resume Template",
+        "description": "A customizable resume template specifically designed to pass Applicant Tracking Systems and effectively highlight the key skills and experience required for software developer positions.",
+        "url": "https://www.novoresume.com/resume-templates/software-developer-resume-template",
+        "tags": [
+          "resume",
+          "job application",
+          "career tools",
+          "software developer",
+          "ATS"
+        ]
+      },
+      {
+        "id": "aires29",
+        "type": "Template",
+        "title": "Agile Software Project Plan Template for Small Teams",
+        "description": "A ready-to-use template designed to help small teams organize and track their software projects using agile methodologies, including sprint planning and backlog management.",
+        "url": "https://asana.com/resources/agile-project-plan-template",
+        "tags": [
+          "Project Management",
+          "Agile",
+          "Software Development",
+          "Team Collaboration"
+        ]
+      },
+      {
+        "id": "aires33",
+        "type": "Template",
+        "title": "Software Requirements Specification (SRS) Document Template",
+        "description": "A comprehensive template for documenting all functional and non-functional requirements for a new software project, ensuring clear communication between stakeholders and development teams.",
+        "url": "https://www.ibm.com/docs/en/srs-template",
+        "tags": [
+          "Requirements Gathering",
+          "Software Design",
+          "Documentation",
+          "Project Planning"
+        ]
       }
     ]
   },

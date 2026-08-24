@@ -40,7 +40,7 @@ const Footer = ({ onNavigate }) => {
               <li><a href="#!" onClick={(e) => handleNavClick(e, 'quiz')} className="footer-link">Career Quiz</a></li>
               <li><a href="#!" onClick={(e) => handleNavClick(e, 'resources')} className="footer-link">Resource Library</a></li>
               <li><a href="#!" onClick={(e) => handleNavClick(e, 'successStories')} className="footer-link">Success Stories</a></li>
-              <li><a href="#!" onClick={(e) => handleNavClick(e, 'multimedia')} className="footer-link">Multimedia Guidance</a></li>
+              {/* <li><a href="#!" onClick={(e) => handleNavClick(e, 'multimedia')} className="footer-link">Multimedia Guidance</a></li> */}
             </ul>
           </div>
 

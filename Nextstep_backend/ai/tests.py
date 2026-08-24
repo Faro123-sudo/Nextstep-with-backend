@@ -21,8 +21,21 @@ from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient
 
 from .models import AIRecommendation
-from .search import fuzzy_search_careers, find_best_match, load_static_careers
-from .json_cache import append_to_json, career_exists, get_career_json_path
+from .search import (
+    fuzzy_search_careers,
+    find_best_match,
+    load_static_careers,
+    fuzzy_search_resources,
+    find_best_resource_matches,
+    load_static_resources,
+)
+from .json_cache import (
+    append_to_json,
+    career_exists,
+    get_career_json_path,
+    append_resources_to_json,
+    resource_exists,
+)
 
 
 User = get_user_model()
@@ -124,6 +137,29 @@ class SearchUtilityTests(TestCase):
             {"careerName": "Biomedical Scientist", "industry": "Healthcare"},
             {"careerName": "Graphic Designer", "industry": "Creative"},
         ]
+        self.resources = [
+            {
+                "type": "Article",
+                "title": "Data Analyst Interview Guide",
+                "description": "Prepare for analytics interviews with sample questions.",
+                "url": "https://example.com/data-analyst-guide",
+                "tags": ["analytics", "interview"],
+            },
+            {
+                "type": "Template",
+                "title": "ATS Resume Template",
+                "description": "Resume format optimized for applicant tracking systems.",
+                "url": "https://example.com/ats-template",
+                "tags": ["resume", "job-search"],
+            },
+            {
+                "type": "Webinar",
+                "title": "Breaking into Cybersecurity",
+                "description": "Live Q&A with security engineers.",
+                "url": "https://example.com/cyber-webinar",
+                "tags": ["security", "career"],
+            },
+        ]
 
     def test_fuzzy_search_exact_match(self):
         results = fuzzy_search_careers("Data Scientist", self.careers)
@@ -224,6 +260,48 @@ class SearchUtilityTests(TestCase):
         finally:
             os.unlink(tmp_path)
 
+    def test_fuzzy_search_resources_exact_title(self):
+        results = fuzzy_search_resources("ATS Resume Template", self.resources)
+        self.assertGreater(len(results), 0)
+        self.assertEqual(results[0]["title"], "ATS Resume Template")
+
+    def test_fuzzy_search_resources_description_match(self):
+        results = fuzzy_search_resources("applicant tracking", self.resources)
+        self.assertGreater(len(results), 0)
+        self.assertEqual(results[0]["title"], "ATS Resume Template")
+
+    def test_find_best_resource_matches_multiple_sources(self):
+        source_a = [self.resources[0]]
+        source_b = [self.resources[1]]
+        matches = find_best_resource_matches("resume", [source_a, source_b], max_results=3)
+        self.assertGreater(len(matches), 0)
+        self.assertEqual(matches[0]["title"], "ATS Resume Template")
+
+    def test_load_static_resources_valid_json(self):
+        payload = {
+            "resourceLibrary": {
+                "articles": [{"title": "Article A", "type": "Article", "description": "d", "url": "#"}],
+                "ebooks": [{"title": "E-book B", "type": "E-book", "description": "d", "url": "#"}],
+                "webinars": [],
+                "templates": [],
+            }
+        }
+
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".json", delete=False, encoding="utf-8"
+        ) as f:
+            json.dump(payload, f)
+            tmp_path = f.name
+
+        try:
+            resources = load_static_resources(tmp_path)
+            self.assertEqual(len(resources), 2)
+            titles = [r["title"] for r in resources]
+            self.assertIn("Article A", titles)
+            self.assertIn("E-book B", titles)
+        finally:
+            os.unlink(tmp_path)
+
 
 # ---------------------------------------------------------------------------
 # JSON cache utility tests
@@ -238,7 +316,21 @@ class JsonCacheTests(TestCase):
             "careerBank": [
                 {"id": 1, "careerName": "Data Scientist", "industry": "Technology"},
                 {"id": 2, "careerName": "UX Designer", "industry": "Technology"},
-            ]
+            ],
+            "resourceLibrary": {
+                "articles": [
+                    {
+                        "id": "art1",
+                        "type": "Article",
+                        "title": "Interview Preparation Checklist",
+                        "description": "Checklist for interviews.",
+                        "url": "#",
+                    }
+                ],
+                "ebooks": [],
+                "webinars": [],
+                "templates": [],
+            },
         }
         with open(self.json_path, "w", encoding="utf-8") as f:
             json.dump(initial, f)
@@ -295,6 +387,46 @@ class JsonCacheTests(TestCase):
         path = get_career_json_path()
         self.assertIsInstance(path, str)
         self.assertTrue(path.endswith("careerData.json"))
+
+    def test_resource_exists_found(self):
+        with patch("ai.json_cache._CAREER_JSON_PATH", self.json_path):
+            self.assertTrue(resource_exists("Interview Preparation Checklist"))
+            self.assertTrue(resource_exists("interview preparation checklist"))
+            self.assertFalse(resource_exists("Cloud Portfolio Template"))
+
+    def test_append_resources_to_json(self):
+        with patch("ai.json_cache._CAREER_JSON_PATH", self.json_path):
+            added = append_resources_to_json([
+                {
+                    "type": "Template",
+                    "title": "Cloud Portfolio Template",
+                    "description": "A one-page cloud engineer portfolio layout.",
+                    "url": "#",
+                    "tags": ["cloud", "portfolio"],
+                }
+            ])
+            self.assertEqual(added, 1)
+
+            with open(self.json_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+            self.assertEqual(len(data["resourceLibrary"]["templates"]), 1)
+            self.assertEqual(
+                data["resourceLibrary"]["templates"][0]["title"],
+                "Cloud Portfolio Template",
+            )
+
+    def test_append_resources_to_json_duplicate(self):
+        with patch("ai.json_cache._CAREER_JSON_PATH", self.json_path):
+            added = append_resources_to_json([
+                {
+                    "type": "Article",
+                    "title": "Interview Preparation Checklist",
+                    "description": "Duplicate",
+                    "url": "#",
+                }
+            ])
+            self.assertEqual(added, 0)
 
 
 # ---------------------------------------------------------------------------
@@ -665,3 +797,70 @@ class CareerDetailRecommendationViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["recommendation"], "Great career choice")
         self.assertEqual(response.data["relatedCareer"], "ML Engineer")
+
+
+class ResourceLibraryViewTests(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.user = User.objects.create_user(
+            username="resourceuser", password="testpass123"
+        )
+        self.client.force_authenticate(user=self.user)
+        cache.clear()
+
+    def tearDown(self):
+        cache.clear()
+
+    @patch("ai.views.generate_resource_library")
+    def test_generate_resource_library_success(self, mock_generate):
+        mock_generate.return_value = [
+            {
+                "type": "Article",
+                "title": "How to Build a Strong Resume",
+                "description": "Practical guide for entry-level candidates.",
+                "url": "#",
+            }
+        ]
+
+        response = self.client.post(
+            "/api/ai/resources/generate/",
+            {"topic": "resume", "limit": 6},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("resources", response.data)
+        self.assertEqual(len(response.data["resources"]), 1)
+
+    def test_resource_search_missing_query(self):
+        response = self.client.post(
+            "/api/ai/resources/search/",
+            {},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("error", response.data)
+
+    @patch("ai.views.search_resource_info")
+    @patch("ai.views.find_best_resource_matches")
+    def test_resource_search_ai_fallback(self, mock_matches, mock_search):
+        # No static or DB matches, then AI fallback
+        mock_matches.return_value = []
+        mock_search.return_value = [
+            {
+                "type": "Template",
+                "title": "Backend Developer Resume Template",
+                "description": "ATS-friendly layout for backend roles.",
+                "url": "#",
+            }
+        ]
+
+        response = self.client.post(
+            "/api/ai/resources/search/",
+            {"query": "backend resume", "limit": 5},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("resources", response.data)
+        self.assertEqual(response.data["source"], "ai")

@@ -9,10 +9,25 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.throttling import ScopedRateThrottle
 
-from .gemini import get_gemini_recommendations, get_career_recommendation, search_career_info
+from .gemini import (
+    get_gemini_recommendations,
+    get_career_recommendation,
+    search_career_info,
+    generate_resource_library,
+    search_resource_info,
+)
 from .models import AIRecommendation
-from .search import fuzzy_search_careers, find_best_match, load_static_careers
-from .json_cache import append_to_json, get_career_json_path
+from .search import (
+    find_best_match,
+    load_static_careers,
+    find_best_resource_matches,
+    load_static_resources,
+)
+from .json_cache import (
+    append_to_json,
+    get_career_json_path,
+    append_resources_to_json,
+)
 
 import logging
 
@@ -280,6 +295,157 @@ class CareerSearchView(APIView):
         )
 
         return Response({"career": output, "fromCache": False}, status=status.HTTP_200_OK)
+
+
+class ResourceLibraryGenerateView(APIView):
+    """
+    Generate a realistic AI-powered resource library set.
+
+    Request:  { "topic": "data analytics", "userType": "student", "limit": 12 }
+    Response: { "resources": [...], "fromCache": true|false, "appended": 10 }
+    """
+    permission_classes = [IsAuthenticated]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'ai'
+
+    def post(self, request, *args, **kwargs):
+        topic = (request.data.get("topic") or "career development").strip()
+        user_type = request.data.get("userType")
+        limit = request.data.get("limit", 12)
+
+        try:
+            limit = int(limit)
+        except (TypeError, ValueError):
+            limit = 12
+        limit = max(4, min(limit, 24))
+
+        input_hash = _make_input_hash(topic, user_type or "", str(limit))
+
+        def _generate():
+            return generate_resource_library(topic=topic, user_type=user_type or 'student', limit=limit)
+
+        output, from_cache = _resolve_ai_output(
+            prefix="resource-library",
+            input_hash=input_hash,
+            input_data={"topic": topic, "userType": user_type, "limit": limit},
+            generate_fn=_generate,
+            user=request.user,
+            recommendation_type="resource_library",
+            ttl=settings.AI_CACHE_TTL.get("resource_library", 21600),
+        )
+
+        if isinstance(output, dict) and "error" in output:
+            return Response(
+                {"error": "Could not generate resource library right now. Please try again."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+        resources = output if isinstance(output, list) else []
+        appended = append_resources_to_json(resources)
+        return Response(
+            {
+                "resources": resources,
+                "fromCache": from_cache,
+                "appended": appended,
+            },
+            status=status.HTTP_200_OK,
+        )
+
+
+class ResourceSearchView(APIView):
+    """
+    Resource search with static + DB cache + AI fallback.
+
+    Request:  { "query": "resume template", "userType": "student", "limit": 8 }
+    Response: { "resources": [...], "fromCache": true|false, "source": "static|db|ai" }
+    """
+    permission_classes = [IsAuthenticated]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'ai'
+
+    def post(self, request, *args, **kwargs):
+        query = (request.data.get("query") or "").strip()
+        user_type = request.data.get("userType")
+        limit = request.data.get("limit", 8)
+
+        if not query:
+            return Response(
+                {"error": "Query is required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        try:
+            limit = int(limit)
+        except (TypeError, ValueError):
+            limit = 8
+        limit = max(1, min(limit, 12))
+
+        json_path = get_career_json_path()
+
+        static_resources = load_static_resources(json_path)
+        static_matches = find_best_resource_matches(
+            query,
+            [static_resources],
+            cutoff=0.55,
+            max_results=limit,
+        )
+        if static_matches:
+            return Response(
+                {"resources": static_matches, "fromCache": True, "source": "static"},
+                status=status.HTTP_200_OK,
+            )
+
+        db_entries = AIRecommendation.objects.filter(
+            recommendation_type__in=["resource_search", "resource_library"],
+        ).values_list("output_data", flat=True)
+
+        db_resources: list[dict] = []
+        for entry in db_entries:
+            if isinstance(entry, list):
+                db_resources.extend([item for item in entry if isinstance(item, dict)])
+            elif isinstance(entry, dict) and isinstance(entry.get("resources"), list):
+                db_resources.extend([item for item in entry["resources"] if isinstance(item, dict)])
+
+        db_matches = find_best_resource_matches(
+            query,
+            [db_resources],
+            cutoff=0.55,
+            max_results=limit,
+        )
+        if db_matches:
+            return Response(
+                {"resources": db_matches, "fromCache": True, "source": "db"},
+                status=status.HTTP_200_OK,
+            )
+
+        input_hash = _make_input_hash(query, user_type or "", str(limit))
+
+        def _generate():
+            return search_resource_info(query=query, user_type=user_type or 'student', limit=limit)
+
+        output, from_cache = _resolve_ai_output(
+            prefix="resource-search",
+            input_hash=input_hash,
+            input_data={"query": query, "userType": user_type, "limit": limit},
+            generate_fn=_generate,
+            user=request.user,
+            recommendation_type="resource_search",
+            ttl=settings.AI_CACHE_TTL.get("resource_search", 3600),
+        )
+
+        if isinstance(output, dict) and "error" in output:
+            return Response(
+                {"error": "Could not search resources at this time. Please try again."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+        resources = output if isinstance(output, list) else []
+        append_resources_to_json(resources)
+
+        return Response(
+            {"resources": resources, "fromCache": from_cache, "source": "ai"},
+            status=status.HTTP_200_OK,
+        )
 
 
 # ---------------------------------------------------------------------------
