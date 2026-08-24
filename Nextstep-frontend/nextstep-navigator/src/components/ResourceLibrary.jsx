@@ -3,6 +3,7 @@ import data from "../data/careerData.json";
 import './ResourceLibrary.css';
 import { FaSearch, FaFileAlt, FaBookOpen, FaChalkboardTeacher, FaFileDownload, FaRobot } from 'react-icons/fa';
 import api from "../utils/axiosClient";
+import { useProfile } from '../context/ProfileContext';
 
 const resourceTypes = ["All", "Article", "E-book", "Webinar", "Template"];
 
@@ -22,6 +23,7 @@ const getIconForType = (type) => {
 };
 
 export default function ResourceLibrary() {
+  const { profile } = useProfile();
   const [searchTerm, setSearchTerm] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
   const [resources, setResources] = useState([]);
@@ -73,15 +75,33 @@ export default function ResourceLibrary() {
   };
 
   useEffect(() => {
-    setResources(allResources.map((item, idx) => mapResource(item, `local-${idx}`)));
+    const staticResources = allResources.map((item, idx) => mapResource(item, `local-${idx}`));
+    
+    // Check for cached AI resources (24-hour cache)
+    const cachedAi = localStorage.getItem('aiResources');
+    const cachedTime = localStorage.getItem('aiResourcesTime');
+    const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+    
+    let initialResources = staticResources;
+    if (cachedAi && cachedTime && (Date.now() - parseInt(cachedTime) < CACHE_DURATION)) {
+      try {
+        const parsed = JSON.parse(cachedAi);
+        initialResources = mergeResources(staticResources, parsed);
+      } catch (e) {
+        console.error('Failed to parse cached AI resources', e);
+      }
+    }
+    
+    setResources(initialResources);
+    generateAiResources();
   }, [allResources]);
 
   const generateAiResources = async (topic = "career development") => {
     setAiLoading(true);
     setInfoMessage("");
 
-    // Get user role from auth context for personalized resources
-    const userType = user?.role || 'student';
+    // Get user role from profile context for personalized resources
+    const userType = profile?.role || 'student';
 
     try {
       const res = await api.post("/ai/resources/generate/", {
@@ -103,9 +123,6 @@ export default function ResourceLibrary() {
     }
   };
 
-  useEffect(() => {
-    generateAiResources();
-  }, []);
 
   const searchWithAi = async () => {
     if (!searchTerm.trim()) return;
@@ -114,7 +131,7 @@ export default function ResourceLibrary() {
     setInfoMessage("");
 
     // Get user role for personalized search results
-    const userType = user?.role || 'student';
+    const userType = profile?.role || 'student';
 
     try {
       const res = await api.post("/ai/resources/search/", {
