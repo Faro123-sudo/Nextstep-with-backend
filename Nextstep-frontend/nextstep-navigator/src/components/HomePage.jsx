@@ -49,17 +49,17 @@ function HomePage({ user, onNavigate }) { // Renamed and changed props
   if (user) {
     return (
       <div className="container d-flex flex-column align-items-center justify-content-center text-center">
-        <h3 className="display-6 fw-bold mb-4">
+        {/* <h3 className="display-6 fw-bold mb-4">
           Welcome back, <span className="text-primary">{user.first_name} {user.last_name}</span>!
         </h3>
-        <p className="lead text-muted mb-4">You are logged in as a {user.role}.</p>
+        <p className="lead text-muted mb-4">You are logged in as a {user.role}.</p> */}
         
         <div className="d-flex flex-column align-items-center justify-content-center landing-bg position-relative overflow-hidden">
         <div className="container position-relative z-2">
           <div className="row align-items-center hero-section">
             <div className="col-lg-6 order-lg-1 order-2 text-center text-lg-start" data-aos="fade-right" data-aos-delay="300">
               <div className="hero-content">
-                <img src={Logo} alt="NextStep Navigator Logo" className="mb-4 fade-in landing-logo" />
+                {/* <img src={Logo} alt="NextStep Navigator Logo" className="mb-4 fade-in landing-logo" /> */}
                 <h1 className="display-3 fw-bold text-primary mb-3 slide-in-left landing-title">
                   NextStep <span style={{ color: "#31a8cc" }}>Navigator</span>
                 </h1>
